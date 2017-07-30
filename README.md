@@ -3,6 +3,7 @@
 ---      
 
 ### 最新   
+> [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)      
 > [《算法导论之js实现--快速选择》](https://godbasin.github.io/2017/07/29/quick-select/)      
 > [《算法导论之js实现--堆排序》](https://godbasin.github.io/2017/07/23/heap-sort/)      
 > [《算法导论之js实现--快速排序》](https://godbasin.github.io/2017/07/16/quick-sort/)      
@@ -13,6 +14,7 @@
 > [《谈谈Angular--从Angular1到Angular4》](https://godbasin.github.io/2017/07/01/about-angular-from-1-to-4/)       
 
 ### 非科班恶补算法   
+> [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)     
 > [《算法导论之js实现--快速选择》](https://godbasin.github.io/2017/07/29/quick-select/)      
 > [《算法导论之js实现--堆排序》](https://godbasin.github.io/2017/07/23/heap-sort/)      
 > [《算法导论之js实现--快速排序》](https://godbasin.github.io/2017/07/16/quick-sort/)      
