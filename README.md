@@ -3,6 +3,7 @@
 ---      
 
 ### 最新   
+> [《算法导论之js实现--n×n矩阵计算》](https://godbasin.github.io/2017/08/04/n-n-matrix/)      
 > [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)      
 > [《算法导论之js实现--快速选择》](https://godbasin.github.io/2017/07/29/quick-select/)      
 > [《算法导论之js实现--堆排序》](https://godbasin.github.io/2017/07/23/heap-sort/)      
@@ -10,10 +11,9 @@
 > [《算法导论之js实现--归并排序》](https://godbasin.github.io/2017/07/15/merge-sort/)      
 > [《算法导论之js实现--插入排序》](https://godbasin.github.io/2017/07/09/insertion-sort/)      
 > [《算法导论之js实现--计数排序》](https://godbasin.github.io/2017/07/08/counting-sort/)      
-> [《算法导论之js实现--冒泡排序》](https://godbasin.github.io/2017/07/02/bubble-sort/)      
-> [《谈谈Angular--从Angular1到Angular4》](https://godbasin.github.io/2017/07/01/about-angular-from-1-to-4/)       
 
 ### 非科班恶补算法   
+> [《算法导论之js实现--n×n矩阵计算》](https://godbasin.github.io/2017/08/04/n-n-matrix/)      
 > [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)     
 > [《算法导论之js实现--快速选择》](https://godbasin.github.io/2017/07/29/quick-select/)      
 > [《算法导论之js实现--堆排序》](https://godbasin.github.io/2017/07/23/heap-sort/)      
