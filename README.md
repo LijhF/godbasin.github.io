@@ -3,6 +3,7 @@
 ---      
 
 ### 最新   
+> [《webpack多页面配置2--拿取页面目录名》](https://godbasin.github.io/2017/08/06/webpack-multi-project-2-page-utils/)      
 > [《webpack多页面配置1--基础webpack配置》](https://godbasin.github.io/2017/08/05/webpack-multi-project-1-init-project/)      
 > [《算法导论之js实现--n×n矩阵计算》](https://godbasin.github.io/2017/08/04/n-n-matrix/)      
 > [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)      
@@ -11,7 +12,8 @@
 > [《算法导论之js实现--快速排序》](https://godbasin.github.io/2017/07/16/quick-sort/)      
 > [《算法导论之js实现--归并排序》](https://godbasin.github.io/2017/07/15/merge-sort/)      
 
-### webpack多页面配置    
+### webpack多页面配置      
+> [《webpack多页面配置2--拿取页面目录名》](https://godbasin.github.io/2017/08/06/webpack-multi-project-2-page-utils/)      
 > [《webpack多页面配置1--基础webpack配置》](https://godbasin.github.io/2017/08/05/webpack-multi-project-1-init-project/)      
 
 ### 非科班恶补算法     
