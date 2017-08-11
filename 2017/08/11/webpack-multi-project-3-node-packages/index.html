@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Box2DJS教程7-3--dynamics-api | Here. There.</title>
+    <title>webpack多页面配置3--打包相关node模块介绍 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="本节主要介绍dynamics相关api。">
+    <meta name="description" content="最近项目中需要搭建一个多页面的环境，包括本地路由服务和分页面打包。本节实现单个页面或是完整页面的打包过程的过程。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/02/17/box2d-tutorial-7-3-dynamics-api/" title="Box2DJS教程7-3--dynamics-api" itemprop="url">Box2DJS教程7-3--dynamics-api</a>
+      <a href="/2017/08/11/webpack-multi-project-3-node-packages/" title="webpack多页面配置3--打包相关node模块介绍" itemprop="url">webpack多页面配置3--打包相关node模块介绍</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-02-17T13:00:34.000Z" itemprop="datePublished">2017-02-17</time>
-    更新日期:<time datetime="2017-07-14T13:03:25.023Z" itemprop="dateModified">2017-07-14</time>
+    <time datetime="2017-08-11T13:27:58.000Z" itemprop="datePublished">2017-08-11</time>
+    更新日期:<time datetime="2017-08-11T13:28:07.334Z" itemprop="dateModified">2017-08-11</time>
     
   </p>
 </header>
@@ -88,59 +88,70 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dynamics"><span class="toc-number">1.</span> <span class="toc-text">dynamics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#刚体"><span class="toc-number">1.1.</span> <span class="toc-text">刚体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结点-joints"><span class="toc-number">1.2.</span> <span class="toc-text">结点(joints)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接触管理-contacts"><span class="toc-number">1.3.</span> <span class="toc-text">接触管理(contacts)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回总目录"><span class="toc-number">1.4.</span> <span class="toc-text">返回总目录</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm模块"><span class="toc-number">1.</span> <span class="toc-text">npm模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ora模块"><span class="toc-number">1.1.</span> <span class="toc-text">ora模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rimraf模块"><span class="toc-number">1.2.</span> <span class="toc-text">rimraf模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chalk模块"><span class="toc-number">1.3.</span> <span class="toc-text">chalk模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js模块"><span class="toc-number">2.</span> <span class="toc-text">node.js模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#path模块"><span class="toc-number">2.1.</span> <span class="toc-text">path模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#process模块"><span class="toc-number">2.2.</span> <span class="toc-text">process模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>本节主要介绍dynamics相关api。<br><a id="more"></a></p>
-<h2 id="dynamics"><a href="#dynamics" class="headerlink" title="dynamics"></a>dynamics</h2><hr>
-<h3 id="刚体"><a href="#刚体" class="headerlink" title="刚体"></a>刚体</h3><ul>
-<li><p><code>b2BodyDef</code>：</p>
+		<p>最近项目中需要搭建一个多页面的环境，包括本地路由服务和分页面打包。<br>本节实现单个页面或是完整页面的打包过程的过程。<br><a id="more"></a></p>
+<h2 id="npm模块"><a href="#npm模块" class="headerlink" title="npm模块"></a>npm模块</h2><hr>
+<p>打包页面需要用到一些npm模块（需单独安装），这里我们简单介绍一下。</p>
+<h3 id="ora模块"><a href="#ora模块" class="headerlink" title="ora模块"></a><a href="https://www.npmjs.com/package/ora" target="_blank" rel="external"><code>ora</code>模块</a></h3><p>主要用来实现<code>node.js</code>命令行环境的loading效果，和显示各种状态的图标等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>)</div><div class="line"><span class="comment">// 开始显示</span></div><div class="line"><span class="keyword">const</span> spinner = ora(<span class="string">'Loading unicorns'</span>).start()</div><div class="line"> </div><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="comment">// 一秒后设置颜色和内容</span></div><div class="line">    spinner.color = <span class="string">'yellow'</span></div><div class="line">    spinner.text = <span class="string">'Loading rainbows'</span></div><div class="line">&#125;, <span class="number">1000</span>)</div></pre></td></tr></table></figure>
+<p>更多的选项，大家到<a href="https://www.npmjs.com/package/ora" target="_blank" rel="external">官方说明</a>上面看吧。</p>
+<h3 id="rimraf模块"><a href="#rimraf模块" class="headerlink" title="rimraf模块"></a><a href="https://www.npmjs.com/package/rimraf" target="_blank" rel="external"><code>rimraf</code>模块</a></h3><p>实现<code>node.js</code>环境的UNIX命令<code>rm -rf</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rimraf(f, [opts], callback)</div></pre></td></tr></table></figure>
 <ul>
-<li>刚体定义结构</li>
-<li>userData来表示用户数据</li>
-<li>shapes来表示形状队列，目前形状数最大支持64个</li>
-<li>position来表示当前位置</li>
-<li>rotation来表示当前角度</li>
-<li>linearVelocity表示线速度</li>
-<li>angularVelocity来表示角速度</li>
-<li>linearDamping来表示线性阻尼</li>
-<li>angularDamping来表示角阻抗</li>
-<li>allowSleep来表示是否可以允许休眠</li>
-<li>isSleeping来表示是否正在休眠</li>
-<li>preventRotation来表示是否防止旋转</li>
-<li>支持方法：AddShape(b2ShapeDef* shape)</li>
+<li><code>f</code>，可为<code>glob</code>匹配规则的文件</li>
+<li><code>[opts]</code>，一些选项，具体可参考<a href="https://www.npmjs.com/package/rimraf" target="_blank" rel="external">官方说明</a></li>
+<li><code>callback</code>，若执行过程中出错，则回调参数为<code>error</code></li>
 </ul>
-</li>
-<li><p><code>b2CollisionFilters</code>：</p>
+<p>如果大家用过<code>shalljs</code>，这是一个<code>node.js</code>环境的<code>Unix shell</code>命令，里面当然已经包括<code>rm</code>命令了。</p>
+<h3 id="chalk模块"><a href="#chalk模块" class="headerlink" title="chalk模块"></a><a href="https://www.npmjs.com/package/chalk" target="_blank" rel="external"><code>chalk</code>模块</a></h3><p>命令行输出各种样式的字符串。</p>
 <ul>
-<li>碰撞过滤是用来防止形状与形状之间进行碰撞的，可以用碰撞种类和组名来区别</li>
-<li>Box2D总共提供16种碰撞种类，每个形状都可以提定属于什么种类，那么它就可以和其他不同种类的形状碰撞</li>
+<li>使用方式</li>
 </ul>
-</li>
+<p><code>chalk.&lt;style&gt;[.&lt;style&gt;...](string, [string...])</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 例如，红色带下划线的粗体字</span></div><div class="line">chalk.red.bold.underline(<span class="string">'Hello'</span>, <span class="string">'world'</span>)</div></pre></td></tr></table></figure>
+<h2 id="node-js模块"><a href="#node-js模块" class="headerlink" title="node.js模块"></a>node.js模块</h2><hr>
+<p>介绍将使用到的node.js自带API和内置模块（无需安装）。</p>
+<h3 id="path模块"><a href="#path模块" class="headerlink" title="path模块"></a><a href="https://nodejs.org/api/path.html" target="_blank" rel="external"><code>path</code>模块</a></h3><p><code>path</code>模块提供了一些工具函数，用于处理文件与目录的路径。这是<code>node.js</code>一个自带的模块。</p>
+<p><code>path</code>模块的默认操作会根据<code>Node.js</code>应用程序运行的操作系统的不同而变化。比如，当运行在<code>Windows</code>操作系统上时，<code>path</code>模块会认为使用的是<code>Windows</code>风格的路径。</p>
+<ul>
+<li><code>path.join([...paths])</code></li>
 </ul>
-<h3 id="结点-joints"><a href="#结点-joints" class="headerlink" title="结点(joints)"></a>结点(joints)</h3><ul>
-<li><code>b2DistanceJoint</code>：距离连接</li>
-<li><code>b2DistanceJointDef</code>：距离连接定义</li>
-<li><code>b2GearJoint</code>：齿轮连接</li>
-<li><code>b2GearJointDef</code>：齿轮连接定义</li>
-<li><code>b2Joint</code>：连接基类</li>
-<li><code>b2JointDef</code>：连接定义基类</li>
-<li><code>b2JointEdge</code>：用于组合刚体或连接到一起.刚体相当于节点,而连接相当于边</li>
-<li><code>b2MouseJoint</code>：鼠标连接</li>
-<li><code>b2MouseJointDef</code>：鼠标连接定义</li>
-<li><code>b2PrismaticJoint</code>：移动连接</li>
-<li><code>b2PrismaticJointDef</code>：移动连接定义</li>
-<li><code>b2PulleyJoint</code>：滑轮连接</li>
-<li><code>b2PulleyJointDef</code>：滑轮连接定义</li>
-<li><code>b2RevoluteJoint</code>：旋转连接</li>
-<li><code>b2RevoluteJointDef</code>：旋转连接定义</li>
+<p>使用平台特定的分隔符把全部给定的<code>path</code>片段连接到一起，并规范化生成的路径。<br>这个大概是我们写webpack配置的时候，最常用的一个方法啦，像<code>path.join(__dirname, &#39;src&#39;)</code>。</p>
+<ul>
+<li><code>path.parse(path)</code></li>
 </ul>
-<h3 id="接触管理-contacts"><a href="#接触管理-contacts" class="headerlink" title="接触管理(contacts)"></a>接触管理(contacts)</h3><ul>
-<li><code>b2Contact</code>：管理两个外形接触</li>
-<li><code>b2ContactEdge</code>：接触边用来连接多个物体和接触到一个接触表(物体是一个节点而接触相当于一个接触边)</li>
-<li><code>b2ContactResult</code>：记录接触结果</li>
+<p>返回一个对象，对象的属性表示<code>path</code>的元素。返回属性包括：<code>dir</code>, <code>root</code>, <code>base</code>, <code>name</code>, <code>ext</code>。</p>
+<ul>
+<li><code>path.format(pathObject)</code></li>
 </ul>
-<h3 id="返回总目录"><a href="#返回总目录" class="headerlink" title="返回总目录"></a><a href="/2017/02/17/box2d-tutorial-0-catalog/">返回总目录</a></h3>  
+<p>会从一个对象返回一个路径字符串，与<code>path.parse()</code>相反。</p>
+<ul>
+<li><code>path.dirname(path)</code></li>
+</ul>
+<p>返回一个<code>path</code>的目录名，类似于<code>Unix</code>中的<code>dirname</code>命令。</p>
+<h3 id="process模块"><a href="#process模块" class="headerlink" title="process模块"></a><a href="https://nodejs.org/api/process.html" target="_blank" rel="external"><code>process</code>模块</a></h3><p><code>process</code>对象是一个<code>global</code>（全局变量），提供有关信息，控制当前<code>Node.js</code>进程。<br>作为一个对象，它对于<code>Node.js</code>应用程序始终是可用的，故无需使用<code>require()</code>。</p>
+<ul>
+<li><code>process.execPath</code></li>
+</ul>
+<p>返回启动<code>Node.js</code>进程的可执行文件所在的绝对路径。</p>
+<ul>
+<li><code>process.argv</code></li>
+</ul>
+<p><code>process.argv</code>属性返回一个数组，这个数组包含了启动<code>Node.js</code>进程时的命令行参数。第一个元素为<code>process.execPath</code>。<br>如果需要获取<code>argv[0]</code>的值请参见<code>process.argv0</code>。第二个元素为当前执行的JavaScript文件路径，剩余的元素为其他命令行参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 运行以下命令，启动进程：</span></div><div class="line">$ node process-args.js one two=three four</div><div class="line"></div><div class="line"><span class="comment">// 将输出：</span></div><div class="line"><span class="number">0</span>: <span class="regexp">/usr/</span>local/bin/node</div><div class="line"><span class="number">1</span>: <span class="regexp">/Users/m</span>jr/work/node/process-args.js</div><div class="line"><span class="number">2</span>: one</div><div class="line"><span class="number">3</span>: two=three</div><div class="line"><span class="number">4</span>: four</div></pre></td></tr></table></figure>
+<ul>
+<li><code>process.env</code></li>
+</ul>
+<p><code>process.env</code>属性返回一个包含用户环境信息的对象。<br>像我们经常看到生产环境<code>process.env.NODE_ENV = &#39;production&#39;</code>和开发环境<code>process.env.NODE_ENV = &#39;dev&#39;</code>。</p>
+<ul>
+<li>输入流<code>process.stdin</code>和输出流<code>process.stdout</code></li>
+</ul>
+<p><code>process</code>还有更多的进程管理相关的方法和参数，大家可以参考<a href="http://nodejs.cn/api/process.html" target="_blank" rel="external">官方说明</a>。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
+<p>本节主要介绍了后面打包页面时会使用到的一些node.js内置和依赖模块，包括终端输出样式、命令、<code>path</code>、<code>process</code>等。后面一节也会用到来进行页面的打包。<br>可参考代码<a href="https://github.com/godbasin/vue-multi-pages/blob/master/build/build.js" target="_blank" rel="external">github-vue-multi-pages</a>，主要是这套环境使用在vue上的demo。</p>
+  
 	</div>
 	<div class="author-right">
   		<p>作者：被删</p>
@@ -157,7 +168,7 @@ var _hmt = _hmt || [];
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/box2djs方糖/">box2djs方糖</a>
+  <a class="article-category-link" href="/categories/webpack宾治/">webpack宾治</a>
 </div>
 
 
@@ -187,19 +198,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/02/19/angular-free-4-create-controller-with-class/" title="玩转Angular1(4)--使用class写控制器">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  玩转Angular1(4)--使用class写控制器</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/02/17/box2d-tutorial-7-2-collisions-api/"  title="Box2DJS教程7-2--collisions-api">
+<a href="/2017/08/06/webpack-multi-project-2-page-utils/"  title="webpack多页面配置2--拿取页面目录名">
  <strong>NEXT:</strong><br/> 
- <span>Box2DJS教程7-2--collisions-api
+ <span>webpack多页面配置2--拿取页面目录名
 </span>
 </a>
 </div>
@@ -221,7 +224,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dynamics"><span class="toc-number">1.</span> <span class="toc-text">dynamics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#刚体"><span class="toc-number">1.1.</span> <span class="toc-text">刚体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结点-joints"><span class="toc-number">1.2.</span> <span class="toc-text">结点(joints)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接触管理-contacts"><span class="toc-number">1.3.</span> <span class="toc-text">接触管理(contacts)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回总目录"><span class="toc-number">1.4.</span> <span class="toc-text">返回总目录</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm模块"><span class="toc-number">1.</span> <span class="toc-text">npm模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ora模块"><span class="toc-number">1.1.</span> <span class="toc-text">ora模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rimraf模块"><span class="toc-number">1.2.</span> <span class="toc-text">rimraf模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chalk模块"><span class="toc-number">1.3.</span> <span class="toc-text">chalk模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js模块"><span class="toc-number">2.</span> <span class="toc-text">node.js模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#path模块"><span class="toc-number">2.1.</span> <span class="toc-text">path模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#process模块"><span class="toc-number">2.2.</span> <span class="toc-text">process模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
