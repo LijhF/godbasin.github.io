@@ -3,16 +3,16 @@
 ---      
 
 ### 最新     
+> [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
+> [《webpack多页面配置7--source map和代码压缩》](https://godbasin.github.io/2017/08/20/webpack-multi-project-7-source-map-and-uglifyjs/)      
 > [《webpack多页面配置6--热加载刷新》](https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/)      
 > [《webpack多页面配置5--开发服务启动》](https://godbasin.github.io/2017/08/13/webpack-multi-project-5-dev-server/)      
 > [《webpack多页面配置4--页面打包实现》](https://godbasin.github.io/2017/08/12/webpack-multi-project-4-build/)      
 > [《webpack多页面配置3--打包相关node模块介绍》](https://godbasin.github.io/2017/08/11/webpack-multi-project-3-node-packages/)      
-> [《webpack多页面配置2--拿取页面目录名》](https://godbasin.github.io/2017/08/06/webpack-multi-project-2-page-utils/)      
-> [《webpack多页面配置1--基础webpack配置》](https://godbasin.github.io/2017/08/05/webpack-multi-project-1-init-project/)      
-> [《算法导论之js实现--n×n矩阵计算》](https://godbasin.github.io/2017/08/04/n-n-matrix/)      
-> [《算法导论之js实现--分治法求最大子数组》](https://godbasin.github.io/2017/07/30/find-maximum-subarray/)          
 
 ### webpack多页面配置      
+> [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
+> [《webpack多页面配置7--source map和代码压缩》](https://godbasin.github.io/2017/08/20/webpack-multi-project-7-source-map-and-uglifyjs/)      
 > [《webpack多页面配置6--热加载刷新》](https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/)      
 > [《webpack多页面配置5--开发服务启动》](https://godbasin.github.io/2017/08/13/webpack-multi-project-5-dev-server/)      
 > [《webpack多页面配置4--页面打包实现》](https://godbasin.github.io/2017/08/12/webpack-multi-project-4-build/)      
