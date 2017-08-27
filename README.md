@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
 > [《Cycle.js学习笔记1--用Webpack启动应用》](https://godbasin.github.io/2017/08/26/cyclejs-notes-1-init-app-with-webpack/)      
 > [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
 > [《webpack多页面配置7--source map和代码压缩》](https://godbasin.github.io/2017/08/20/webpack-multi-project-7-source-map-and-uglifyjs/)      
@@ -11,6 +12,7 @@
 > [《webpack多页面配置4--页面打包实现》](https://godbasin.github.io/2017/08/12/webpack-multi-project-4-build/)      
 
 ### Cycle.js笔记      
+> [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
 > [《Cycle.js学习笔记1--用Webpack启动应用》](https://godbasin.github.io/2017/08/26/cyclejs-notes-1-init-app-with-webpack/)      
 
 ### webpack多页面配置      
