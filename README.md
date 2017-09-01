@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《关于Typescript》](https://godbasin.github.io/2017/09/01/about-typescript/)      
 > [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
 > [《Cycle.js学习笔记1--用Webpack启动应用》](https://godbasin.github.io/2017/08/26/cyclejs-notes-1-init-app-with-webpack/)      
 > [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
@@ -55,6 +56,9 @@
 > [《谈谈Angular--从Angular1到Angular4》](https://godbasin.github.io/2017/07/01/about-angular-from-1-to-4/)      
 > [《谈谈Angular2的依赖注入》](https://godbasin.github.io/2017/05/28/di-in-angular/)    
 > [《从Angular2-beta到Angular4-release框架升级总结》](https://godbasin.github.io/2017/05/21/angular2-beta-to-release/)    
+
+### Typescript相关      
+> [《关于Typescript》](https://godbasin.github.io/2017/09/01/about-typescript/)      
 
 ### Webpack相关
 > [《正确的Webpack配置姿势，快速启动各式框架》](https://godbasin.github.io/2017/05/21/webpack-common-setting/)        
