@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
 > [《Cycle.js学习笔记3--切换到Typescript》](https://godbasin.github.io/2017/09/03/cyclejs-notes-3-use-typescript/)      
 > [《关于Typescript》](https://godbasin.github.io/2017/09/01/about-typescript/)      
 > [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
@@ -10,9 +11,9 @@
 > [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
 > [《webpack多页面配置7--source map和代码压缩》](https://godbasin.github.io/2017/08/20/webpack-multi-project-7-source-map-and-uglifyjs/)      
 > [《webpack多页面配置6--热加载刷新》](https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/)      
-> [《webpack多页面配置5--开发服务启动》](https://godbasin.github.io/2017/08/13/webpack-multi-project-5-dev-server/)      
 
 ### Cycle.js笔记      
+> [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
 > [《Cycle.js学习笔记3--切换到Typescript》](https://godbasin.github.io/2017/09/03/cyclejs-notes-3-use-typescript/)      
 > [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
 > [《Cycle.js学习笔记1--用Webpack启动应用》](https://godbasin.github.io/2017/08/26/cyclejs-notes-1-init-app-with-webpack/)      
