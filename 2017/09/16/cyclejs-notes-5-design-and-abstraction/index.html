@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>算法导论之js实现--快速选择 | Here. There.</title>
+    <title>Cycle.js学习笔记5--关于框架设计和抽象 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="快速选择（Quick-Select）的javascript实现。">
+    <meta name="description" content="因为对Rxjs的好感玩上了Cycle.js，《Cycle.js学习笔记》系列用于记录使用该框架的一些笔记。本文我们来细细品味一下整个Cyclejs的核心–流，从不一样的角度开始思考吧。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/07/29/quick-select/" title="算法导论之js实现--快速选择" itemprop="url">算法导论之js实现--快速选择</a>
+      <a href="/2017/09/16/cyclejs-notes-5-design-and-abstraction/" title="Cycle.js学习笔记5--关于框架设计和抽象" itemprop="url">Cycle.js学习笔记5--关于框架设计和抽象</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-07-29T07:57:36.000Z" itemprop="datePublished">2017-07-29</time>
-    更新日期:<time datetime="2017-07-29T07:57:45.673Z" itemprop="dateModified">2017-07-29</time>
+    <time datetime="2017-09-16T04:28:23.000Z" itemprop="datePublished">2017-09-16</time>
+    更新日期:<time datetime="2017-09-16T04:29:39.241Z" itemprop="dateModified">2017-09-16</time>
     
   </p>
 </header>
@@ -88,27 +88,86 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速选择"><span class="toc-number">1.</span> <span class="toc-text">快速选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">1.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速选择-1"><span class="toc-number">1.2.</span> <span class="toc-text">快速选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js基本思路实现"><span class="toc-number">1.4.</span> <span class="toc-text">js基本思路实现</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cycle-js基础概念"><span class="toc-number">1.</span> <span class="toc-text">Cycle.js基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#人机交互"><span class="toc-number">1.1.</span> <span class="toc-text">人机交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话抽象"><span class="toc-number">1.2.</span> <span class="toc-text">对话抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#驱动"><span class="toc-number">1.3.</span> <span class="toc-text">驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流"><span class="toc-number">1.4.</span> <span class="toc-text">流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>快速选择（Quick-Select）的javascript实现。<br><a id="more"></a></p>
-<h2 id="快速选择"><a href="#快速选择" class="headerlink" title="快速选择"></a>快速选择</h2><hr>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li>输入：n个数的一个序列<code>&lt;a1, a2, ..., an&gt;</code></li>
-<li>输出：找到第k个最小数字的元素</li>
+		<p>因为对Rxjs的好感玩上了Cycle.js，《Cycle.js学习笔记》系列用于记录使用该框架的一些笔记。<br>本文我们来细细品味一下整个Cyclejs的核心–流，从不一样的角度开始思考吧。<br><a id="more"></a></p>
+<h2 id="Cycle-js基础概念"><a href="#Cycle-js基础概念" class="headerlink" title="Cycle.js基础概念"></a>Cycle.js基础概念</h2><hr>
+<p>基础知识什么时候恶补都不为晚。</p>
+<h3 id="人机交互"><a href="#人机交互" class="headerlink" title="人机交互"></a>人机交互</h3><p><a href="https://cycle.js.org/dialogue.html" target="_blank" rel="external">官方文档</a>用了这么个高大上的词语形容，“对话抽象”(Dialogue abstraction)、“人机交互”(Human-Computer Interaction)，其实主要讲了以下个东西，容我接地气地讲讲。</p>
+<p>首先来看配图：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/8JS%60Y%7B$TBJ1H%29%7B_~O6DI907.png" alt="image"></p>
+<p>先不管为什么官方文档要放这么一张逼死强迫症的缺个顶部的图片，这图片主要讲了一个轮回：</p>
+<ul>
+<li>人 =&gt; 机：通过操作对机器进行输入，例如从键盘输入内容、用鼠标点击某些元素等</li>
+<li>机 =&gt; 人：机器拿到输入内容，根据程序进行计算，人通过眼睛观察得到输出</li>
 </ul>
-<h3 id="快速选择-1"><a href="#快速选择-1" class="headerlink" title="快速选择"></a>快速选择</h3><p>快速选择（Quickselect）是一种从无序列表找到第k小元素的选择算法。它从原理上来说与快速排序有关。</p>
-<p>快速选择的总体思路与快速排序一致，选择一个元素作为基准来对元素进行分区，将小于和大于基准的元素分在基准左边和右边的两个区域。不同的是，快速选择并不递归访问双边，而是只递归进入一边的元素中继续寻找。这降低了平均时间复杂度，从<code>O(n log n)</code>至<code>O(n)</code>，不过最坏情况仍然是<code>O(n2)</code>。</p>
-<p>与快速排序一样，快速选择一般是以原地算法的方式实现，除了选出第k小的元素，数据也得到了部分地排序。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li>从数列中挑出一个元素，称为”基准”（pivot）。</li>
-<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区结束之后，该基准就处于数列的中间位置。</li>
-<li>判断第k个最小元素位于左侧还是右侧，然后对该侧进行递归。</li>
+<p>其实这里面主要是进行了这样一个抽象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params">输入</span>)</span>&#123;</div><div class="line">    经过一些处理</div><div class="line">    <span class="keyword">return</span> 输出</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们来看一个简单的场景：操作者需要登录一个页面。</p>
+<ol>
+<li>对于操作者–人：</li>
 </ol>
 <ul>
-<li>参考<a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9" target="_blank" rel="external">快速选择-wiki</a></li>
+<li>输入 =&gt; 眼睛获得的图像</li>
+<li>处理 =&gt; 打开浏览器</li>
+<li>输出 =&gt; 输入一个地址，并按Enter</li>
 </ul>
-<h3 id="js基本思路实现"><a href="#js基本思路实现" class="headerlink" title="js基本思路实现"></a>js基本思路实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 交换数组值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">arr, a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (a == b) &#123; <span class="keyword">return</span>; &#125;</div><div class="line">    <span class="keyword">var</span> c = arr[a];</div><div class="line">    arr[a] = arr[b];</div><div class="line">    arr[b] = c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSelect</span>(<span class="params">iArr, start, end, k</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> n = end - start;</div><div class="line">    <span class="comment">// 若只有一个或者没有，则返回</span></div><div class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123; <span class="keyword">return</span> iArr[start]; &#125;</div><div class="line">    <span class="comment">// 若有多个，则选择基准进行位置调整，递归处理</span></div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> p = end - <span class="number">1</span>; <span class="comment">// 选取最后一个作为基准</span></div><div class="line">        <span class="keyword">var</span> pivot = iArr[p]; <span class="comment">// 获取基准值</span></div><div class="line">        <span class="keyword">var</span> leftIndex = start; <span class="comment">// 记录左侧列表位置</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</div><div class="line">            arrVal = iArr[start + i];</div><div class="line">            <span class="comment">// 若小于基准，则排列在左侧</span></div><div class="line">            <span class="keyword">if</span> (arrVal &lt;= pivot) &#123;</div><div class="line">                swap(iArr, leftIndex++, start + i)</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 若大于基准，继续</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 交换基准至中间</span></div><div class="line">        swap(iArr, leftIndex, p);</div><div class="line">        <span class="keyword">if</span> (leftIndex &gt; k - <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">// 若k &lt; 基准位置，递归排序左侧</span></div><div class="line">            <span class="keyword">return</span> quickSelect(iArr, start, leftIndex, k);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (leftIndex &lt; k - <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">// 若k &gt; 基准位置，递归排序右侧</span></div><div class="line">            <span class="keyword">return</span> quickSelect(iArr, leftIndex + <span class="number">1</span>, end, k);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 若k = 基准位置，返回</span></div><div class="line">            <span class="keyword">return</span> iArr[k - <span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>  
+<ol>
+<li>对于机器–电脑：</li>
+</ol>
+<ul>
+<li>输入 =&gt; 浏览器获得地址</li>
+<li>处理 =&gt; 解析地址，发送请求</li>
+<li>输出 =&gt; 返回一个登录页面</li>
+</ul>
+<ol>
+<li>对于操作者–人：</li>
+</ol>
+<ul>
+<li>输入 =&gt; 眼睛获得登录页面</li>
+<li>处理 =&gt; 键盘输入帐号密码，登录</li>
+<li>输出 =&gt; 上面的一系列操作便是输出</li>
+</ul>
+<p>以上如此轮回的输入和输出，可以简单理解为人机交互。<br>其实我们在电脑上进行的每一个操作，每一个按键、鼠标移动的每一下，都可以理解为一次输出，也是电脑的一次输入。<br>而电脑每一个显示的变动或是不变，也都是输出，同时是人通过眼睛的一次输入。</p>
+<p>这里面的输入输出有各种的媒介：<br>电脑的输入包括键盘、鼠标等，输出包括显示器、音响等。<br>人的输入包括眼睛、耳朵等，输出包括手脚的移动、说话等。</p>
+<p>至于这些媒介，我们可以理解为一个接口，或是在Cycle.js里面，可以算是个驱动（Driver）吧，后面章节应该也会讲到。</p>
+<h3 id="对话抽象"><a href="#对话抽象" class="headerlink" title="对话抽象"></a>对话抽象</h3><p>上面所说的人机交互，只是一层简单的抽象，而且也有比较主观的角度。</p>
+<p>这里我们尝试再进行一层抽象，不管是人还是机器，都是这样的物体：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params">输入</span>)</span>&#123;</div><div class="line">    经过一些处理</div><div class="line">    <span class="keyword">return</span> 输出</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们假设，物体和物体之间的交流通过电、光，所以我们得到这样的物体：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params">输入</span>)</span>&#123;</div><div class="line">    光 = 输入.光</div><div class="line">    处理光</div><div class="line"></div><div class="line">    电 = 输入.电</div><div class="line">    处理电</div><div class="line"></div><div class="line">    <span class="comment">// 输出</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        光: 处理后的光</div><div class="line">        电: 处理后的电</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这大概是这个世界中所有物体的抽象了。</p>
+<p>这时候你可能会有些疑惑，如果每个物体都是这样，那承接这些光和电的传播途径或者方式呢？</p>
+<p>到这里，事情变得有意思了，理所当然地，承接这些光和电的便是我们的世界。<br>而我们的世界又是什么呢？其实也是这样一个抽象的物体：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> 处理器(<span class="params">输入</span>)</span>&#123;</div><div class="line">    光 = 输入.光</div><div class="line">    处理光（传输光）</div><div class="line"></div><div class="line">    电 = 输入.电</div><div class="line">    处理电（传输电）</div><div class="line"></div><div class="line">    <span class="comment">// 输出</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        光: 处理后的光</div><div class="line">        电: 处理后的电</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">创建(处理器, &#123;</div><div class="line">    光: 创建光源（驱动器）</div><div class="line">    电：创建电源（驱动器）</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>说白了，就是世界除了作为一个普通抽象物体，拥有对光和电的处理（例如传播过程减弱等等），同时还有一个特殊的任务：负责创建光和电的驱动。</p>
+<p>这个驱动是什么呢？</p>
+<h3 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h3><p>这个驱动，跟我们平时理解的电脑的驱动有什么区别呢？其实说一样也是一样，说不一样也可以不一样。</p>
+<p>其实这里的驱动相当于一些规则，在这里我们理解为对光和电的规则：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function 光驱动器() &#123;</div><div class="line">  return 创建流(&#123;</div><div class="line">    天亮了: 监听器 =&gt; &#123;</div><div class="line">      创建光</div><div class="line">      光.改变 = (增强/减弱) =&gt; &#123;</div><div class="line">        监听器.通知(增强/减弱)</div><div class="line">      &#125;</div><div class="line">      光.停止 = (停止) =&gt; &#123;</div><div class="line">        监听器.通知(停止)</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    天黑了: () =&gt; &#123;</div><div class="line">      光.消失();</div><div class="line">    &#125;,</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>中文的代码是不是看起来好难懂，简单的说，这里面包括一下规则：</p>
+<ol>
+<li>光的传播处理（<code>改变 =&gt; 监听 =&gt; 通知</code>）</li>
+<li>光的出现消失（<code>出现 =&gt; 开始监听</code>, <code>消失 =&gt; 关闭监听</code>）</li>
+</ol>
+<p>而所有的抽象物体里，输入和输出都遵守这样的处理。</p>
+<p>到这里，我们给这个世界创建了物体，然后规定了光和电的规则，创建世界的时候我们便开始根据设定运作起来。</p>
+<h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><p>现在还剩下最后一个概念：流。</p>
+<p>其实流是最好理解的，它就是我们上面所说的光和电。</p>
+<p>我们创建一个世界之后：</p>
+<ol>
+<li>流的规则设定好，流开始流动；</li>
+<li>流的流动，表现为世界对流的输入 =&gt; 处理 =&gt; 输出；</li>
+<li>物体和世界、物体间通过流来进行交流，表现为输入 =&gt; 处理 =&gt; 输出；</li>
+<li>若世界消失，流消失，物体无输入也便无输出，表现为消失。</li>
+</ol>
+<p>[捂脸]感觉自己说的也好抽象，不过这是一个挺有意思的角度。不管Cycle.js适不适合用来做项目，但是这样一些新的想法和理念对设计和思路都能拓展空间。</p>
+<p>这样的思路拓展到我们的页面中，便有了Cycle.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params">sources</span>) </span>&#123;</div><div class="line">  <span class="comment">// 流的处理</span></div><div class="line">  </div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">DOM</span>: DOM$, <span class="comment">// 处理后的DOM流</span></div><div class="line">    router: router$, <span class="comment">// 处理后的router流</span></div><div class="line">    HTTP: HTTP$ <span class="comment">// 处理后的HTTP流</span></div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">run(main, &#123;</div><div class="line">  <span class="attr">DOM</span>: makeDOMDriver(), <span class="comment">// DOM驱动</span></div><div class="line">  router: makeRouterDriver(), <span class="comment">// 路由驱动</span></div><div class="line">  HTTP: makeHTTPDriver() <span class="comment">// HTTP驱动</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
+<p>这节主要发挥本骚年的大脑洞，来进行思想探索。<br>主要是尝试讲解了一下Cycle.js的设计思路，当然这只是本骚年的理解，或许有些理解不到位，甚至完全颠倒的地方，请多多包涵，和仅供参考。</p>
+  
 	</div>
 	<div class="author-right">
   		<p>作者：被删</p>
@@ -119,13 +178,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/算法/">算法</a>
+  <span></span> <a href="/tags/笔记/">笔记</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/js什锦/">js什锦</a>
+  <a class="article-category-link" href="/categories/cyclejs哈根达斯/">cyclejs哈根达斯</a>
 </div>
 
 
@@ -155,19 +214,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/07/30/find-maximum-subarray/" title="算法导论之js实现--分治法求最大子数组">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  算法导论之js实现--分治法求最大子数组</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/07/23/heap-sort/"  title="算法导论之js实现--堆排序">
+<a href="/2017/09/08/cyclejs-notes-4-use-class-build-input/"  title="Cycle.js学习笔记4--使用Class和装饰器">
  <strong>NEXT:</strong><br/> 
- <span>算法导论之js实现--堆排序
+ <span>Cycle.js学习笔记4--使用Class和装饰器
 </span>
 </a>
 </div>
@@ -189,7 +240,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速选择"><span class="toc-number">1.</span> <span class="toc-text">快速选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">1.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速选择-1"><span class="toc-number">1.2.</span> <span class="toc-text">快速选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js基本思路实现"><span class="toc-number">1.4.</span> <span class="toc-text">js基本思路实现</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cycle-js基础概念"><span class="toc-number">1.</span> <span class="toc-text">Cycle.js基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#人机交互"><span class="toc-number">1.1.</span> <span class="toc-text">人机交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话抽象"><span class="toc-number">1.2.</span> <span class="toc-text">对话抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#驱动"><span class="toc-number">1.3.</span> <span class="toc-text">驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流"><span class="toc-number">1.4.</span> <span class="toc-text">流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
