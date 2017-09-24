@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
 > [《Cycle.js学习笔记5--关于框架设计和抽象》](https://godbasin.github.io/2017/09/16/cyclejs-notes-5-design-and-abstraction/)      
 > [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
 > [《Cycle.js学习笔记3--切换到Typescript》](https://godbasin.github.io/2017/09/03/cyclejs-notes-3-use-typescript/)      
@@ -12,6 +13,7 @@
 > [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
 
 ### Cycle.js笔记      
+> [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
 > [《Cycle.js学习笔记5--关于框架设计和抽象》](https://godbasin.github.io/2017/09/16/cyclejs-notes-5-design-and-abstraction/)      
 > [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
 > [《Cycle.js学习笔记3--切换到Typescript》](https://godbasin.github.io/2017/09/03/cyclejs-notes-3-use-typescript/)      
