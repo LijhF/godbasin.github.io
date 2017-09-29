@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 > [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
 > [《Cycle.js学习笔记5--关于框架设计和抽象》](https://godbasin.github.io/2017/09/16/cyclejs-notes-5-design-and-abstraction/)      
 > [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
@@ -11,6 +12,9 @@
 > [《Cycle.js学习笔记2--使用cyclic-router来启动路由》](https://godbasin.github.io/2017/08/27/cyclejs-notes-2-use-cyclic-router/)      
 > [《Cycle.js学习笔记1--用Webpack启动应用》](https://godbasin.github.io/2017/08/26/cyclejs-notes-1-init-app-with-webpack/)      
 > [《webpack多页面配置8--静态资源loader们》](https://godbasin.github.io/2017/08/25/webpack-multi-project-8-certain-loaders/)      
+
+### 前端杂谈
+> [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Cycle.js笔记      
 > [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
