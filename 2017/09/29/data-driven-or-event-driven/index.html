@@ -165,7 +165,7 @@ var _hmt = _hmt || [];
 </ol>
 <h3 id="mvvm推动数据驱动思维"><a href="#mvvm推动数据驱动思维" class="headerlink" title="mvvm推动数据驱动思维"></a>mvvm推动数据驱动思维</h3><p>这里借用vue，来举两个例子吧。</p>
 <p>一、获取input输入并更新<br>实现一个input的监听输入，并更新输出到模板，我们能有以下代码的变化：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--1. 事件驱动--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">$('#input').on('click', e =&gt; &#123;</div><div class="line">    const val = e.target.value;</div><div class="line">    $('#p').text(val);</div><div class="line">&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--2. 数据驱动 + vue--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"inputValue"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; inputValue &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--1. 事件驱动--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">$(<span class="string">'#input'</span>).on(<span class="string">'click'</span>, e =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> val = e.target.value;</div><div class="line">    $(<span class="string">'#p'</span>).text(val);</div><div class="line">&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--2. 数据驱动 + vue--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"inputValue"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; inputValue &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>当我们在vue中，模板引擎帮我们处理了模板渲染、数据绑定的过程，我们只需要知道这里面只有一个有效数据，即input的值。</p>
 <p>二、部分更新列表<br>我们再来看个例子，我们有一组数据，需要渲染成一个列表：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> list = [</div><div class="line">    &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'name1'</span>, <span class="attr">href</span>: <span class="string">'http://href1'</span>&#125;,</div><div class="line">    &#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">'name2'</span>, <span class="attr">href</span>: <span class="string">'http://href2'</span>&#125;,</div><div class="line">    &#123;<span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">'name3'</span>, <span class="attr">href</span>: <span class="string">'http://href3'</span>&#125;,</div><div class="line">    &#123;<span class="attr">id</span>: <span class="number">4</span>, <span class="attr">name</span>: <span class="string">'name4'</span>, <span class="attr">href</span>: <span class="string">'http://href4'</span>&#125;</div><div class="line">]</div></pre></td></tr></table></figure>
@@ -229,6 +229,14 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/10/03/cyclejs-notes-7-debug-input/" title="Cycle.js学习笔记7--定位Input组件值获取bug">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Cycle.js学习笔记7--定位Input组件值获取bug</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2017/09/24/cyclejs-notes-6-merge-streams/"  title="Cycle.js学习笔记6--合流">
@@ -266,6 +274,12 @@ var jiathis_config = {data_track_clickback:'true'};
 	<div class="archiveslist">
 		<p class="asidetitle">最近文章</p>
 			<ul class="archive-list">
+			
+					
+				<li class="archive-list-item">
+					<a class="archive-list-link" href="/2017/10/03/cyclejs-notes-7-debug-input/" title="Cycle.js学习笔记7--定位Input组件值获取bug">Cycle.js学习笔记7--定位I...</a>
+				</li>
+				
 			
 					
 				<li class="archive-list-item">
@@ -321,10 +335,6 @@ var jiathis_config = {data_track_clickback:'true'};
 				</li>
 				
 			
-					
-				<li class="archive-list-item">
-					<a class="archive-list-link" href="/2017/08/20/webpack-multi-project-7-source-map-and-uglifyjs/" title="webpack多页面配置7--source map和代码压缩">webpack多页面配置7--sou...</a>
-				</li>
 				
 			
 				
@@ -664,7 +674,7 @@ var jiathis_config = {data_track_clickback:'true'};
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">9</span></li></ul>
   </div>
 
 
@@ -690,7 +700,7 @@ var jiathis_config = {data_track_clickback:'true'};
 			</li>
 		
 			<li class="archive-list-item">
-				<a class="archive-list-link" href="/categories/cyclejs哈根达斯/" title="cyclejs哈根达斯">cyclejs哈根达斯<sup>6</sup></a>
+				<a class="archive-list-link" href="/categories/cyclejs哈根达斯/" title="cyclejs哈根达斯">cyclejs哈根达斯<sup>7</sup></a>
 			</li>
 		
 			<li class="archive-list-item">
@@ -751,7 +761,7 @@ var jiathis_config = {data_track_clickback:'true'};
 			</li>
 		
 			<li class="archive-list-item">
-				<a class="archive-list-link" href="/tags/笔记/" title="笔记">笔记<sup>96</sup></a>
+				<a class="archive-list-link" href="/tags/笔记/" title="笔记">笔记<sup>97</sup></a>
 			</li>
 		
 			<li class="archive-list-item">
