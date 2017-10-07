@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Cycle.js学习笔记8--双向绑定Input值》](https://godbasin.github.io/2017/10/07/cyclejs-notes-8-two-way-binding/)      
 > [《Cycle.js学习笔记7--定位Input组件值获取bug》](https://godbasin.github.io/2017/10/03/cyclejs-notes-7-debug-input/)      
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 > [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
@@ -15,6 +16,8 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Cycle.js笔记      
+> [《Cycle.js学习笔记8--双向绑定Input值》](https://godbasin.github.io/2017/10/07/cyclejs-notes-8-two-way-binding/)      
+> > [《Cycle.js学习笔记7--定位Input组件值获取bug》](https://godbasin.github.io/2017/10/03/cyclejs-notes-7-debug-input/)      
 > [《Cycle.js学习笔记6--合流》](https://godbasin.github.io/2017/09/24/cyclejs-notes-6-merge-streams/)      
 > [《Cycle.js学习笔记5--关于框架设计和抽象》](https://godbasin.github.io/2017/09/16/cyclejs-notes-5-design-and-abstraction/)      
 > [《Cycle.js学习笔记4--使用Class和装饰器》](https://godbasin.github.io/2017/09/08/cyclejs-notes-4-use-class-build-input/)      
