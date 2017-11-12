@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Angular使用笔记5--作用域简单分析以及制作index页面 | Here. There.</title>
+    <title>纯前端的进军3--进程间通信 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="最近的一个项目使用AngularJS(v1.2.6)作为前端的框架，《Angular使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录简单介绍作用域，以及制作首页的过程。">
+    <meta name="description" content="《纯前端的进军》系列主要作为曾经的纯前端，对后台和底层的一些弥补，涉及进程、网络通信，以及对node.js和相关框架的学习。本节主要围绕进程间通信、进程间同步等内容。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/16/angular-note-5-fullfill-index/" title="Angular使用笔记5--作用域简单分析以及制作index页面" itemprop="url">Angular使用笔记5--作用域简单分析以及制作index页面</a>
+      <a href="/2017/11/12/advance-from-pure-front-ender-3-interprocess-communication/" title="纯前端的进军3--进程间通信" itemprop="url">纯前端的进军3--进程间通信</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-07-16T00:49:21.000Z" itemprop="datePublished">2016-07-16</time>
-    更新日期:<time datetime="2016-08-20T10:54:21.060Z" itemprop="dateModified">2016-08-20</time>
+    <time datetime="2017-11-12T07:41:07.000Z" itemprop="datePublished">2017-11-12</time>
+    更新日期:<time datetime="2017-11-12T07:41:31.334Z" itemprop="dateModified">2017-11-12</time>
     
   </p>
 </header>
@@ -88,112 +88,95 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#有关angularJS作用域"><span class="toc-number">1.</span> <span class="toc-text">有关angularJS作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rootscope相关执行过程"><span class="toc-number">1.1.</span> <span class="toc-text">rootscope相关执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scope对象"><span class="toc-number">1.2.</span> <span class="toc-text">Scope对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控对象属性"><span class="toc-number">1.3.</span> <span class="toc-text">监控对象属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域树"><span class="toc-number">1.4.</span> <span class="toc-text">作用域树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作index页面"><span class="toc-number">2.</span> <span class="toc-text">制作index页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加index控制器"><span class="toc-number">2.1.</span> <span class="toc-text">添加index控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加侧边菜单"><span class="toc-number">2.2.</span> <span class="toc-text">添加侧边菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加页面内容"><span class="toc-number">2.3.</span> <span class="toc-text">添加页面内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器逻辑"><span class="toc-number">2.4.</span> <span class="toc-text">控制器逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信（IPC）"><span class="toc-number">1.</span> <span class="toc-text">进程间通信（IPC）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间通信方式"><span class="toc-number">1.2.</span> <span class="toc-text">进程间通信方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间同步机制"><span class="toc-number">1.3.</span> <span class="toc-text">进程间同步机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>最近的一个项目使用AngularJS(v1.2.6)作为前端的框架，《Angular使用笔记》系列用于记录过程中的一些使用和解决方法。<br>本文记录简单介绍作用域，以及制作首页的过程。<br><a id="more"></a></p>
-<h2 id="有关angularJS作用域"><a href="#有关angularJS作用域" class="headerlink" title="有关angularJS作用域"></a>有关angularJS作用域</h2><hr>
-<h3 id="rootscope相关执行过程"><a href="#rootscope相关执行过程" class="headerlink" title="rootscope相关执行过程"></a>rootscope相关执行过程</h3><ul>
-<li>调用compile(element)(scope)</li>
-<li>开始编译dom树，传递的element是应用的根节点（有ng-app属性的节点或者手动bootstrap的节点）</li>
-<li>传递的scope则是唯一的根作用域rootscope，与根节点对应</li>
-<li>通过scope.$apply(..)进行digest进行脏检查，开始一些初始化工作</li>
-</ul>
-<h3 id="Scope对象"><a href="#Scope对象" class="headerlink" title="Scope对象"></a>Scope对象</h3><ul>
-<li>简单的JavaScript对象</li>
-<li>可以像对其他对象一样添加属性</li>
-<li>Scope对象是用构造函数创建的</li>
-<li>从原型方法包括$watch，$apply和$digest方法，以及处理自定义事件（消息传递）的$on, $emit和$broadcaset方法</li>
-</ul>
-<h3 id="监控对象属性"><a href="#监控对象属性" class="headerlink" title="监控对象属性"></a>监控对象属性</h3><ul>
-<li><p>$watch方法</p>
+		<p>《纯前端的进军》系列主要作为曾经的纯前端，对后台和底层的一些弥补，涉及进程、网络通信，以及对node.js和相关框架的学习。本节主要围绕进程间通信、进程间同步等内容。<br><a id="more"></a></p>
+<h2 id="进程间通信（IPC）"><a href="#进程间通信（IPC）" class="headerlink" title="进程间通信（IPC）"></a>进程间通信（IPC）</h2><hr>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>进程间通信（IPC，Inter-Process Communication），指至少两个进程或线程间传送数据或信号的一些技术或方法。比如shell中的管道命令：<code>ps -ef | grep nginx</code>，一个命令的输出，作为另一个进程的输入，这就是进程间通信。</p>
+<p><strong>使用进程间通信的理由</strong>：</p>
 <ul>
-<li>$watch方法监听作用域变化</li>
-<li>$watch函数所做的工作其实就是作用域中变量和关联的监听函数的存储</li>
-<li>$watch指定如下两个函数，就可以创建一个监听器<ul>
-<li>一个监控函数，用于指定所关注的那部分数据。</li>
-<li>一个监听函数，用于在数据变更的时候接受提示</li>
+<li>信息共享：Web服务器，通过网页浏览器使用进程间通信来共享web文件（网页等）和多媒体</li>
+<li>加速：维基百科使用通过进程间通信进行交流的多服务器来满足用户的请求</li>
+<li>模块化</li>
+<li>私有权分离</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>$digest方法</p>
+<p><strong>与直接共享内存地址空间的多线程编程相比，进程间通信的缺点</strong>：</p>
 <ul>
-<li>$digest方法进行脏检查，它执行了所有在作用域上注册过的监听器</li>
-<li>当作用域里的变量发生变化时，调用$digest方法便会执行该作用域以及它的所有子作用域上的相关的监听函数</li>
-<li>$digest函数的作用是调用这个监控函数，并且比较它返回的值和上一次返回值的差异</li>
-<li>如果不相同，监听器就是脏的，它的监听函数就应当被调用</li>
-<li>内置的directive和controller内部都已经做了$apply操作</li>
+<li>采用了某种形式的内核开销，降低了性能</li>
+<li>几乎大部分IPC都不是程序设计的自然扩展，往往会大大地增加程序的复杂度</li>
 </ul>
+<p><strong>进程间通信主要需要解决三个问题（线程间通信需要解决后两个问题）</strong>：</p>
+<ol>
+<li>一个进程如何给另一个进程传递信息。</li>
+<li>如何确保进程之间不互相干扰、妨碍。</li>
+<li>当进程间出现依赖关系时，该如何处理。</li>
+</ol>
+<p><strong>本地的进程间通信（IPC）可以总结为下面4类技术</strong>：</p>
+<ol>
+<li><strong>消息传递（管道、FIFO、消息队列）</strong></li>
+<li><strong>同步（互斥量、条件变量、读写锁、文件和写记录锁、信号量）</strong></li>
+<li><strong>共享内存（匿名的和具名的）</strong></li>
+<li><strong>远程过程调用（Solaris门和Sun RPC）</strong></li>
+</ol>
+<h3 id="进程间通信方式"><a href="#进程间通信方式" class="headerlink" title="进程间通信方式"></a>进程间通信方式</h3><ul>
+<li><strong>管道/匿名管道(pipe)</strong>：<blockquote>
+<p>管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。<br>进程的亲缘关系通常是指父子进程关系。</p>
+</blockquote>
 </li>
-<li><p>$eval方法</p>
+<li><strong>有名管道(named pipe)</strong>： <blockquote>
+<p>有名管道也是半双工的通信方式，有名管道克服了管道没有名字的限制。<br>因此，除具有管道所具有的功能外，它还允许无亲缘关系进程间的通信。</p>
+</blockquote>
+</li>
+<li><strong>信号量(semophore)</strong>： <blockquote>
+<p>信号量是一个计数器，可以用来控制多个进程对共享资源的访问。<br>常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
+</blockquote>
+</li>
+<li><strong>消息队列(message queue)</strong>： <blockquote>
+<p>消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。<br>有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
+</blockquote>
+</li>
+<li><strong>信号 (sinal)</strong>： <blockquote>
+<p>信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。<br>除了用于进程间通信外，进程还可以发送信号给进程本身。</p>
+</blockquote>
+</li>
+<li><strong>共享内存(shared memory)</strong>：<blockquote>
+<p>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。<br>共享内存是最快的IPC方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号两，配合使用，来实现进程间的同步和通信。</p>
+</blockquote>
+</li>
+<li><p><strong>套接字(socket)</strong>： </p>
+<blockquote>
+<p>套解口也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同机器之间的进程通信。</p>
+</blockquote>
+</li>
+<li><p>在Windows OS上进程间通信：</p>
 <ul>
-<li>$eval在作用域的上下文上执行代码</li>
-<li>使用一个函数作参数，所做的事情是立即执行这个传入的函数，并且把作用域自身当作参数传递给它，返回的是这个函数的返回值</li>
+<li>文件映射、共享内存、匿名管道、命名管道、动态连接库、远程过程调用、Sockets、WM_COPYDATA消息</li>
 </ul>
 </li>
-<li><p>$apply方法</p>
+<li><p>linux下进程间通信：</p>
 <ul>
-<li>使用一个函数作参数，用$eval执行这个函数，然后通过$digest触发digest循环</li>
-<li>在$apply中，$digest的调用放置于finally块中，以确保即使函数抛出异常，也会执行digest</li>
+<li>管道（Pipe）及有名管道（named pipe）、信号（Signal）、报文（Message）队列（消息队列）、共享内存、信号量（semaphore）、套接口（Socket）</li>
 </ul>
 </li>
 </ul>
-<h3 id="作用域树"><a href="#作用域树" class="headerlink" title="作用域树"></a>作用域树</h3><ul>
-<li>普通的作用域通过原型链实现了继承关系，孤立作用域没有任何继承关系</li>
-<li>所有的作用域之间（也包括孤立作用域）根据自身所处的位置都存在以下这些关系<ul>
-<li>$root来访问跟作用域</li>
-<li>$parent来访问父作用域</li>
-<li>$childHead（$childTail）访问头（尾）子作用域</li>
-<li>prevSibling（$nextSibling）访问前（后）一个兄弟作用域</li>
-</ul>
-</li>
-</ul>
+<h3 id="进程间同步机制"><a href="#进程间同步机制" class="headerlink" title="进程间同步机制"></a>进程间同步机制</h3><p><strong>进程同步</strong><br>进程同步也是进程之间直接的制约关系，是为完成某种任务而建立的两个或多个线程，这个线程需要在某些位置上协调他们的工作次序而等待、传递信息所产生的制约关系。进程间的直接制约关系来源于他们之间的合作。</p>
+<p><strong>进程互斥</strong><br>进程互斥是进程之间的间接制约关系。当一个进程进入临界区使用临界资源时，另一个进程必须等待。只有当使用临界资源的进程退出临界区后，这个进程才会解除阻塞状态。</p>
+<p><strong>进程间同步机制包括临界区、互斥区、事件、信号量四种方式。</strong></p>
+<p><strong>1. 临界区</strong><br>通过对多线程的串行化来访问公共资源或一段代码，速度快，适合控制数据访问。<br>在任意时刻只允许一个线程对共享资源进行访问，如果有多个线程试图访问公共资源，那么在有一个线程进入后，其他试图访问公共资源的线程将被挂起，并一直等到进入临界区的线程离开，临界区在被释放后，其他线程才可以抢占。</p>
+<p><strong>2. 互斥量</strong><br>采用互斥对象机制。<br>只有拥有互斥对象的线程才有访问公共资源的权限，因为互斥对象只有一个，所以能保证公共资源不会同时被多个线程访问。<br>互斥不仅能实现同一应用程序的公共资源安全共享，还能实现不同应用程序的公共资源安全共享。<br>互斥量比临界区复杂。因为使用互斥不仅仅能够在同一应用程序不同线程中实现资源的安全共享，而且可以在不同应用程序的线程之间实现对资源的安全共享。</p>
+<p><strong>实现临界区互斥的基本方法：硬件实现、信号量实现。</strong></p>
+<p><strong>3. 信号量</strong><br>它允许多个线程在同一时刻访问同一资源，但是需要限制在同一时刻访问此资源的最大线程数目。<br>信号量对象对线程的同步方式与前面几种方法不同，信号允许多个线程同时使用共享资源，这与操作系统中的PV操作相同。它指出了同时访问共享资源的线程最大数目。它允许多个线程在同一时刻访问同一资源，但是需要限制在同一时刻访问此资源的最大线程数目。<br>简单来说，例如多个线程同时读取共享资源，但有写操作的时候则锁定。</p>
+<p><strong>4. 事件</strong><br>通过通知操作的方式来保持线程的同步，还可以方便实现对多个线程的优先级比较的操作。</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="http://www.ituring.com.cn/article/39865" target="_blank" rel="external">《构建自己的AngularJS，第一部分：作用域和digest》</a></li>
-<li><a href="http://www.html-js.com/article/2365" target="_blank" rel="external">《angularjs1.3.0源码解析之scope》</a></li>
-</ul>
-<h2 id="制作index页面"><a href="#制作index页面" class="headerlink" title="制作index页面"></a>制作index页面</h2><hr>
-<p>页面结构如下：<br><img src="http://o905ne85q.bkt.clouddn.com/F3A2.tmp.png" alt="image"></p>
-<h3 id="添加index控制器"><a href="#添加index控制器" class="headerlink" title="添加index控制器"></a>添加index控制器</h3><ul>
-<li>在scripts文件夹内添加一个indexCtrl.js文件，并添加控制器</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'IndexCtrl'</span>, [<span class="string">'$scope'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;&#125;]);</div></pre></td></tr></table></figure>
-<ul>
-<li>在app.js文件中对应路由添加上控制器</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.when(<span class="string">'/index'</span>, &#123;</div><div class="line">  <span class="attr">templateUrl</span>: <span class="string">'views/index.html'</span>, <span class="comment">//index的html页面</span></div><div class="line">  controller: <span class="string">'IndexCtrl'</span> <span class="comment">//index的控制器，现在暂时不加</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<ul>
-<li>在index.html页面内引入indexCtrl.js文件</li>
-</ul>
-<h3 id="添加侧边菜单"><a href="#添加侧边菜单" class="headerlink" title="添加侧边菜单"></a>添加侧边菜单</h3><ul>
-<li>使用bootstrap的列表组作为侧边菜单</li>
-<li>使用bootstrap的Collapse插件实现展开和收缩菜单</li>
-<li>菜单使用ng-repeat遍历生成，故需在控制器中加入相关的内容使其生成相应菜单，此处使用scope.asidemenus</li>
-</ul>
-<h3 id="添加页面内容"><a href="#添加页面内容" class="headerlink" title="添加页面内容"></a>添加页面内容</h3><ul>
-<li>在index页面中添加页面内容</li>
-<li>使用统一样式添加页面内容</li>
-<li>使用scope.loading设置当前内容</li>
-<li>使用ng-show绑定scope.loading设置相应显示内容</li>
-<li>使用ng-click绑定菜单事件，改变scope.loading来实现内容切换</li>
-</ul>
-<h3 id="控制器逻辑"><a href="#控制器逻辑" class="headerlink" title="控制器逻辑"></a>控制器逻辑</h3><ul>
-<li>使用$scope.loading储存当前位置</li>
-<li>使用$scope.asidemenus储存侧边菜单，包括以下参数<ul>
-<li>title: string，一级菜单的名称</li>
-<li>click: function对象，点击菜单时绑定的事件</li>
-<li>menus: obj对象，一级菜单下的二级菜单<ul>
-<li>title: string，二级菜单的名称</li>
-<li>click: function对象，点击菜单时绑定的事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'IndexCtrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</div><div class="line">  $scope.loading = <span class="string">'init'</span>; <span class="comment">//$scope.loading储存当前位置</span></div><div class="line">  $scope.asidemenus = [&#123;</div><div class="line">    <span class="attr">title</span>: <span class="string">''</span>, <span class="comment">//一级菜单的名称</span></div><div class="line">    click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;, <span class="comment">//点击菜单时绑定的事件</span></div><div class="line">    menus: [&#123; <span class="comment">//二级菜单</span></div><div class="line">      text: <span class="string">''</span>, <span class="comment">//二级菜单的名称</span></div><div class="line">      click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">//点击菜单时绑定的事件</span></div><div class="line">    &#125;]</div><div class="line">  &#125;];</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="http://www.cnblogs.com/wawlian/archive/2012/02/18/2356865.html" target="_blank" rel="external">《现代操作系统》读书笔记之——进程间通信</a></li>
+<li><a href="http://blog.csdn.net/coolmeme/article/details/6053418" target="_blank" rel="external">《进程间通信（IPC）》</a></li>
+<li><a href="http://www.jianshu.com/p/c1015f5ffa74" target="_blank" rel="external">《进程间通信IPC (InterProcess Communication)》</a></li>
+<li><a href="http://www.cnblogs.com/memewry/archive/2012/08/22/2651696.html" target="_blank" rel="external">《进程/线程同步的方式和机制，进程间通信》</a></li>
+<li><a href="http://www.cnblogs.com/CareySon/archive/2012/04/14/Process-SynAndmutex.html" target="_blank" rel="external">《浅谈进程同步和互斥的概念》</a></li>
 </ul>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>AngularJS中用得最爽的莫过于模板引擎的数据和事件绑定了，当你熟悉了angular之后你会喜欢上他的哦。<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/angular-notes/5-fullfill-index" target="_blank" rel="external">此处查看项目代码（仅包含app部分）</a><br><a href="http://o9grhhyar.bkt.clouddn.com/5-fullfill-index/index.html#/index" target="_blank" rel="external">此处查看页面效果</a></p>
+<p>以上内容其实主要是操作系统的设计相关，这里其实不涉及很多，作为课外知识补充一下就好。<br>如果是强迫症或者求知欲比较强烈的孩子，可以深入研究一下进程、队列、锁等等等等。感兴趣的也可以去看看操作系统设计相关的书籍。</p>
   
 	</div>
 	<div class="author-right">
@@ -205,13 +188,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/分享/">分享</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/angular混搭/">angular混搭</a>
+  <a class="article-category-link" href="/categories/非前端钙片/">非前端钙片</a>
 </div>
 
 
@@ -241,19 +224,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/07/17/angular-note-6-asyncchronous-submit-form/" title="Angular使用笔记6--编写异步提交带图片的表单服务">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Angular使用笔记6--编写异步提交带图片的表单服务</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/07/10/angular-note-4-make-header-directive/"  title="Angular使用笔记4--制作头部指令">
+<a href="/2017/11/05/advance-from-pure-front-ender-2-progress-and-io/"  title="纯前端的进军2--多线程与IO">
  <strong>NEXT:</strong><br/> 
- <span>Angular使用笔记4--制作头部指令
+ <span>纯前端的进军2--多线程与IO
 </span>
 </a>
 </div>
@@ -275,7 +250,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#有关angularJS作用域"><span class="toc-number">1.</span> <span class="toc-text">有关angularJS作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rootscope相关执行过程"><span class="toc-number">1.1.</span> <span class="toc-text">rootscope相关执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scope对象"><span class="toc-number">1.2.</span> <span class="toc-text">Scope对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控对象属性"><span class="toc-number">1.3.</span> <span class="toc-text">监控对象属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域树"><span class="toc-number">1.4.</span> <span class="toc-text">作用域树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作index页面"><span class="toc-number">2.</span> <span class="toc-text">制作index页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加index控制器"><span class="toc-number">2.1.</span> <span class="toc-text">添加index控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加侧边菜单"><span class="toc-number">2.2.</span> <span class="toc-text">添加侧边菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加页面内容"><span class="toc-number">2.3.</span> <span class="toc-text">添加页面内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器逻辑"><span class="toc-number">2.4.</span> <span class="toc-text">控制器逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信（IPC）"><span class="toc-number">1.</span> <span class="toc-text">进程间通信（IPC）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间通信方式"><span class="toc-number">1.2.</span> <span class="toc-text">进程间通信方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间同步机制"><span class="toc-number">1.3.</span> <span class="toc-text">进程间同步机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
