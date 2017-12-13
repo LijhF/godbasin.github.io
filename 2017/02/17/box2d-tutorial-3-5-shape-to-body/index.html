@@ -129,10 +129,12 @@ var _hmt = _hmt || [];
 <p>首先，利用b2BodyDef创建一个刚体，然后设置刚体的初始位置并加入之间已创建的形状，然后使用CreateBody将刚体放入到世界里面，这样就可以看到一些模拟刚体了。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> BodyDef= <span class="keyword">new</span> b2BodyDef();   <span class="comment">// 利用b2BodyDef类创建一个刚体</span></div><div class="line">BodyDef.position.Set(<span class="number">0</span>, <span class="number">600</span>);     <span class="comment">// 设置刚体的初始位置，这里把BodyDef放在（0，600）</span></div><div class="line">BodyDef.AddShape(Shape);      <span class="comment">// 在刚体BodyDef中加入形状Shape</span></div><div class="line">Body= world.CreateBody(BodyDef); <span class="comment">// 把刚体BodyDef放到world中</span></div></pre></td></tr></table></figure>
 <h3 id="返回总目录"><a href="#返回总目录" class="headerlink" title="返回总目录"></a><a href="/2017/02/17/box2d-tutorial-0-catalog/">返回总目录</a></h3>  
+		
+		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
 	</div>
 	<div class="author-right">
   		<p>作者：被删</p>
-  		<p>出处：<a href="https://godbasin.github.io"></a>https://godbasin.github.io</p>
+  		<p>出处：<a href="https://godbasin.github.io">https://godbasin.github.io</a></p>
   		<p>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
 	</div>
 		<footer class="article-footer clearfix">

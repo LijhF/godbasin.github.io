@@ -98,10 +98,12 @@ var _hmt = _hmt || [];
 <h3 id="b2RevoluteJointDef"><a href="#b2RevoluteJointDef" class="headerlink" title="b2RevoluteJointDef"></a>b2RevoluteJointDef</h3><p>首先创建两个物体，然后将它们放在世界里，使用基类b2RevoluteJointDef创建一个旋转关节，设定铰接点，及旋转关节连接的是哪两个物体之后即可将其放入到世界里。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> jointDefRevolute = <span class="keyword">new</span> b2RevoluteJointDef();  <span class="comment">//创建一个旋转关节jointDefRevolute</span></div><div class="line">jointDefRevolute.anchorPoint.Set(<span class="number">450</span>, <span class="number">450</span>);       <span class="comment">//设定铰接点坐标</span></div><div class="line">jointDefRevolute.body1 = Body1;                   <span class="comment">//设定旋转关节一端连接Body1</span></div><div class="line">jointDefRevolute.body2 = Body2;                   <span class="comment">//设定旋转关节另一端连接Body2</span></div><div class="line"><span class="keyword">var</span> jointRevolute= world.CreateJoint(jointDefRevolute);     <span class="comment">//将旋转关节放入世界中</span></div><div class="line">jointRevolute.SetMotorSpeed(<span class="number">100</span>);           <span class="comment">//设置旋转关节马达的速度</span></div></pre></td></tr></table></figure>
 <h3 id="返回总目录"><a href="#返回总目录" class="headerlink" title="返回总目录"></a><a href="/2017/02/17/box2d-tutorial-0-catalog/">返回总目录</a></h3>  
+		
+		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
 	</div>
 	<div class="author-right">
   		<p>作者：被删</p>
-  		<p>出处：<a href="https://godbasin.github.io"></a>https://godbasin.github.io</p>
+  		<p>出处：<a href="https://godbasin.github.io">https://godbasin.github.io</a></p>
   		<p>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
 	</div>
 		<footer class="article-footer clearfix">

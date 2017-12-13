@@ -98,10 +98,12 @@ var _hmt = _hmt || [];
 <h3 id="GetContactList"><a href="#GetContactList" class="headerlink" title="GetContactList"></a>GetContactList</h3><p>GetContactList其实与上面的作用效果一样，而且其判断接触的逻辑思路也是一致的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> cn = world.GetContactList(); cn != <span class="literal">null</span>; cn = cn.GetNext()) &#123;</div><div class="line">  <span class="keyword">var</span> body1 = cn.GetShape1().GetBody();</div><div class="line">  <span class="keyword">var</span> body2 = cn.GetShape2().GetBody();</div><div class="line"></div><div class="line">  <span class="comment">// 处理判断发生碰撞的两个刚体是不是分别为箱子和墙壁</span></div><div class="line">  <span class="keyword">if</span> ((body1 ==  box &amp;&amp; body2 == wall) || (body2 == box &amp;&amp; body1 == wall))&#123;</div><div class="line">    <span class="comment">// 进行逻辑处理</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="返回总目录"><a href="#返回总目录" class="headerlink" title="返回总目录"></a><a href="/2017/02/17/box2d-tutorial-0-catalog/">返回总目录</a></h3>  
+		
+		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
 	</div>
 	<div class="author-right">
   		<p>作者：被删</p>
-  		<p>出处：<a href="https://godbasin.github.io"></a>https://godbasin.github.io</p>
+  		<p>出处：<a href="https://godbasin.github.io">https://godbasin.github.io</a></p>
   		<p>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
 	</div>
 		<footer class="article-footer clearfix">
