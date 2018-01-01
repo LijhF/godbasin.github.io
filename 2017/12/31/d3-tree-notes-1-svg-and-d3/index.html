@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-12-31T13:27:57.000Z" itemprop="datePublished">2017-12-31</time>
-    更新日期:<time datetime="2017-12-31T13:27:24.013Z" itemprop="dateModified">2017-12-31</time>
+    更新日期:<time datetime="2018-01-01T06:15:25.492Z" itemprop="dateModified">2018-01-01</time>
     
   </p>
 </header>
@@ -115,19 +115,19 @@ var _hmt = _hmt || [];
 <p>D3 的运行速度很快，支持大数据集和动态交互以及动画，当然在数量级上去了之后，据说 SVG 性能与 Canvas 还是差了一些的。</p>
 <p>下面我们讲几个 D3 中比较关键的概念。</p>
 <h3 id="Selections-选择集"><a href="#Selections-选择集" class="headerlink" title="Selections(选择集)"></a>Selections(选择集)</h3><p>D3 采用声明式方法，可以对任意节点以及节点集合进行操作:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="string">"white"</span>); <span class="comment">// selectAll则选中所有匹配的元素</span></div><div class="line"></div><div class="line"><span class="comment">// 同时，可以操作其他节点，而不相互影响</span></div><div class="line">d3.select(<span class="string">"body"</span>).style(<span class="string">"background-color"</span>, <span class="string">"black"</span>); <span class="comment">// select仅仅选择第一个匹配的元素</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="string">"white"</span>); <span class="comment">// selectAll则选中所有匹配的元素</span></div><div class="line"></div><div class="line"><span class="comment">// 同时，可以操作其他节点，而不相互影响</span></div><div class="line">d3.select(<span class="string">"body"</span>).style(<span class="string">"background-color"</span>, <span class="string">"black"</span>); <span class="comment">// select仅仅选择第一个匹配的元素</span></div></pre></td></tr></table></figure>
 <p>我们能看到：</p>
 <ol>
 <li>选择器方法接受<a href="https://www.w3.org/TR/selectors-api/" target="_blank" rel="external">W3C selector strings</a>支持的字符串，比如<code>.fancy</code>表示选择类名为<code>fancy</code>的元素, <code>div</code>选择<code>DIV</code>元素。</li>
 <li>选择集的方法一般返回当前选择集或一个新的选择集，这样可以支持简明的链式语法。</li>
 </ol>
 <h3 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h3><p>在选中元素之后，就可以通过一些方法对元素进行操作。比如设置 a 元素的 name 属性和颜色:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">d3</div><div class="line">  .select(<span class="string">"a"</span>)</div><div class="line">  .attr(<span class="string">"name"</span>, <span class="string">"fred"</span>)</div><div class="line">  .style(<span class="string">"color"</span>, <span class="string">"red"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">d3</div><div class="line">  .select(<span class="string">"a"</span>)</div><div class="line">  .attr(<span class="string">"name"</span>, <span class="string">"fred"</span>)</div><div class="line">  .style(<span class="string">"color"</span>, <span class="string">"red"</span>);</div></pre></td></tr></table></figure>
 <p><strong>动态属性</strong><br>或许上面的操作，与 jQuery、Prototype 有相似之处。但是不同的是，样式、属性以及其他属性的值在 D3 中可以是函数形式，而不仅仅是常量。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"hsl("</span> + <span class="built_in">Math</span>.random() * <span class="number">360</span> + <span class="string">",100%,50%)"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"hsl("</span> + <span class="built_in">Math</span>.random() * <span class="number">360</span> + <span class="string">",100%,50%)"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>上面这种通过匿名函数动态设置属性、样式值的方法常用来绑定数据。</p>
 <p>数据被定义在一个数组中，并且每一个数据值可以作为这个函数的参数，此外还有索引等参数，如我们的 Demo 中则用 id 设为索引，此索引对于后面 enter 和 exit 操作等都有很大的用处。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> node = svg.selectAll(<span class="string">"g.node"</span>).data(nodes, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> d.id || (d.id = ++i);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> node = svg.selectAll(<span class="string">"g.node"</span>).data(nodes, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> d.id || (d.id = ++i);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>数据绑定操作可以方便的根据具体数据操作 DOM 元素。</p>
 <p>将数组类型的 data 与选择集中的元素绑定，返回一个 update 集：数据与元素绑定。因为数据个数未必与元素个数一致，所以又有 enter 和 exit 操作。故在数据绑定操作之后会产生三种选择集：update 集,enter 集以及 exit 集。</p>
 <h3 id="enter-和-exit-操作"><a href="#enter-和-exit-操作" class="headerlink" title="enter 和 exit 操作"></a>enter 和 exit 操作</h3><p>数据绑定的时候可能出现 DOM 元素与数据元素个数不匹配的问题，那么 enter 和 exit 就是用来处理这个问题的。</p>
@@ -138,7 +138,7 @@ var _hmt = _hmt || [];
 <li>数据元素个数多于 DOM 元素个数时，动态添加元素，并操作元素。</li>
 <li>数据元素个数少于 DOM 元素个数，移除多余元素。</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> circle = svg</div><div class="line">  .selectAll(<span class="string">"circle"</span>) <span class="comment">// 1</span></div><div class="line">  .data(data) <span class="comment">// 2</span></div><div class="line">  .style(<span class="string">"fill"</span>, <span class="string">"blue"</span>); <span class="comment">// 3</span></div><div class="line"></div><div class="line">circle.exit().remove(); <span class="comment">// 4</span></div><div class="line"></div><div class="line">circle</div><div class="line">  .enter()</div><div class="line">  .append(<span class="string">"circle"</span>) <span class="comment">// 5</span></div><div class="line">  .style(<span class="string">"fill"</span>, <span class="string">"green"</span>) <span class="comment">// 6</span></div><div class="line">  .merge(circle) <span class="comment">// 7</span></div><div class="line">  .style(<span class="string">"stroke"</span>, <span class="string">"black"</span>); <span class="comment">// 8</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> circle = svg</div><div class="line">  .selectAll(<span class="string">"circle"</span>) <span class="comment">// 1</span></div><div class="line">  .data(data) <span class="comment">// 2</span></div><div class="line">  .style(<span class="string">"fill"</span>, <span class="string">"blue"</span>); <span class="comment">// 3</span></div><div class="line"></div><div class="line">circle.exit().remove(); <span class="comment">// 4</span></div><div class="line"></div><div class="line">circle</div><div class="line">  .enter()</div><div class="line">  .append(<span class="string">"circle"</span>) <span class="comment">// 5</span></div><div class="line">  .style(<span class="string">"fill"</span>, <span class="string">"green"</span>) <span class="comment">// 6</span></div><div class="line">  .merge(circle) <span class="comment">// 7</span></div><div class="line">  .style(<span class="string">"stroke"</span>, <span class="string">"black"</span>); <span class="comment">// 8</span></div></pre></td></tr></table></figure>
 <p>这个过程可分解成以下步骤:</p>
 <ol>
 <li>当前存在的 circles 被选中。</li>
@@ -152,7 +152,7 @@ var _hmt = _hmt || [];
 </ol>
 <h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p>selections 允许监听和分发事件以支持交互。</p>
 <p>我们可以看到我们的 Demo 中：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nodeEnter = node</div><div class="line">  .enter()</div><div class="line">  .append(<span class="string">"g"</span>)</div><div class="line">  .attr(<span class="string">"class"</span>, <span class="string">"node"</span>)</div><div class="line">  .attr(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"translate("</span> + source.y0 + <span class="string">","</span> + source.x0 + <span class="string">")"</span>;</div><div class="line">  &#125;)</div><div class="line">  .on(<span class="string">"click"</span>, click);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nodeEnter = node</div><div class="line">  .enter()</div><div class="line">  .append(<span class="string">"g"</span>)</div><div class="line">  .attr(<span class="string">"class"</span>, <span class="string">"node"</span>)</div><div class="line">  .attr(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"translate("</span> + source.y0 + <span class="string">","</span> + source.x0 + <span class="string">")"</span>;</div><div class="line">  &#125;)</div><div class="line">  .on(<span class="string">"click"</span>, click);</div></pre></td></tr></table></figure>
 <p>上面每个节点添加的时候，都会绑定<code>click</code>事件，当然这里是 toggle，也就是切换子节点的展开和收起状态。</p>
 <h3 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h3><p>D3 支持动画效果，这种动画效果可以通过对样式属性的过渡实现。其补间插值支持多种方式，比如线性、弹性等。此外 D3 内置了多种插值方式，比如对数值类型、字符类型路径数据以及颜色等。</p>
 <p>D3 中过渡的 API 是 transition，参考<a href="https://github.com/xswei/d3js_doc/tree/master/API/d3-transition-master" target="_blank" rel="external">d3-transition</a>。<br>transition 是一个类 selection 为 DOM 元素进行过渡的接口，可以使 DOM 从当前状态平滑的过渡到目标状态。</p>
@@ -210,6 +210,14 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/01/01/d3-tree-notes-2-init-a-d3-tree/" title="D3.js-Tree实战笔记2--简单的Tree demo">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  D3.js-Tree实战笔记2--简单的Tree demo</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2017/12/23/async-await/"  title="async/await的使用">
@@ -247,6 +255,12 @@ var jiathis_config = {data_track_clickback:'true'};
 	<div class="archiveslist">
 		<p class="asidetitle">最近文章</p>
 			<ul class="archive-list">
+			
+					
+				<li class="archive-list-item">
+					<a class="archive-list-link" href="/2018/01/01/d3-tree-notes-2-init-a-d3-tree/" title="D3.js-Tree实战笔记2--简单的Tree demo">D3.js-Tree实战笔记2--简...</a>
+				</li>
+				
 			
 					
 				<li class="archive-list-item">
@@ -302,10 +316,6 @@ var jiathis_config = {data_track_clickback:'true'};
 				</li>
 				
 			
-					
-				<li class="archive-list-item">
-					<a class="archive-list-link" href="/2017/10/21/template-engine/" title="前端模板引擎">前端模板引擎</a>
-				</li>
 				
 			
 				
@@ -671,7 +681,7 @@ var jiathis_config = {data_track_clickback:'true'};
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">9</span></li></ul>
   </div>
 
 
@@ -685,7 +695,7 @@ var jiathis_config = {data_track_clickback:'true'};
 			</li>
 		
 			<li class="archive-list-item">
-				<a class="archive-list-link" href="/categories/D3小馒头/" title="D3小馒头">D3小馒头<sup>1</sup></a>
+				<a class="archive-list-link" href="/categories/D3小馒头/" title="D3小馒头">D3小馒头<sup>2</sup></a>
 			</li>
 		
 			<li class="archive-list-item">
@@ -766,7 +776,7 @@ var jiathis_config = {data_track_clickback:'true'};
 			</li>
 		
 			<li class="archive-list-item">
-				<a class="archive-list-link" href="/tags/笔记/" title="笔记">笔记<sup>99</sup></a>
+				<a class="archive-list-link" href="/tags/笔记/" title="笔记">笔记<sup>100</sup></a>
 			</li>
 		
 			<li class="archive-list-item">
@@ -804,7 +814,7 @@ var jiathis_config = {data_track_clickback:'true'};
 		<p> 即使梦想再小，却很伟大 ^_^ </p>
 	</section>
 	 
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
 		
 		<a href="https://godbasin.github.io" target="_blank" title="被删">被删</a>
 		

@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
 > [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
 > [《async/await的使用》](https://godbasin.github.io/2017/12/23/async-await/)   
 > [《纯前端的进军7--node.js》](https://godbasin.github.io/2017/12/16/advance-from-pure-front-ender-7-node-js/)   
@@ -24,6 +25,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### D3.js-Tree实战笔记      
+> [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
 > [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
 
 ### 纯前端的进军    
