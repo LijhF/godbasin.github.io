@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
 > [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
 > [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
 > [《async/await的使用》](https://godbasin.github.io/2017/12/23/async-await/)   
@@ -23,6 +24,18 @@
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
 > [《对话抽象》](https://godbasin.github.io/2017/10/14/dialogue-abstraction/)   
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
+
+### Vue2笔记    
+> [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
+> [《Vue2使用笔记9--监视路由》](https://godbasin.github.io/2016/12/17/vue2-notes-9-watch-router/)     
+> [《Vue2使用笔记8--vue与datatables(二)：服务端渲染》](https://godbasin.github.io/2016/12/11/vue2-notes-8-use-datatable-with-server/)     
+> [《Vue2使用笔记7--vue与datatables(一):浏览器渲染》](https://godbasin.github.io/2016/12/10/vue2-notes-7-use-datatable-with-html/)     
+> [《Vue2使用笔记6--vue与各种插件和谐相处地创建表单》](https://godbasin.github.io/2016/12/04/vue2-notes-6-form-with-some-plugins/)      
+> [《Vue2使用笔记5--transition过渡效果使用》](https://godbasin.github.io/2016/12/03/vue2-notes-5-transition-animation/)      
+> [《Vue2使用笔记4--vue-router使用》](https://godbasin.github.io/2016/11/27/vue2-notes-4-vue-router/)     
+> [《Vue2使用笔记3--父子组件的通信》](https://godbasin.github.io/2016/11/26/vue2-notes-3-parent-child-component/)     
+> [《Vue2使用笔记2--创建左侧菜单栏Sidebar》](https://godbasin.github.io/2016/11/20/vue2-notes-2-create-sidebar-componnet/)     
+> [《Vue2使用笔记1--vue-cli+vue-router搭建应用》](https://godbasin.github.io/2016/11/19/vue2-notes-1-build-vue2-project/)     
 
 ### D3.js-Tree实战笔记      
 > [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
@@ -200,18 +213,7 @@
 > [《React-Redux使用笔记4--使用Redux管理状态》](https://godbasin.github.io/2017/01/02/react-redux-notes-4-use-redux/)  
 > [《React-Redux使用笔记3--使用router完成简单登陆功能》](https://godbasin.github.io/2017/01/01/react-redux-notes-3-use-router-login/)  
 > [《React-Redux使用笔记2--完善打包生产代码流程》](https://godbasin.github.io/2016/12/25/react-redux-notes-2-complete-publish/)  
-> [《React-Redux使用笔记1--使用webpack搭建React开发环境》](https://godbasin.github.io/2016/12/24/react-redux-notes-1-build-react-project/)   
-
-### Vue2笔记
-> [《Vue2使用笔记9--监视路由》](https://godbasin.github.io/2016/12/17/vue2-notes-9-watch-router/)     
-> [《Vue2使用笔记8--vue与datatables(二)：服务端渲染》](https://godbasin.github.io/2016/12/11/vue2-notes-8-use-datatable-with-server/)     
-> [《Vue2使用笔记7--vue与datatables(一):浏览器渲染》](https://godbasin.github.io/2016/12/10/vue2-notes-7-use-datatable-with-html/)     
-> [《Vue2使用笔记6--vue与各种插件和谐相处地创建表单》](https://godbasin.github.io/2016/12/04/vue2-notes-6-form-with-some-plugins/)      
-> [《Vue2使用笔记5--transition过渡效果使用》](https://godbasin.github.io/2016/12/03/vue2-notes-5-transition-animation/)      
-> [《Vue2使用笔记4--vue-router使用》](https://godbasin.github.io/2016/11/27/vue2-notes-4-vue-router/)     
-> [《Vue2使用笔记3--父子组件的通信》](https://godbasin.github.io/2016/11/26/vue2-notes-3-parent-child-component/)     
-> [《Vue2使用笔记2--创建左侧菜单栏Sidebar》](https://godbasin.github.io/2016/11/20/vue2-notes-2-create-sidebar-componnet/)     
-> [《Vue2使用笔记1--vue-cli+vue-router搭建应用》](https://godbasin.github.io/2016/11/19/vue2-notes-1-build-vue2-project/)      
+> [《React-Redux使用笔记1--使用webpack搭建React开发环境》](https://godbasin.github.io/2016/12/24/react-redux-notes-1-build-react-project/)    
 
 ### Angular2笔记    
 > [《Angular2使用笔记9--使用Subject创建Websocket服务》](https://godbasin.github.io/2016/11/12/angular2-notes-9-websocket-service-with-rxjs/)  
