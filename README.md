@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2使用笔记11--菜单鉴权》](https://godbasin.github.io/2018/01/07/vue2-notes-11-access-menu/)     
 > [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
 > [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
 > [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
@@ -15,10 +16,6 @@
 > [《纯前端的进军2--多线程与IO》](https://godbasin.github.io/2017/11/05/advance-from-pure-front-ender-2-progress-and-io/)   
 > [《纯前端的进军1--线程与进程》](https://godbasin.github.io/2017/10/28/advance-from-pure-front-ender-1-thread-and-progress/)   
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
-> [《对话抽象》](https://godbasin.github.io/2017/10/14/dialogue-abstraction/)   
-> [《Cycle.js学习笔记8--双向绑定Input值》](https://godbasin.github.io/2017/10/07/cyclejs-notes-8-two-way-binding/)      
-> [《Cycle.js学习笔记7--定位Input组件值获取bug》](https://godbasin.github.io/2017/10/03/cyclejs-notes-7-debug-input/)      
-> [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### 前端杂谈    
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
@@ -26,6 +23,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Vue2笔记    
+> [《Vue2使用笔记11--菜单鉴权》](https://godbasin.github.io/2018/01/07/vue2-notes-11-access-menu/)     
 > [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
 > [《Vue2使用笔记9--监视路由》](https://godbasin.github.io/2016/12/17/vue2-notes-9-watch-router/)     
 > [《Vue2使用笔记8--vue与datatables(二)：服务端渲染》](https://godbasin.github.io/2016/12/11/vue2-notes-8-use-datatable-with-server/)     
