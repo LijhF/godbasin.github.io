@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2使用笔记12--使用vuex》](https://godbasin.github.io/2018/01/13/vue2-notes-12-use-vuex/)     
 > [《Vue2使用笔记11--菜单鉴权》](https://godbasin.github.io/2018/01/07/vue2-notes-11-access-menu/)     
 > [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
 > [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
@@ -23,6 +24,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Vue2笔记    
+> [《Vue2使用笔记12--使用vuex》](https://godbasin.github.io/2018/01/13/vue2-notes-12-use-vuex/)     
 > [《Vue2使用笔记11--菜单鉴权》](https://godbasin.github.io/2018/01/07/vue2-notes-11-access-menu/)     
 > [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
 > [《Vue2使用笔记9--监视路由》](https://godbasin.github.io/2016/12/17/vue2-notes-9-watch-router/)     
