@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>算法导论之js实现--堆排序 | Here. There.</title>
+    <title>Vue2使用笔记16--自定义指令 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="堆排序的javascript实现。">
+    <meta name="description" content="最近在使用 Vue2 作为项目中前端的框架，《Vue2 使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录开发自定义指令的过程。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/07/23/heap-sort/" title="算法导论之js实现--堆排序" itemprop="url">算法导论之js实现--堆排序</a>
+      <a href="/2018/01/27/vue2-notes-16-custom-directive/" title="Vue2使用笔记16--自定义指令" itemprop="url">Vue2使用笔记16--自定义指令</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-07-23T08:07:16.000Z" itemprop="datePublished">2017-07-23</time>
-    更新日期:<time datetime="2017-07-23T08:07:26.509Z" itemprop="dateModified">2017-07-23</time>
+    <time datetime="2018-01-26T16:02:07.000Z" itemprop="datePublished">2018-01-27</time>
+    更新日期:<time datetime="2018-01-26T16:03:57.435Z" itemprop="dateModified">2018-01-27</time>
     
   </p>
 </header>
@@ -88,44 +88,51 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序"><span class="toc-number">1.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排序问题"><span class="toc-number">1.1.</span> <span class="toc-text">排序问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆"><span class="toc-number">1.2.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js基本思路实现"><span class="toc-number">1.4.</span> <span class="toc-text">js基本思路实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证"><span class="toc-number">1.5.</span> <span class="toc-text">验证</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-number">1.</span> <span class="toc-text">自定义指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚焦例子"><span class="toc-number">1.1.</span> <span class="toc-text">聚焦例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钩子函数"><span class="toc-number">1.2.</span> <span class="toc-text">钩子函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写v-click-outside指令"><span class="toc-number">1.3.</span> <span class="toc-text">编写v-click-outside指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>堆排序的javascript实现。<br><a id="more"></a></p>
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
-<h3 id="排序问题"><a href="#排序问题" class="headerlink" title="排序问题"></a>排序问题</h3><ul>
-<li>输入：n个数的一个序列<code>&lt;a1, a2, ..., an&gt;</code></li>
-<li>输出：输入序列的一个排列<code>&lt;a1&#39;, a2&#39;, ..., an&#39;&gt;</code>，满足<code>a1&#39; &lt;= a2&#39; &lt;= ... &lt;= an&#39;</code></li>
+		<p>最近在使用 Vue2 作为项目中前端的框架，《Vue2 使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录开发自定义指令的过程。</p>
+<a id="more"></a>
+<h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><hr>
+<p>和Angular一样，Vue也支持自定义指令。通常我们会在需要给某个元素添加简单的事件处理逻辑的时候，会使用到自定义指令。</p>
+<h3 id="聚焦例子"><a href="#聚焦例子" class="headerlink" title="聚焦例子"></a>聚焦例子</h3><p>我们先来看<a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="external">官方文档</a>中的一个表单自动聚焦的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注册一个全局自定义指令 `v-focus`</span></div><div class="line">Vue.directive(<span class="string">'focus'</span>, &#123;</div><div class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></div><div class="line">  inserted: <span class="function"><span class="keyword">function</span> (<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="comment">// 聚焦元素</span></div><div class="line">    el.focus()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>然后我们可以在模板中任何元素上使用新的 v-focus 属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-focus</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当然，跟components、filter等一致，directive也支持局部添加，这里也不多说。</p>
+<h3 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h3><p>我们的指令定义对象有一下的钩子函数 (均为可选)：</p>
+<ul>
+<li><code>bind</code>：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。</li>
+<li><code>inserted</code>：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。</li>
+<li><code>update</code>：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。需要通过比较更新前后的值来忽略不必要的模板更新。</li>
+<li><code>componentUpdated</code>：指令所在组件的 VNode 及其子 VNode 全部更新后调用。</li>
+<li><code>unbind</code>：只调用一次，指令与元素解绑时调用。常常用来解除一些事件的绑定、或者定时器的清除等。</li>
 </ul>
-<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>堆（二叉堆）可以视为一棵完全的二叉树，完全二叉树的一个“优秀”的性质是，除了最底层之外，每一层都是满的，这使得堆可以利用数组来表示（普通的一般的二叉树通常用链表作为基本容器表示），每一个结点对应数组中的一个元素。</p>
-<p>二叉堆一般分为两种：最大堆和最小堆。</p>
+<p>每个钩子函数都能拿到下面的一些参数：</p>
 <ul>
-<li><p>最大堆：</p>
-<ul>
-<li>最大堆中的最大元素值出现在根结点（堆顶）</li>
-<li>堆中每个父节点的元素值都大于等于其孩子结点（如果存在）</li>
+<li><code>el</code>：指令所绑定的元素，可以用来直接操作 DOM 。</li>
+<li><code>binding</code>：一个对象，包含以下属性：<ul>
+<li><code>name</code>：指令名，不包括 v- 前缀。</li>
+<li><code>value</code>：指令的绑定值，例如：<code>v-my-directive=&quot;1 + 1&quot;</code> 中，绑定值为 2。</li>
+<li><code>oldValue</code>：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。</li>
+<li><code>expression</code>：字符串形式的指令表达式。例如 <code>v-my-directive=&quot;1 + 1&quot;</code> 中，表达式为 <code>&quot;1 + 1&quot;</code>。</li>
+<li><code>arg</code>：传给指令的参数，可选。例如 <code>v-my-directive:foo</code> 中，参数为 “foo”。</li>
+<li><code>modifiers</code>：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code> 中，修饰符对象为 <code>{ foo: true, bar: true }</code>。</li>
 </ul>
 </li>
-<li><p>最小堆：</p>
-<ul>
-<li>最小堆中的最小元素值出现在根结点（堆顶）</li>
-<li>堆中每个父节点的元素值都小于等于其孩子结点（如果存在）</li>
+<li><code>vnode</code>：Vue 编译生成的虚拟节点，参考<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js" target="_blank" rel="external">VNode class declaration</a>。</li>
+<li><code>oldVnode</code>：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。</li>
 </ul>
-</li>
-</ul>
-<p>通常堆是通过一维数组来实现的。在数组起始位置为0的情形中：</p>
-<blockquote>
-<p>父节点i的左子节点在位置<code>(2*i+1)</code><br>父节点i的右子节点在位置<code>(2*i+2)</code><br>子节点i的父节点在位置<code>floor((i-1)/2)</code></p>
-</blockquote>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>堆排序就是把最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。在堆中定义以下几种操作：</p>
-<ul>
-<li>最大堆调整（Max-Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点</li>
-<li>创建最大堆（Build-Max-Heap）：将堆所有数据重新排序，使其成为最大堆</li>
-<li>堆排序（Heap-Sort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算</li>
-</ul>
-<p>参考<a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="external">堆排序-wiki</a></p>
-<h3 id="js基本思路实现"><a href="#js基本思路实现" class="headerlink" title="js基本思路实现"></a>js基本思路实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">arr, a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (a == b) &#123; <span class="keyword">return</span>; &#125;</div><div class="line">    <span class="keyword">var</span> c = arr[a];</div><div class="line">    arr[a] = arr[b];</div><div class="line">    arr[b] = c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">heapSort</span>(<span class="params">iArr</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> n = iArr.length;</div><div class="line">    <span class="comment">// 若只有一个或者没有，则返回</span></div><div class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123; <span class="keyword">return</span> iArr; &#125;</div><div class="line">    <span class="comment">// 若有多个，则建最大堆</span></div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 建堆（Build-Max-Heap）</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="built_in">Math</span>.floor(n / <span class="number">2</span>); i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">            maxHeapify(iArr, i, n);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 堆排序</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</div><div class="line">            swap(iArr, <span class="number">0</span>, n - <span class="number">1</span> - j)</div><div class="line">            maxHeapify(iArr, <span class="number">0</span>, n - <span class="number">2</span> - j);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> iArr;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">maxHeapify</span>(<span class="params">Arr, i, size</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> l = <span class="number">2</span> * i + <span class="number">1</span>, r = <span class="number">2</span> * i + <span class="number">2</span>; <span class="comment">// 左子节点为2i + 1，右子节点为2i + 2</span></div><div class="line">    <span class="keyword">var</span> largest = i;</div><div class="line">    <span class="comment">// 若子节点比节点大，则标记</span></div><div class="line">    <span class="keyword">if</span> (l &lt;= size &amp;&amp; Arr[l] &gt; Arr[largest]) &#123;</div><div class="line">        largest = l;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (r &lt;= size &amp;&amp; Arr[r] &gt; Arr[largest]) &#123;</div><div class="line">        largest = r;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 若标记有子节点，则交换父子位置，并递归计算</span></div><div class="line">    <span class="keyword">if</span> (largest !== i) &#123;</div><div class="line">        swap(Arr, i, largest);</div><div class="line">        maxHeapify(Arr, largest, size);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">heapSort([<span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">3</span>]); </div><div class="line"><span class="comment">// 输出[1, 2, 3, 4, 5, 6]</span></div><div class="line"></div><div class="line">heapSort([<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>]);</div><div class="line"><span class="comment">// 输出[1, 1, 2, 3, 5]</span></div><div class="line"></div><div class="line">heapSort([<span class="number">5</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="number">2</span>, <span class="number">134</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>]); </div><div class="line"><span class="comment">// 输出[1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 12, 34, 134]</span></div></pre></td></tr></table></figure>  
+<h3 id="编写v-click-outside指令"><a href="#编写v-click-outside指令" class="headerlink" title="编写v-click-outside指令"></a>编写v-click-outside指令</h3><p>又是很常见的一个使用，点击某个元素的外面时，执行一些操作（常见关闭某些元素）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Vue.directive(<span class="string">"click-outside"</span>, &#123;</div><div class="line">  <span class="attr">bind</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) </span>&#123;</div><div class="line">    el.event = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">      <span class="comment">// 检查点击是否发生在节点之内（包括子节点）</span></div><div class="line">      <span class="keyword">if</span> (!(el == event.target || el.contains(event.target))) &#123;</div><div class="line">        <span class="comment">// 如果没有，则触发调用</span></div><div class="line">        <span class="comment">// 若绑定值为函数，则执行</span></div><div class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> vnode.context[binding.expression] == <span class="string">'function'</span>)&#123;</div><div class="line">            vnode.context[binding.expression](event);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 绑定事件</span></div><div class="line">    <span class="comment">// 设置为true，代表在DOM树中，注册了该listener的元素，会先于它下方的任何事件目标，接收到该事件。</span></div><div class="line">    <span class="built_in">document</span>.body.addEventListener(<span class="string">"click"</span>, el.event, <span class="literal">true</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">unbind</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="comment">// 解绑事件</span></div><div class="line">    <span class="built_in">document</span>.body.removeEventListener(<span class="string">"click"</span>, el.event, <span class="literal">true</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这里我们可以通过钩子函数中的<code>vnode.context</code>，来获取当前组件的作用域，参考<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js" target="_blank" rel="external">VNode class declaration</a>。</p>
+<p>我们可以这样使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span> <span class="attr">style</span>=<span class="string">"margin-left: 20px;"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"mr5"</span> <span class="attr">style</span>=<span class="string">"font-size: 14px;"</span>&gt;</span>下拉菜单<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn-group"</span> <span class="attr">v-click-outside</span>=<span class="string">"closeMenu"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default dropdown-toggle"</span> @<span class="attr">click</span>=<span class="string">"isMenuShown = !isMenuShown"</span>&gt;</span></div><div class="line">            点击 <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"caret"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-show</span>=<span class="string">"isMenuShown"</span> <span class="attr">class</span>=<span class="string">"dropdown-menu"</span> <span class="attr">style</span>=<span class="string">"display:block;"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Another action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Something else here<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">role</span>=<span class="string">"separator"</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Separated link<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">"Logs"</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">isMenuShown</span>: <span class="literal">false</span></div><div class="line">    &#125;;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    closeMenu(ev)&#123;</div><div class="line">      <span class="built_in">console</span>.log(&#123;ev&#125;)</div><div class="line">      <span class="keyword">this</span>.isMenuShown = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里有个需要注意的地方是，这种带条件判断的逻辑，我们需要绑定函数来使用。<br>因为我们在自定义指令的时候，我们的钩子函数参数里面包括<code>value</code>指令的绑定值，也就是说，指令会执行求值操作。</p>
+<p>如果我们直接绑定表达式的话，则每次触发都会求值，并不能跟进条件判断是否求值。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
+<p>自定义指令其实也是一个很有用的工具，不管在Angular还是在Vue中，我们对一些可复用性的逻辑封装起来使用，能提升不少的工作效率。<br>像一些表单校验、输入控制等等，很多功能可以通过自定义指令来实现哒~<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/vue2-notes/16-custom-directive" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://ofyya1gfg.bkt.clouddn.com/16-custom-directive/index.html#/app/logs" target="_blank" rel="external">此处查看页面效果</a></p>
+  
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
 	</div>
@@ -138,13 +145,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/算法/">算法</a>
+  <span></span> <a href="/tags/笔记/">笔记</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/js什锦/">js什锦</a>
+  <a class="article-category-link" href="/categories/vue八宝粥/">vue八宝粥</a>
 </div>
 
 
@@ -174,19 +181,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/07/29/quick-select/" title="算法导论之js实现--快速选择">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  算法导论之js实现--快速选择</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/07/16/quick-sort/"  title="算法导论之js实现--快速排序">
+<a href="/2018/01/21/vue2-notes-15-custom-v-model/"  title="Vue2使用笔记15--自定义的表单组件">
  <strong>NEXT:</strong><br/> 
- <span>算法导论之js实现--快速排序
+ <span>Vue2使用笔记15--自定义的表单组件
 </span>
 </a>
 </div>
@@ -208,7 +207,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序"><span class="toc-number">1.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排序问题"><span class="toc-number">1.1.</span> <span class="toc-text">排序问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆"><span class="toc-number">1.2.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js基本思路实现"><span class="toc-number">1.4.</span> <span class="toc-text">js基本思路实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证"><span class="toc-number">1.5.</span> <span class="toc-text">验证</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-number">1.</span> <span class="toc-text">自定义指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚焦例子"><span class="toc-number">1.1.</span> <span class="toc-text">聚焦例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钩子函数"><span class="toc-number">1.2.</span> <span class="toc-text">钩子函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写v-click-outside指令"><span class="toc-number">1.3.</span> <span class="toc-text">编写v-click-outside指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
