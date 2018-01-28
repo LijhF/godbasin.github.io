@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2使用笔记17--路由懒加载》](https://godbasin.github.io/2018/01/28/vue2-notes-17-lazyload-chunk/)     
 > [《Vue2使用笔记16--自定义指令》](https://godbasin.github.io/2018/01/27/vue2-notes-16-custom-directive/)     
 > [《Vue2使用笔记15--自定义的表单组件》](https://godbasin.github.io/2018/01/21/vue2-notes-15-custom-v-model/)     
 > [《Vue2使用笔记14--Datetimepicker组件封装》](https://godbasin.github.io/2018/01/20/vue2-notes-14-sealed-component/)     
@@ -22,6 +23,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Vue2笔记    
+> [《Vue2使用笔记17--路由懒加载》](https://godbasin.github.io/2018/01/28/vue2-notes-17-lazyload-chunk/)     
 > [《Vue2使用笔记16--自定义指令》](https://godbasin.github.io/2018/01/27/vue2-notes-16-custom-directive/)     
 > [《Vue2使用笔记15--自定义的表单组件》](https://godbasin.github.io/2018/01/21/vue2-notes-15-custom-v-model/)     
 > [《Vue2使用笔记14--Datetimepicker组件封装》](https://godbasin.github.io/2018/01/20/vue2-notes-14-sealed-component/)     
