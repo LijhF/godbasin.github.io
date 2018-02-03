@@ -22,6 +22,11 @@
 > [《对话抽象》](https://godbasin.github.io/2017/10/14/dialogue-abstraction/)   
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
+### D3.js-Tree实战笔记      
+> [《D3.js-Tree实战笔记3--动态请求子节点》](https://godbasin.github.io/2018/02/03/d3-tree-notes-3-ajax-for-node/)   
+> [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
+> [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
+
 ### Vue2笔记    
 > [《Vue2使用笔记17--路由懒加载》](https://godbasin.github.io/2018/01/28/vue2-notes-17-lazyload-chunk/)     
 > [《Vue2使用笔记16--自定义指令》](https://godbasin.github.io/2018/01/27/vue2-notes-16-custom-directive/)     
@@ -40,10 +45,6 @@
 > [《Vue2使用笔记3--父子组件的通信》](https://godbasin.github.io/2016/11/26/vue2-notes-3-parent-child-component/)     
 > [《Vue2使用笔记2--创建左侧菜单栏Sidebar》](https://godbasin.github.io/2016/11/20/vue2-notes-2-create-sidebar-componnet/)     
 > [《Vue2使用笔记1--vue-cli+vue-router搭建应用》](https://godbasin.github.io/2016/11/19/vue2-notes-1-build-vue2-project/)     
-
-### D3.js-Tree实战笔记      
-> [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
-> [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
 
 ### 纯前端的进军    
 > [《纯前端的进军6--套接字（Socket）与socket.io》](https://godbasin.github.io/2017/12/09/advance-from-pure-front-ender-6-socket-and-socket-io/)   
