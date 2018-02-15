@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《D3.js-Tree实战笔记5--添加浮层》](https://godbasin.github.io/2018/02/15/d3-tree-notes-5-add-panel/)   
 > [《D3.js-Tree实战笔记4--添加拖动和缩放》](https://godbasin.github.io/2018/02/07/d3-tree-notes-4-zoom-amd-drag/)   
 > [《D3.js-Tree实战笔记3--动态请求子节点》](https://godbasin.github.io/2018/02/03/d3-tree-notes-3-ajax-for-node/)   
 > [《Vue2使用笔记17--路由懒加载》](https://godbasin.github.io/2018/01/28/vue2-notes-17-lazyload-chunk/)     
@@ -25,6 +26,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### D3.js-Tree实战笔记      
+> [《D3.js-Tree实战笔记5--添加浮层》](https://godbasin.github.io/2018/02/15/d3-tree-notes-5-add-panel/)   
 > [《D3.js-Tree实战笔记4--添加拖动和缩放》](https://godbasin.github.io/2018/02/07/d3-tree-notes-4-zoom-amd-drag/)   
 > [《D3.js-Tree实战笔记3--动态请求子节点》](https://godbasin.github.io/2018/02/03/d3-tree-notes-3-ajax-for-node/)   
 > [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
