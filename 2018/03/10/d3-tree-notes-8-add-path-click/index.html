@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CSS的display有关 | Here. There.</title>
+    <title>D3.js-Tree实战笔记8--曲线hover和点击 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="上一篇主要讲CSS的position和z-index，刚好想到了display。本文主要讲述块状元素和内联元素的说明，并补充float浮动相关。">
+    <meta name="description" content="因为业务需要折腾起了图表，《D3.js-Tree 实战笔记》系列用于记录使用该库制作 Tree 图表的一些笔记。本节我们要在 link 连接线上，添加 hover 的样式，和点击事件。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/06/26/about-display/" title="CSS的display有关" itemprop="url">CSS的display有关</a>
+      <a href="/2018/03/10/d3-tree-notes-8-add-path-click/" title="D3.js-Tree实战笔记8--曲线hover和点击" itemprop="url">D3.js-Tree实战笔记8--曲线hover和点击</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-06-26T12:03:10.000Z" itemprop="datePublished">2016-06-26</time>
-    更新日期:<time datetime="2017-02-17T13:49:48.675Z" itemprop="dateModified">2017-02-17</time>
+    <time datetime="2018-03-10T09:20:29.000Z" itemprop="datePublished">2018-03-10</time>
+    更新日期:<time datetime="2018-03-10T09:20:34.355Z" itemprop="dateModified">2018-03-10</time>
     
   </p>
 </header>
@@ -88,152 +88,24 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-display属性"><span class="toc-number">1.</span> <span class="toc-text">CSS display属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#w3c的display"><span class="toc-number">1.1.</span> <span class="toc-text">w3c的display</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联元素和块状元素"><span class="toc-number">1.2.</span> <span class="toc-text">内联元素和块状元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的display属性"><span class="toc-number">2.</span> <span class="toc-text">常用的display属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#block：块状元素"><span class="toc-number">2.1.</span> <span class="toc-text">block：块状元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inline：内联元素"><span class="toc-number">2.2.</span> <span class="toc-text">inline：内联元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inline-block元素"><span class="toc-number">2.3.</span> <span class="toc-text">inline-block元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他display属性"><span class="toc-number">2.4.</span> <span class="toc-text">其他display属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float浮动"><span class="toc-number">3.</span> <span class="toc-text">float浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加-path-事件"><span class="toc-number">1.</span> <span class="toc-text">添加 path 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本思路"><span class="toc-number">1.1.</span> <span class="toc-text">基本思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>上一篇主要讲<a href="/2016/06/25/about-position/">CSS的position和z-index</a>，刚好想到了display。<br>本文主要讲述块状元素和内联元素的说明，并补充float浮动相关。<br><a id="more"></a></p>
-<h2 id="CSS-display属性"><a href="#CSS-display属性" class="headerlink" title="CSS display属性"></a>CSS display属性</h2><hr>
-<h3 id="w3c的display"><a href="#w3c的display" class="headerlink" title="w3c的display"></a>w3c的display</h3><p>这里借用<a href="http://www.w3school.com.cn/cssref/pr_class_display.asp" target="_blank" rel="external">w3c</a>上的说明</p>
-<ul>
-<li>display属性规定元素应该生成的框的类型</li>
-<li>这个属性用于定义建立布局时元素生成的显示框类型</li>
-</ul>
-<h3 id="内联元素和块状元素"><a href="#内联元素和块状元素" class="headerlink" title="内联元素和块状元素"></a>内联元素和块状元素</h3><ul>
-<li>内联元素<ul>
-<li>内联元素又称行内元素等，表示位于行内的元素</li>
-<li>内联元素只能容纳文本或者其他内联元素，它允许其他内联元素与其位于同一行</li>
-<li>内联元素的宽度高度不起作用</li>
-</ul>
-</li>
-<li>块状元素<ul>
-<li>块状元素一般是其他元素的容器，可容纳内联元素和其他块状元素</li>
-<li>块状元素排斥其他元素与其位于同一行</li>
-<li>块状元素的宽度高度起作用</li>
-</ul>
-</li>
-</ul>
-<h2 id="常用的display属性"><a href="#常用的display属性" class="headerlink" title="常用的display属性"></a>常用的display属性</h2><hr>
-<h3 id="block：块状元素"><a href="#block：块状元素" class="headerlink" title="block：块状元素"></a>block：块状元素</h3><ul>
-<li><p>常见的默认display: block元素</p>
-<ul>
-<li>div/p/h1/h2…h6/ul/ol</li>
-<li>html5新元素: section/article/header/footer等</li>
-</ul>
-</li>
-<li><p>可容纳其他块状元素或内联元素<br>此时我们可以在block元素里添加其他块状元素和内联元素。<br>常见的就是在div内添加div/p，在p内添加a/span等。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>排斥其他元素与其位于同一行<br>一个block元素占位一行，不管其宽度和高度多少，都不允许其他元素（包括内联元素和块状元素）与其位于同一行。<br>此时若要使多个block位于同一行，可以选择使用float浮动。后续会讲到。</p>
-</li>
-<li><p>宽度高度起作用<br>block元素可以设置宽度width和高度height，有效。</p>
-</li>
-</ul>
-<h3 id="inline：内联元素"><a href="#inline：内联元素" class="headerlink" title="inline：内联元素"></a>inline：内联元素</h3><ul>
-<li><p>常见的默认display: inline元素</p>
-<ul>
-<li>a/span/i/strong/sub等</li>
-</ul>
-</li>
-<li><p>位于行内，即位于块状元素或者其他内联元素内<br>此时我们可以将inline元素放置于块状元素或者其他内联元素内。<br>常见的就是在p内添加a/span等。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>只能容纳文本或者其他内联元素<br>请注意，inline元素里面无法放置block元素，这也是为什么我们将div/p放在a内，在浏览器中却依然显示在外面的原因。<br>此时若要在元素内放置块状元素，可以选择设置display为block。</p>
-</li>
-<li><p>允许其他内联元素与其位于同一行</p>
-</li>
-<li><p>inline元素的宽度高度不起作用<br>即使给inline元素设置了宽高，也是无效的，这也是个常见的失误。<br>此时若要给元素设置宽高，可以选择设置display为block或者inline-block。</p>
-</li>
-</ul>
-<h3 id="inline-block元素"><a href="#inline-block元素" class="headerlink" title="inline-block元素"></a>inline-block元素</h3><ul>
-<li>与inline元素相似的地方<ul>
-<li>位于行内，即位于块状元素或者其他内联元素内</li>
-<li>允许其他内联元素与其位于同一行</li>
-</ul>
-</li>
-<li>与block元素相似的地方<ul>
-<li>可容纳其他块状元素或内联元素</li>
-<li>宽度高度起作用</li>
-</ul>
-</li>
-<li>使用inline-block<br>其实，使用inline-block可以很方便解决一些问题：<ul>
-<li>使元素居中<ul>
-<li>考虑下面情况，在块状元素parent内添加了另外一个块状元素child</li>
-<li>可以将child设置display: inline-block，同时配合parent设置text-align: center，就可以设置child在parent内横向居中</li>
-<li>此时将parent的height和line-height设置相等，就可以轻松实现child在parent内纵向居中啦</li>
-<li>当然child元素设置margin: auto也是可以实现横向居中的</li>
-</ul>
-</li>
-<li>inline元素a/span设置宽高<ul>
-<li>考虑下面情况，我们需要给多个a元素设置为宽高一致</li>
-<li>由于a元素内文字长度可能不一样，若使用padding也达不到想要的效果</li>
-<li>此时将a元素设置display: inline-block，然后就可以添加有效的width和height进行设置啦</li>
-</ul>
-</li>
-<li>将多个块状元素放在一行<ul>
-<li>考虑下面情况，我们需要将多个block块状元素放在一行</li>
-<li>由于block元素占位一行，即使设置宽度很小，后面的元素也会出现在下一行</li>
-<li>此时将块状元素设置display: inline-block，解决问题</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="其他display属性"><a href="#其他display属性" class="headerlink" title="其他display属性"></a>其他display属性</h3><ul>
-<li>table/table-cell等<br>以前table也常被用来解决元素纵向居中的问题。<br>但table样式还会导致很多的问题，这里就不再一一赘述。</li>
-<li>inherite<br>规定应该从父元素继承 display 属性的值。</li>
-</ul>
-<h2 id="float浮动"><a href="#float浮动" class="headerlink" title="float浮动"></a>float浮动</h2><hr>
-<p>说到block元素，当然不能少了float浮动啦</p>
-<ul>
-<li>float属性<ul>
-<li>float属性定义元素在哪个方向浮动</li>
-<li>float属性可应用于图像，使文本围绕在图像周围</li>
-</ul>
-</li>
-</ul>
-<p>这里我们又得拿起文档流来讲讲了。<br>给元素的float属性赋值后，就是脱离文档流，进行左右浮动，紧贴着父元素的边框或者是上一个同级同浮动元素的边框。</p>
-<ul>
-<li>float与block<ul>
-<li>设置float浮动的元素自动获取display: block样式</li>
-<li>当一个元素浮动之后，不会影响到块级框的布局<br>如图：<br>HTML<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"float"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"float"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"float"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">border</span>: solid <span class="number">1px</span> red; <span class="attribute">width</span>: <span class="number">50px</span>; <span class="attribute">height</span>: <span class="number">50px</span>; &#125; </div><div class="line"><span class="selector-class">.float</span> &#123; <span class="attribute">float</span>: left; &#125;</div></pre></td></tr></table></figure></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/KSQKV%7D%253L%25Z6XE_C4FWXCRI.png" alt="image"></p>
-<ul>
-<li>float与inline-block<ul>
-<li>当一个元素浮动之后，会影响内联框（通常是文本）的排列和布局</li>
-<li>float浮动若未指明宽度会尽可能地窄，而inline-block元素会带来空白问题</li>
-</ul>
-</li>
-</ul>
-<p>如图：<br>CSS(给div添加display=inline-block)<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">border</span>: solid <span class="number">1px</span> red; <span class="attribute">width</span>: <span class="number">50px</span>; <span class="attribute">height</span>: <span class="number">50px</span>; <span class="attribute">display</span>: display: inline-block;&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/O1%297R8%7BZ%7DAH%25C0F%28U%25M%7D8XX.png" alt="image"></p>
-<ul>
-<li><p>float撑开父元素的方法<br>本属于普通流中的元素浮动之后，包含框内部由于不存在其他普通流元素了，也就表现出高度为0（高度塌陷）<br>相信使用float的童鞋们都遇到过父元素高度塌陷的问题，这是因为浮动元素不占位的问题引起的。本骚年用过的解决办法如下：</p>
-<ul>
-<li>父元素使用overflow: hidden（此时高度为auto）<br>父元素overflow:hidden后，首先会计算height: auto的真实高度，由于其触发了BFC，需要包含子元素，所以高度不是0，而是子元素高度。<ul>
-<li>这里补充BFC的三个特性</li>
-<li>1.BFC会阻止垂直外边距（margin-top、margin-bottom）折叠</li>
-<li>2.BFC不会重叠浮动元素</li>
-<li>3.BFC可以包含浮动</li>
-</ul>
-</li>
-<li>使父元素也成为浮动float元素<br>将父容器也改成浮动定位，这样它就可以带着子元素一起浮动了</li>
-<li>使用clear清除浮动<br>在浮动元素后方加入clear: both的元素，就可以清除浮动撑开父元素<ul>
-<li>简述clear原理</li>
-<li>在样式中添加clear:right，理解为不允许右边有浮动元素，由于上一个元素是浮动元素，因此该元素会自动下移一行来满足规则</li>
-<li>添加clear:both，则可以清除左右两边的浮动了</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>参考<br><a href="http://www.jb51.net/css/67471.html" target="_blank" rel="external">《浮动从何而来 我们为何要清除浮动 清除浮动的原理是什么》</a> </p>
-</li>
-</ul>
-<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>虽然说这些很简单也很基础的东西，但对于写页面的时候解决各种不明bug和现象很有帮助的哦。</p>
+		<p>因为业务需要折腾起了图表，《D3.js-Tree 实战笔记》系列用于记录使用该库制作 Tree 图表的一些笔记。本节我们要在 link 连接线上，添加 hover 的样式，和点击事件。</p>
+<a id="more"></a>
+<h1 id="添加-path-事件"><a href="#添加-path-事件" class="headerlink" title="添加 path 事件"></a>添加 path 事件</h1><hr>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>之前在讲节点悬浮展示信息的时候，也有做过差不多逻辑的事情，这里因为比较简单，也不涉及新的特性，就直接讲讲逻辑吧。</p>
+<ol>
+<li>绑定 mouseout 和 mouseover 事件，给线条加上颜色。</li>
+<li>绑定 click 事件，获取需要的信息，再触发对应的事情。</li>
+</ol>
+<p>简单来说，就是这么一小段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加enter操作，添加类名为link的path元素</span></div><div class="line"><span class="keyword">var</span> linkEnter = link</div><div class="line">  .enter()</div><div class="line">  .insert(<span class="string">"path"</span>, <span class="string">"g"</span>)</div><div class="line">  .attr(<span class="string">"class"</span>, <span class="string">"link"</span>)</div><div class="line">  <span class="comment">// 添加id</span></div><div class="line">  .attr(<span class="string">"id"</span>, d =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"textPath"</span> + d.id;</div><div class="line">  &#125;)</div><div class="line">  .on(<span class="string">"mouseover"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    d3.select(<span class="keyword">this</span>).style(<span class="string">"stroke"</span>, <span class="string">"orange"</span>);</div><div class="line">  &#125;)</div><div class="line">  .on(<span class="string">"mouseout"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    d3.select(<span class="keyword">this</span>).style(<span class="string">"stroke"</span>, <span class="string">"#CCC"</span>);</div><div class="line">  &#125;)</div><div class="line">  .on(<span class="string">"click"</span>, d =&gt; &#123;</div><div class="line">    alert(d.parent.data.name + <span class="string">' -&gt; '</span> + d.data.name);</div><div class="line">  &#125;)</div><div class="line">  <span class="comment">// 默认位置为当前父节点的位置</span></div><div class="line">  .attr(<span class="string">"d"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> o = &#123;</div><div class="line">      <span class="attr">x</span>: source.x0,</div><div class="line">      <span class="attr">y</span>: source.y0</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> diagonalReverse(o, o);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<p>从上面我们可以知道，绑定事件时，使用this可以获取到当前元素。所以需要注意的是，这里如果使用可箭头函数，可能就拿不到想要的数据了喔。</p>
+<p>最终效果如图：<br><img src="http://o905ne85q.bkt.clouddn.com/1514014266%281%29.jpg" alt="image"></p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><hr>
+<p>我也不知道为啥这节就这么点内容…只是觉得这个点可以记一下，但是又实在凑不上很多东西了，大家将就看看吧。</p>
+<p><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/d3-tree-notes/8-add-path-click" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://p13oygsq6.bkt.clouddn.com/8-add-path-click/index.html" target="_blank" rel="external">此处查看页面效果</a></p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -247,13 +119,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/分享/">分享</a>
+  <span></span> <a href="/tags/笔记/">笔记</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CSS炒饭/">CSS炒饭</a>
+  <a class="article-category-link" href="/categories/D3小馒头/">D3小馒头</a>
 </div>
 
 
@@ -283,19 +155,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/07/01/angular-note-1-create-angular-project/" title="Angular使用笔记1--搭建Angular项目">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Angular使用笔记1--搭建Angular项目</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/06/25/about-position/"  title="CSS的position和z-index有关">
+<a href="/2018/03/04/d3-tree-notes-7-text-path/"  title="D3.js-Tree实战笔记7--曲线上的文字textPath">
  <strong>NEXT:</strong><br/> 
- <span>CSS的position和z-index有关
+ <span>D3.js-Tree实战笔记7--曲线上的文字textPath
 </span>
 </a>
 </div>
@@ -317,7 +181,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-display属性"><span class="toc-number">1.</span> <span class="toc-text">CSS display属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#w3c的display"><span class="toc-number">1.1.</span> <span class="toc-text">w3c的display</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联元素和块状元素"><span class="toc-number">1.2.</span> <span class="toc-text">内联元素和块状元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的display属性"><span class="toc-number">2.</span> <span class="toc-text">常用的display属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#block：块状元素"><span class="toc-number">2.1.</span> <span class="toc-text">block：块状元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inline：内联元素"><span class="toc-number">2.2.</span> <span class="toc-text">inline：内联元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inline-block元素"><span class="toc-number">2.3.</span> <span class="toc-text">inline-block元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他display属性"><span class="toc-number">2.4.</span> <span class="toc-text">其他display属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float浮动"><span class="toc-number">3.</span> <span class="toc-text">float浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加-path-事件"><span class="toc-number">1.</span> <span class="toc-text">添加 path 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本思路"><span class="toc-number">1.1.</span> <span class="toc-text">基本思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">

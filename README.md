@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
 > [《D3.js-Tree实战笔记7--曲线上的文字textPath》](https://godbasin.github.io/2018/03/04/d3-tree-notes-7-text-path/)   
 > [《D3.js-Tree实战笔记6--添加右键菜单》](https://godbasin.github.io/2018/02/25/d3-tree-notes-6-add-smart-menu/)   
 > [《D3.js-Tree实战笔记5--添加浮层》](https://godbasin.github.io/2018/02/15/d3-tree-notes-5-add-panel/)   
@@ -28,6 +29,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### D3.js-Tree实战笔记      
+> [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
 > [《D3.js-Tree实战笔记7--曲线上的文字textPath》](https://godbasin.github.io/2018/03/04/d3-tree-notes-7-text-path/)   
 > [《D3.js-Tree实战笔记6--添加右键菜单》](https://godbasin.github.io/2018/02/25/d3-tree-notes-6-add-smart-menu/)   
 > [《D3.js-Tree实战笔记5--添加浮层》](https://godbasin.github.io/2018/02/15/d3-tree-notes-5-add-panel/)   
