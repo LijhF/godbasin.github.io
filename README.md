@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2动画1--transition组件》](https://godbasin.github.io/2018/03/11/vue2-transition-1-transition-component/)   
 > [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
 > [《D3.js-Tree实战笔记7--曲线上的文字textPath》](https://godbasin.github.io/2018/03/04/d3-tree-notes-7-text-path/)   
 > [《D3.js-Tree实战笔记6--添加右键菜单》](https://godbasin.github.io/2018/02/25/d3-tree-notes-6-add-smart-menu/)   
@@ -13,20 +14,14 @@
 > [《Vue2使用笔记16--自定义指令》](https://godbasin.github.io/2018/01/27/vue2-notes-16-custom-directive/)     
 > [《Vue2使用笔记15--自定义的表单组件》](https://godbasin.github.io/2018/01/21/vue2-notes-15-custom-v-model/)     
 > [《Vue2使用笔记14--Datetimepicker组件封装》](https://godbasin.github.io/2018/01/20/vue2-notes-14-sealed-component/)     
-> [《Vue2使用笔记13--添加Promise弹窗》](https://godbasin.github.io/2018/01/14/vue2-notes-13-dialog-component/)     
-> [《Vue2使用笔记12--使用vuex》](https://godbasin.github.io/2018/01/13/vue2-notes-12-use-vuex/)     
-> [《Vue2使用笔记11--菜单鉴权》](https://godbasin.github.io/2018/01/07/vue2-notes-11-access-menu/)     
-> [《Vue2使用笔记10--路由鉴权》](https://godbasin.github.io/2018/01/06/vue2-notes-10-access-route/)     
-> [《D3.js-Tree实战笔记2--简单的Tree demo》](https://godbasin.github.io/2018/01/01/d3-tree-notes-2-init-a-d3-tree/)   
-> [《D3.js-Tree实战笔记1--拜见D3.js》](https://godbasin.github.io/2017/12/31/d3-tree-notes-1-svg-and-d3/)   
-> [《async/await的使用》](https://godbasin.github.io/2017/12/23/async-await/)   
-> [《纯前端的进军7--node.js》](https://godbasin.github.io/2017/12/16/advance-from-pure-front-ender-7-node-js/)   
-> [《纯前端的进军6--套接字（Socket）与socket.io》](https://godbasin.github.io/2017/12/09/advance-from-pure-front-ender-6-socket-and-socket-io/)   
 
 ### 前端杂谈    
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
 > [《对话抽象》](https://godbasin.github.io/2017/10/14/dialogue-abstraction/)   
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
+
+### Vue2动画     
+> [《Vue2动画1--transition组件》](https://godbasin.github.io/2018/03/11/vue2-transition-1-transition-component/)   
 
 ### D3.js-Tree实战笔记      
 > [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
