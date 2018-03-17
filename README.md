@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2动画2--CSS过渡与动画》](https://godbasin.github.io/2018/03/17/vue2-transition-2-css-transition-animation/)   
 > [《Vue2动画1--transition组件》](https://godbasin.github.io/2018/03/11/vue2-transition-1-transition-component/)   
 > [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
 > [《D3.js-Tree实战笔记7--曲线上的文字textPath》](https://godbasin.github.io/2018/03/04/d3-tree-notes-7-text-path/)   
@@ -21,6 +22,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Vue2动画     
+> [《Vue2动画2--CSS过渡与动画》](https://godbasin.github.io/2018/03/17/vue2-transition-2-css-transition-animation/)   
 > [《Vue2动画1--transition组件》](https://godbasin.github.io/2018/03/11/vue2-transition-1-transition-component/)   
 
 ### D3.js-Tree实战笔记      
