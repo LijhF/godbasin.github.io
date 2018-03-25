@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>前端阶段性总结之「自动化和构建工具」 | Here. There.</title>
+    <title>Vue2动画4--多元素/组件过渡 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="该篇主要整理接触过的一些前端工具。">
+    <meta name="description" content="最近在捣鼓Vue动画的内容，《Vue2 动画》系列用于记录一些使用方法、demo 以及原理分析。本文介绍 Vue 中多个元素或是组件的过渡效果。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/14/front-end-notes-5-build-tool/" title="前端阶段性总结之「自动化和构建工具」" itemprop="url">前端阶段性总结之「自动化和构建工具」</a>
+      <a href="/2018/03/25/vue2-transition-4-multi-element/" title="Vue2动画4--多元素/组件过渡" itemprop="url">Vue2动画4--多元素/组件过渡</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-05-14T01:49:48.000Z" itemprop="datePublished">2017-05-14</time>
-    更新日期:<time datetime="2017-07-14T13:03:25.145Z" itemprop="dateModified">2017-07-14</time>
+    <time datetime="2018-03-25T06:37:59.000Z" itemprop="datePublished">2018-03-25</time>
+    更新日期:<time datetime="2018-03-25T06:39:38.382Z" itemprop="dateModified">2018-03-25</time>
     
   </p>
 </header>
@@ -88,124 +88,43 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端工具"><span class="toc-number">1.</span> <span class="toc-text">前端工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发环境"><span class="toc-number">1.1.</span> <span class="toc-text">开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建套件-工具"><span class="toc-number">1.2.</span> <span class="toc-text">构建套件/工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于Grunt-Gulp-Webpack"><span class="toc-number">1.3.</span> <span class="toc-text">关于Grunt/Gulp/Webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Webpack"><span class="toc-number">1.4.</span> <span class="toc-text">Webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多元素-组件过渡"><span class="toc-number">1.</span> <span class="toc-text">多元素/组件过渡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多元素过渡"><span class="toc-number">1.1.</span> <span class="toc-text">多元素过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多组件过渡"><span class="toc-number">1.2.</span> <span class="toc-text">多组件过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡模式"><span class="toc-number">1.3.</span> <span class="toc-text">过渡模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑"><span class="toc-number">1.4.</span> <span class="toc-text">实现逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">1.5.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>该篇主要整理接触过的一些前端工具。<br><a id="more"></a></p>
-<h2 id="前端工具"><a href="#前端工具" class="headerlink" title="前端工具"></a>前端工具</h2><hr>
-<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>对于nodejs和npm的事情，还需要本骚年讲解的话，不合格重考了噢。</p>
-<h3 id="构建套件-工具"><a href="#构建套件-工具" class="headerlink" title="构建套件/工具"></a>构建套件/工具</h3><ul>
-<li><p>程序产生器</p>
+		<p>最近在捣鼓Vue动画的内容，《Vue2 动画》系列用于记录一些使用方法、demo 以及原理分析。本文介绍 Vue 中多个元素或是组件的过渡效果。</p>
+<a id="more"></a>
+<h1 id="多元素-组件过渡"><a href="#多元素-组件过渡" class="headerlink" title="多元素/组件过渡"></a>多元素/组件过渡</h1><hr>
+<h2 id="多元素过渡"><a href="#多元素过渡" class="headerlink" title="多元素过渡"></a>多元素过渡</h2><p>这里的多元素过渡，通常指的是 v-if 和 v-else 等指令绑定元素状态切换的动画效果。</p>
+<p>Vue 官网里面提到一个需要注意的地方：<br>当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。</p>
+<p>嘛，这个就跟 v-for 中绑定 key 是差不多原理的，总之是追踪元素，然后来进行操作或是优化更新算法。</p>
+<p>这里看看<a href="https://cn.vuejs.org/v2/guide/transitions.html#%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E8%BF%87%E6%B8%A1" target="_blank" rel="external">官网</a>的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-if</span>=<span class="string">"docState === 'saved'"</span> <span class="attr">key</span>=<span class="string">"saved"</span>&gt;</span></div><div class="line">    Edit</div><div class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-if</span>=<span class="string">"docState === 'edited'"</span> <span class="attr">key</span>=<span class="string">"edited"</span>&gt;</span></div><div class="line">    Save</div><div class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-if</span>=<span class="string">"docState === 'editing'"</span> <span class="attr">key</span>=<span class="string">"editing"</span>&gt;</span></div><div class="line">    Cancel</div><div class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="多组件过渡"><a href="#多组件过渡" class="headerlink" title="多组件过渡"></a>多组件过渡</h2><p>多个组件的过渡要使用动态组件。</p>
+<p>什么是动态组件呢？通过使用保留的 component 元素，并对其 is 特性进行动态绑定，你可以在同一个挂载点动态切换多个组件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind:is</span>=<span class="string">"currentView"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 组件在 vm.currentview 变化时改变！ --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#example'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">currentView</span>: <span class="string">'home'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    <span class="attr">home</span>: &#123; <span class="comment">/* ... */</span> &#125;,</div><div class="line">    <span class="attr">posts</span>: &#123; <span class="comment">/* ... */</span> &#125;,</div><div class="line">    <span class="attr">archive</span>: &#123; <span class="comment">/* ... */</span> &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这里要加过渡的话，就是酱紫：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"component-fade"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind:is</span>=<span class="string">"currentView"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>路由组件的过渡，大概也是属于这种吧（没仔细研究过，瞎说的）~</p>
+<h2 id="过渡模式"><a href="#过渡模式" class="headerlink" title="过渡模式"></a>过渡模式</h2><p>多元素和多组件的过渡中，会有上一个的离开以及下一个的进入的情况，于是便有了这个过渡模式。</p>
+<p>Vue 提供了以下过渡模式：</p>
 <ul>
-<li>Yaomen：可快速生产Angular/Backbone等所需的专门类别程式，以及单元测试程式(现在基本没啥人用了呢)</li>
-<li>git：Git只是代码管理工具，但是把写好的原型程式下载下来这样的事情，也可以当作程序产生器吧哈哈</li>
-<li>各种框架自带的脚手架、CLI等等</li>
+<li><strong>in-out</strong>：新元素先进行过渡，完成之后当前元素过渡离开。</li>
+<li><strong>out-in</strong>：当前元素先进行过渡，完成之后新元素过渡进入。</li>
 </ul>
-</li>
-<li><p>依赖管理</p>
-<ul>
-<li>bower: 能自动下载安装CSS以及JS套件，并自动处理依赖性(Again，已经很少人用了)</li>
-<li>npm: nodejs用来下载以及安装依赖的工具</li>
-</ul>
-</li>
-<li><p>自动化工具</p>
-<ul>
-<li>Grunt: Task Runner，常用来执行JS/CSS打包压缩、编译、单元测试等工作</li>
-<li>Gulp：用来简化Grunt的设定，常用来监视+编译打包一系列连续整合工作</li>
-<li>Webpack：其实Webpack只是个模块化工具，但是很多时候我们会使用它完成以上Grunt/Gulp等能完成的工作，所以不小心被归类了</li>
-</ul>
-</li>
-<li><p>校验工具</p>
-<ul>
-<li>eslint/tslint：可在支持的编译器进行代码校验</li>
-<li>typescript：编译过程的强类型校验</li>
-</ul>
-</li>
-<li><p>测试工具</p>
-<ul>
-<li>Karma: 单元测试执行工具</li>
-<li>Mocha/Jasmine: js测试语言</li>
-</ul>
-</li>
-</ul>
-<p>测试相关的本骚年也没接触过，但除了单元测试之外，似乎还有自动化测试相关的，请小伙伴们自行查找。</p>
-<ul>
-<li>调试工具<ul>
-<li>强大的浏览器：像Chrome等自带了强大的控制台，包括断点、sourcemap、http等功能</li>
-<li>Fiddler：主要用于抓包、代理等等，很方便的http调试工具</li>
-</ul>
-</li>
-</ul>
-<h3 id="关于Grunt-Gulp-Webpack"><a href="#关于Grunt-Gulp-Webpack" class="headerlink" title="关于Grunt/Gulp/Webpack"></a>关于Grunt/Gulp/Webpack</h3><p>以下摘自<a href="https://www.zhihu.com/question/37020798/answer/71621266" target="_blank" rel="external">知乎网友-一波不是一波</a>:</p>
-<p>Gulp应该和Grunt比较，他们的区别我就不说了，说说用处吧。Gulp/Grunt是一种工具，能够优化前端工作流程。比如自动刷新页面、combo、压缩css、js、编译less等等。简单来说，就是使用Gulp/Grunt，然后配置你需要的插件，就可以把以前需要手工做的事情让它帮你做了。</p>
-<p>说到browserify/webpack，那还要说到seajs/requirejs。这四个都是JS模块化的方案。</p>
-<p>其中seajs/require是一种类型，是一种在线”编译” 模块的方案，相当于在页面上加载一个CMD/AMD解释器。这样浏览器就认识了define、exports、module这些东西。</p>
-<p>browserify/webpack是另一种类型，是一个预编译模块的方案，相比于上面，这个方案更加智能。没用过browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是AMD/CMD/ES6风格的模块化，它都能认识，并且编译成浏览器认识的JS。</p>
-<h3 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h3><p>这里单独把webpack拉出来讲，其实只是因为骚年对其稍微有过些使用经验和总结而已。再说Webpcak可配置性这么棒，当然要多了解了解啦。</p>
-<p>优秀的Webpack：</p>
-<ul>
-<li>拆分依赖树（dependency tree）为多个按需加载的chunk</li>
-<li>保证快速首屏加载</li>
-<li>每种静态资源都可成为模块</li>
-<li>能够将第三方库视作一个模块来处理</li>
-<li>能够定制模块打包器的几乎任何部分</li>
-<li><p>适合大型项目</p>
-</li>
-<li><p>webpack-dev-server</p>
-<ul>
-<li>webpack-dev-server是webpack官方提供的一个小型Express服务器。使用它可以为webpack打包生成的资源文件提供web服务。</li>
-<li>webpack-dev-server主要提供两个功能：<ul>
-<li>为静态文件提供服务</li>
-<li>自动刷新和热替换(HMR)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Webpack常用配置</p>
-<ul>
-<li>entry: 设置入口</li>
-<li>resolve: 配置文件后缀名(extensions)，除了js，还有jsx、coffee等等。alias配置项，可以为常用模块配置改属性，可以节省编译的搜索时间</li>
-<li>output: 配置输出文件的路径，文件名等</li>
-<li>module(loaders): 配置要使用的loader。把资源文件（css、图片、html等非js模块）处理成相应的js模块，然后其它的plugins才能对这些资源进行下一步处理</li>
-</ul>
-</li>
-</ul>
-<p>比如babel-loader可以把es6的文件转换成es5。大部分的对文件的处理的功能都是通过loader实现的。loader可以用来处理在入口文件中require的和其他方式引用进来的文件。</p>
-<p>loader一般是一个独立的node模块，要单独安装。</p>
-<ul>
-<li>plugins: 顾名思义，就是配置要使用的插件。<ul>
-<li>plugin是比loader功能更强大的插件，能使用更多的wepack api。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>常用Loader</p>
-<ul>
-<li>less-loader, sass-loader: 处理样式</li>
-<li>url-loader, file-loader: 处理文件路径</li>
-<li>babel-loader，babel-preset-es2015，babel-preset-react: js处理，将最新特性的es6/es7语法编译成es5</li>
-<li>ts-loader：ts -&gt; js代码编译，当然中间有类型检测的过程</li>
-<li>json-loader</li>
-</ul>
-</li>
-<li><p>常用Plugin</p>
-<ul>
-<li>CommonsChunkPlugin: 多个html共用一个js文件(chunk)</li>
-<li>UglifyJsPlugin: 压缩js</li>
-<li>DefinePlugin: 定义变量，一般用于开发环境log或者全局变量</li>
-<li>ProvidePlugin: 自动加载模块，当配置（$:’jquery’）例如当使用$时，自动加载jquery</li>
-<li>HtmlWebpackPlugin: 生成html</li>
-</ul>
-</li>
-<li><p>参考文章</p>
-<ul>
-<li><a href="https://toutiao.io/posts/fiq8wd/preview" target="_blank" rel="external">《Webpack 常用配置总结》</a></li>
-</ul>
-</li>
-</ul>
-<p>Webpack的配置性很强大噢，而且相关的loader/plugin都很多很强大，其实现在的话，基本不需要grunt/gulp这些工具，单使用webpack就能实现整个项目的自动化构建、编译打包等等功能了呢。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span> <span class="attr">mode</span>=<span class="string">"out-in"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- ... the buttons ... --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当然，在不做任何设置的时候，transition 的默认行为是：进入和离开同时发生。</p>
+<h2 id="实现逻辑"><a href="#实现逻辑" class="headerlink" title="实现逻辑"></a>实现逻辑</h2><p>其实多元素和组件的过渡，大致总体是跟单个元素的过渡相似的，大概是多了切换的过程，也就是一个结束另外一个开始的过渡把。</p>
+<p>所以这里可以看看以下的源码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// replace old child transition data with fresh one</span></div><div class="line"><span class="comment">// important for dynamic transitions!</span></div><div class="line"><span class="keyword">const</span> oldData: <span class="built_in">Object</span> = oldChild &amp;&amp; (oldChild.data.transition = extend(&#123;&#125;, data))</div><div class="line"><span class="comment">// handle transition mode</span></div><div class="line"><span class="keyword">if</span> (mode === <span class="string">'out-in'</span>) &#123;</div><div class="line">  <span class="comment">// return placeholder node and queue update when leave finishes</span></div><div class="line">  <span class="keyword">this</span>._leaving = <span class="literal">true</span></div><div class="line">  mergeVNodeHook(oldData, <span class="string">'afterLeave'</span>, () =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>._leaving = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.$forceUpdate()</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">return</span> placeholder(h, rawChild)</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mode === <span class="string">'in-out'</span>) &#123;</div><div class="line">  <span class="keyword">if</span> (isAsyncPlaceholder(child)) &#123;</div><div class="line">    <span class="keyword">return</span> oldRawChild</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">let</span> delayedLeave</div><div class="line">  <span class="keyword">const</span> performLeave = <span class="function"><span class="params">()</span> =&gt;</span> &#123; delayedLeave() &#125;</div><div class="line">  mergeVNodeHook(data, <span class="string">'afterEnter'</span>, performLeave)</div><div class="line">  mergeVNodeHook(data, <span class="string">'enterCancelled'</span>, performLeave)</div><div class="line">  mergeVNodeHook(oldData, <span class="string">'delayLeave'</span>, leave =&gt; &#123; delayedLeave = leave &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里大概的操作是：</p>
+<ol>
+<li>当 mode 为 ‘out-in’ 时，将下一个元素的插入时间延后，等待上一个元素的离开动画完成后，再触发下一个元素的插入和进入动画。</li>
+<li>当 mode 为 ‘in-out’ 时，将上一个元素的移除时间延后，等待下一个元素的进入动画完成后，再触发上一个元素的移除和离开动画。</li>
+</ol>
+<p>因为前面几节我们也分析过，进入动画和元素插入捆绑，而离开动画和元素移除捆绑，所以这里只需要控制元素的延时变更，就能得到动画控制的效果了。</p>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>对于层出不穷的工具，最好的态度是接受不抗拒。同时有空我们也可以多去了解和研究，毕竟一个新事物的出现和流行，总是有它自身的闪光之点呢。</p>
+<p>本节我们介绍了 Vue 中多元素和多组件的过渡，其实他们也可以算是一个东西啦。在前面几节的基础上，这块内容的理解相对简单些。</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -219,13 +138,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/分享/">分享</a>
+  <span></span> <a href="/tags/笔记/">笔记</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/前端满汉全席/">前端满汉全席</a>
+  <a class="article-category-link" href="/categories/vue八宝粥/">vue八宝粥</a>
 </div>
 
 
@@ -255,19 +174,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/05/16/img-coutain-with-background/" title="图片居中新用法--巧妙使用background">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  图片居中新用法--巧妙使用background</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/05/12/front-end-notes-4-frame/"  title="前端阶段性总结之「框架相关」">
+<a href="/2018/03/18/vue2-transition-3-javascript-hook/"  title="Vue2动画3--Javascript钩子">
  <strong>NEXT:</strong><br/> 
- <span>前端阶段性总结之「框架相关」
+ <span>Vue2动画3--Javascript钩子
 </span>
 </a>
 </div>
@@ -289,7 +200,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端工具"><span class="toc-number">1.</span> <span class="toc-text">前端工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发环境"><span class="toc-number">1.1.</span> <span class="toc-text">开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建套件-工具"><span class="toc-number">1.2.</span> <span class="toc-text">构建套件/工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于Grunt-Gulp-Webpack"><span class="toc-number">1.3.</span> <span class="toc-text">关于Grunt/Gulp/Webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Webpack"><span class="toc-number">1.4.</span> <span class="toc-text">Webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多元素-组件过渡"><span class="toc-number">1.</span> <span class="toc-text">多元素/组件过渡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多元素过渡"><span class="toc-number">1.1.</span> <span class="toc-text">多元素过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多组件过渡"><span class="toc-number">1.2.</span> <span class="toc-text">多组件过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡模式"><span class="toc-number">1.3.</span> <span class="toc-text">过渡模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑"><span class="toc-number">1.4.</span> <span class="toc-text">实现逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">1.5.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
