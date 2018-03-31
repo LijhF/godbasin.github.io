@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《Vue2动画5--FLIP与列表过渡》](https://godbasin.github.io/2018/03/31/vue2-transition-5-list-and-flip/)   
 > [《Vue2动画4--多元素/组件过渡》](https://godbasin.github.io/2018/03/25/vue2-transition-4-multi-element/)   
 > [《Vue2动画3--Javascript钩子》](https://godbasin.github.io/2018/03/18/vue2-transition-3-javascript-hook/)   
 > [《Vue2动画2--CSS过渡与动画》](https://godbasin.github.io/2018/03/17/vue2-transition-2-css-transition-animation/)   
@@ -24,6 +25,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### Vue2动画     
+> [《Vue2动画5--FLIP与列表过渡》](https://godbasin.github.io/2018/03/31/vue2-transition-5-list-and-flip/)   
 > [《Vue2动画4--多元素/组件过渡》](https://godbasin.github.io/2018/03/25/vue2-transition-4-multi-element/)   
 > [《Vue2动画3--Javascript钩子》](https://godbasin.github.io/2018/03/18/vue2-transition-3-javascript-hook/)   
 > [《Vue2动画2--CSS过渡与动画》](https://godbasin.github.io/2018/03/17/vue2-transition-2-css-transition-animation/)   
