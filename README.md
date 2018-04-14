@@ -3,6 +3,8 @@
 ---      
 
 ### 最新     
+> [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
+> [《前端入门1--什么是前端》](https://godbasin.github.io/2018/04/07/front-end-1-what-is-front-end/)   
 > [《Vue2动画5--FLIP与列表过渡》](https://godbasin.github.io/2018/03/31/vue2-transition-5-list-and-flip/)   
 > [《Vue2动画4--多元素/组件过渡》](https://godbasin.github.io/2018/03/25/vue2-transition-4-multi-element/)   
 > [《Vue2动画3--Javascript钩子》](https://godbasin.github.io/2018/03/18/vue2-transition-3-javascript-hook/)   
@@ -18,6 +20,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### 前端入门    
+> [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
 > [《前端入门1--什么是前端》](https://godbasin.github.io/2018/04/07/front-end-1-what-is-front-end/)   
 
 ### Vue2动画     

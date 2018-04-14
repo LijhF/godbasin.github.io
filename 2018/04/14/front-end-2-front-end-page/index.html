@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Vue2使用笔记16--自定义指令 | Here. There.</title>
+    <title>前端入门2--编写页面 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="最近在使用 Vue2 作为项目中前端的框架，《Vue2 使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录开发自定义指令的过程。">
+    <meta name="description" content="《前端入门》系列主要为个人对前端一些经验和认识总结。本文简单说明一下一个网页的结构，以及 HTML 和 CSS编写页面。">
     
     
     
@@ -71,15 +71,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/27/vue2-notes-16-custom-directive/" title="Vue2使用笔记16--自定义指令" itemprop="url">Vue2使用笔记16--自定义指令</a>
+      <a href="/2018/04/14/front-end-2-front-end-page/" title="前端入门2--编写页面" itemprop="url">前端入门2--编写页面</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2018-01-26T16:02:07.000Z" itemprop="datePublished">2018-01-27</time>
-    更新日期:<time datetime="2018-01-26T16:03:57.435Z" itemprop="dateModified">2018-01-27</time>
+    <time datetime="2018-04-14T08:22:15.000Z" itemprop="datePublished">2018-04-14</time>
+    更新日期:<time datetime="2018-04-14T08:25:40.086Z" itemprop="dateModified">2018-04-14</time>
     
   </p>
 </header>
@@ -88,50 +88,113 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-number">1.</span> <span class="toc-text">自定义指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚焦例子"><span class="toc-number">1.1.</span> <span class="toc-text">聚焦例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钩子函数"><span class="toc-number">1.2.</span> <span class="toc-text">钩子函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写v-click-outside指令"><span class="toc-number">1.3.</span> <span class="toc-text">编写v-click-outside指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前端页面"><span class="toc-number">1.</span> <span class="toc-text">前端页面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面查看"><span class="toc-number">1.1.</span> <span class="toc-text">页面查看</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#右键菜单"><span class="toc-number">1.1.1.</span> <span class="toc-text">右键菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制台"><span class="toc-number">1.1.2.</span> <span class="toc-text">控制台</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面组成"><span class="toc-number">1.2.</span> <span class="toc-text">页面组成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单页-amp-amp-多页"><span class="toc-number">2.</span> <span class="toc-text">单页&&多页</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#单页应用"><span class="toc-number">2.1.</span> <span class="toc-text">单页应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多页应用"><span class="toc-number">2.2.</span> <span class="toc-text">多页应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>最近在使用 Vue2 作为项目中前端的框架，《Vue2 使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录开发自定义指令的过程。</p>
-<a id="more"></a>
-<h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><hr>
-<p>和Angular一样，Vue也支持自定义指令。通常我们会在需要给某个元素添加简单的事件处理逻辑的时候，会使用到自定义指令。</p>
-<h3 id="聚焦例子"><a href="#聚焦例子" class="headerlink" title="聚焦例子"></a>聚焦例子</h3><p>我们先来看<a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="external">官方文档</a>中的一个表单自动聚焦的例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注册一个全局自定义指令 `v-focus`</span></div><div class="line">Vue.directive(<span class="string">'focus'</span>, &#123;</div><div class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></div><div class="line">  inserted: <span class="function"><span class="keyword">function</span> (<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="comment">// 聚焦元素</span></div><div class="line">    el.focus()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>然后我们可以在模板中任何元素上使用新的 v-focus 属性：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-focus</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>当然，跟components、filter等一致，directive也支持局部添加，这里也不多说。</p>
-<h3 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h3><p>我们的指令定义对象有一下的钩子函数 (均为可选)：</p>
+		<p>《前端入门》系列主要为个人对前端一些经验和认识总结。本文简单说明一下一个网页的结构，以及 HTML 和 CSS编写页面。<br><a id="more"></a></p>
+<h1 id="前端页面"><a href="#前端页面" class="headerlink" title="前端页面"></a>前端页面</h1><hr>
+<p>打开浏览器，里面全都是网页或是网站。包括大家常用的百度、论坛、视频网站等等，当然现在使用 App 的占比上升了不少。不过对于常常需要搜索、或是某些应用的老用户来说，当然是大屏幕的视野要宽，键盘的输入要快啦。</p>
+<h2 id="页面查看"><a href="#页面查看" class="headerlink" title="页面查看"></a>页面查看</h2><p>近年来，单页应用的出现率涨高了。要说明什么是单页应用呢，我们先从最初的静态页面说起。</p>
+<p>静态页面，里面主要是<code>HTML</code>、<code>CSS</code>和<code>javascript</code>这几种类型组成的。当然还有像<code>xHTML</code>/<code>svg</code>等待。</p>
+<p>废话少说，我们先来看看百度首页。</p>
+<h3 id="右键菜单"><a href="#右键菜单" class="headerlink" title="右键菜单"></a>右键菜单</h3><p>在定位某个元素的时候，我们也可以在该元素上右键选择“检查”，菜单如下：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1510044313%281%29.png" alt="image"></p>
 <ul>
-<li><code>bind</code>：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。</li>
-<li><code>inserted</code>：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。</li>
-<li><code>update</code>：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。需要通过比较更新前后的值来忽略不必要的模板更新。</li>
-<li><code>componentUpdated</code>：指令所在组件的 VNode 及其子 VNode 全部更新后调用。</li>
-<li><code>unbind</code>：只调用一次，指令与元素解绑时调用。常常用来解除一些事件的绑定、或者定时器的清除等。</li>
+<li>查看网页源代码</li>
 </ul>
-<p>每个钩子函数都能拿到下面的一些参数：</p>
+<p>选择“查看网页源代码”，能看到当前页面的整个<code>HTML</code>文档，里面包括一些当前页面的代码。</p>
 <ul>
-<li><code>el</code>：指令所绑定的元素，可以用来直接操作 DOM 。</li>
-<li><code>binding</code>：一个对象，包含以下属性：<ul>
-<li><code>name</code>：指令名，不包括 v- 前缀。</li>
-<li><code>value</code>：指令的绑定值，例如：<code>v-my-directive=&quot;1 + 1&quot;</code> 中，绑定值为 2。</li>
-<li><code>oldValue</code>：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。</li>
-<li><code>expression</code>：字符串形式的指令表达式。例如 <code>v-my-directive=&quot;1 + 1&quot;</code> 中，表达式为 <code>&quot;1 + 1&quot;</code>。</li>
-<li><code>arg</code>：传给指令的参数，可选。例如 <code>v-my-directive:foo</code> 中，参数为 “foo”。</li>
-<li><code>modifiers</code>：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code> 中，修饰符对象为 <code>{ foo: true, bar: true }</code>。</li>
+<li>另存为</li>
 </ul>
-</li>
-<li><code>vnode</code>：Vue 编译生成的虚拟节点，参考<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js" target="_blank" rel="external">VNode class declaration</a>。</li>
-<li><code>oldVnode</code>：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。</li>
+<p>选择“另存为”，可以将该页面以及相关的一些静态资源打包下载，以前经常这样来“借鉴”别人的样式。</p>
+<ul>
+<li>检查</li>
 </ul>
-<h3 id="编写v-click-outside指令"><a href="#编写v-click-outside指令" class="headerlink" title="编写v-click-outside指令"></a>编写v-click-outside指令</h3><p>又是很常见的一个使用，点击某个元素的外面时，执行一些操作（常见关闭某些元素）。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Vue.directive(<span class="string">"click-outside"</span>, &#123;</div><div class="line">  <span class="attr">bind</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) </span>&#123;</div><div class="line">    el.event = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">      <span class="comment">// 检查点击是否发生在节点之内（包括子节点）</span></div><div class="line">      <span class="keyword">if</span> (!(el == event.target || el.contains(event.target))) &#123;</div><div class="line">        <span class="comment">// 如果没有，则触发调用</span></div><div class="line">        <span class="comment">// 若绑定值为函数，则执行</span></div><div class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> vnode.context[binding.expression] == <span class="string">'function'</span>)&#123;</div><div class="line">            vnode.context[binding.expression](event);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 绑定事件</span></div><div class="line">    <span class="comment">// 设置为true，代表在DOM树中，注册了该listener的元素，会先于它下方的任何事件目标，接收到该事件。</span></div><div class="line">    <span class="built_in">document</span>.body.addEventListener(<span class="string">"click"</span>, el.event, <span class="literal">true</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">unbind</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="comment">// 解绑事件</span></div><div class="line">    <span class="built_in">document</span>.body.removeEventListener(<span class="string">"click"</span>, el.event, <span class="literal">true</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>这里我们可以通过钩子函数中的<code>vnode.context</code>，来获取当前组件的作用域，参考<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js" target="_blank" rel="external">VNode class declaration</a>。</p>
-<p>我们可以这样使用：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span> <span class="attr">style</span>=<span class="string">"margin-left: 20px;"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"mr5"</span> <span class="attr">style</span>=<span class="string">"font-size: 14px;"</span>&gt;</span>下拉菜单<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn-group"</span> <span class="attr">v-click-outside</span>=<span class="string">"closeMenu"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default dropdown-toggle"</span> @<span class="attr">click</span>=<span class="string">"isMenuShown = !isMenuShown"</span>&gt;</span></div><div class="line">            点击 <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"caret"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-show</span>=<span class="string">"isMenuShown"</span> <span class="attr">class</span>=<span class="string">"dropdown-menu"</span> <span class="attr">style</span>=<span class="string">"display:block;"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Another action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Something else here<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">role</span>=<span class="string">"separator"</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Separated link<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">"Logs"</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">isMenuShown</span>: <span class="literal">false</span></div><div class="line">    &#125;;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    closeMenu(ev)&#123;</div><div class="line">      <span class="built_in">console</span>.log(&#123;ev&#125;)</div><div class="line">      <span class="keyword">this</span>.isMenuShown = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这里有个需要注意的地方是，这种带条件判断的逻辑，我们需要绑定函数来使用。<br>因为我们在自定义指令的时候，我们的钩子函数参数里面包括<code>value</code>指令的绑定值，也就是说，指令会执行求值操作。</p>
-<p>如果我们直接绑定表达式的话，则每次触发都会求值，并不能跟进条件判断是否求值。</p>
-<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>自定义指令其实也是一个很有用的工具，不管在Angular还是在Vue中，我们对一些可复用性的逻辑封装起来使用，能提升不少的工作效率。<br>像一些表单校验、输入控制等等，很多功能可以通过自定义指令来实现哒~<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/vue2-notes/16-custom-directive" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://ofyya1gfg.bkt.clouddn.com/16-custom-directive/index.html#/app/logs" target="_blank" rel="external">此处查看页面效果</a></p>
+<p>选择“检查”，可以检查当前选中的元素，同时打开控制台。接下里我们重点介绍控制台，因为你们以后会与他们为伴。</p>
+<h3 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h3><p>这里顺便讲讲，前端常用的调试工具。首先，必备第一个就是Chrome浏览器啦。</p>
+<p><strong>打开控制台</strong></p>
+<p>假设你们已经在使用 Chrome 浏览器看我的文章了，那么我们可以有三个方法打开控制台：</p>
+<ol>
+<li>按键<code>F12</code>。</li>
+<li>右键菜单，选择“检查”。</li>
+<li>快捷键<code>Shift + Ctrl + I</code>。</li>
+</ol>
+<p><strong>控制台菜单</strong><br>我们来看控制台：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1510045324%281%29.png" alt="image"></p>
+<p>这是控制台的菜单，这边简单做介绍（从左往右）：</p>
+<ol>
+<li>检查元素（箭头带个框框）：与右键选择元素检查相似，后面讲。</li>
+<li>屏幕切换（手机卡在框框上）：该功能主要用于PC端和移动端屏幕切换，适合H5的开发，并且可匹配多种机型。</li>
+<li>Element：查看元素，能看到页面中所有存在的元素。</li>
+<li>Console：输出，常用来输出一些信息，或是错误信息。</li>
+<li>Source：查看源文件，可支持打断点调试。开启了source map后，更是可以浏览器直接更改本地文件。</li>
+<li>Network：查看网络请求信息，包括静态资源的下载、ajax请求等。</li>
+</ol>
+<p>这里面主要介绍这几个，其他的等需要的时候你们就会自己去接触啦。</p>
+<p><strong>Element 查看元素</strong><br>我们看看元素的查看，这里很方便的是，当我们选中 Element 里面某个元素，Chrome 便会突显出来，并且伴有常用的元素信息，宽高、padding、margin 等等。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/%7B521323E8-144E-4B2D-8567-9488ACB1EB4C%7D.png" alt="image"></p>
+<p>同时，我们也可以看到下方的 Style，里面会有当前元素匹配中的一些 CSS 样式，我们也可以尝试在这里调整，调整成想要的样式之后，再贴进我们的代码里。</p>
+<p><strong>Console 输出</strong><br>我们常用几种方式来调试，包括打断点、<code>alert()</code>和<code>console</code>等。本骚年用<code>console</code>稍微多一些。</p>
+<p>看看百度的页面，还藏了招聘信息：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1510045732%281%29.png" alt="image"></p>
+<p>当然现在好像越来越流行了，有时候有趣得网站也会藏些解码游戏在里面。</p>
+<p><strong>Network</strong><br>我们在搜索框里面输入内容，便能看到百度页面发起的请求：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1510046804%281%29.png" alt="image"></p>
+<p>我们能在这里查看请求的内容、状态、服务端返回的内容等等。</p>
+<h2 id="页面组成"><a href="#页面组成" class="headerlink" title="页面组成"></a>页面组成</h2><p>上面也提到过，我们的页面主要由<code>HTML</code>、<code>CSS</code>和<code>js</code>组成，如果只用于静态数据的展示，或许只需要前两者就好了，一些公司的主页/官网也常常是简单的页面。</p>
+<p><strong>HTML</strong><br>HTML，指超文本标签语言。<br>它被称为通向WEB技术世界的钥匙，因为我们的<code>CSS</code>和<code>Javascript</code>，其实也属于<code>HTML</code>中的<code>&lt;style&gt;</code>和<code>&lt;script&gt;</code>标签而已。</p>
+<p>但更多时候，我喜欢用<code>HTML</code>指代元素，例如<code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>等。</p>
+<p>最简单的莫过于：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我的第一个标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>我的第一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我们的<code>&lt;html&gt;</code>里面包括两个子模快：</p>
+<ul>
+<li><code>&lt;head&gt;</code>：常包括一些样式、<code>&lt;meta&gt;</code>标签、甚至是<code>&lt;script&gt;</code>，不展示到页面</li>
+<li><code>&lt;body&gt;</code>：包括展示在页面的内容</li>
+</ul>
+<p><strong>CSS</strong><br>CSS主要是给我们的<code>HTML</code>元素添加样式，可以通过几个方式匹配：</p>
+<ul>
+<li><code>DOM</code>：像常用的<code>p</code>、<code>ul/li</code>等便是<code>DOM</code>匹配</li>
+<li><code>class</code>：类的匹配</li>
+<li><code>id</code>：id标识符的匹配</li>
+</ul>
+<p><code>class</code>针对一类元素的匹配，<code>id</code>则是唯一标识符，若页面内有多个相同的<code>id</code>，则只有第一个生效。<br>给元素添加样式，像是绘画的过程，绘制边框、大小、颜色等，都是通过样式来设置的。</p>
+<p><strong>Javascript</strong><br>JavaScript是可插入HTML页面的编程代码。插入HTML页面后，可由所有的现代浏览器执行。</p>
+<p>我们常常使用Javascript来做以下事情：</p>
+<ol>
+<li>输出HTML。</li>
+<li>处理事件（点击、输入等）。</li>
+<li>改变HTML内容和样式。</li>
+<li>处理Http请求。</li>
+</ol>
+<p>其他的一些基础内容，这里面不详述了。推荐几个学习基础的网站：</p>
+<ul>
+<li><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="external">w3school</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML" target="_blank" rel="external">MDN web</a></li>
+</ul>
+<h1 id="单页-amp-amp-多页"><a href="#单页-amp-amp-多页" class="headerlink" title="单页&amp;&amp;多页"></a>单页&amp;&amp;多页</h1><hr>
+<p>前端程序员越来越频繁提到“单页应用”、“多页应用”这些，那这又分别代表什么呢？</p>
+<h2 id="单页应用"><a href="#单页应用" class="headerlink" title="单页应用"></a>单页应用</h2><p>其实很简单，单页应用与多页最简单的区别就是，单页应用，是一个<code>HTML</code>文件。</p>
+<p>当我们需要更改页面的展示，我们会移除掉部分元素，然后将需要新增的内容填充进去，与画画的擦除重绘相似。</p>
+<p>单页应用的好处是：</p>
+<ol>
+<li>页面的数据状态都能维持着。</li>
+<li>部分擦除重绘，比整个页面刷新的效果体验要好很多。</li>
+</ol>
+<p>当然，单页应用也会有缺点：</p>
+<ol>
+<li>不利于SEO。</li>
+<li>请求等待时间长。</li>
+</ol>
+<p>事物都是有利有弊，单页应用的最大痛处在于SEO。<br><a href="https://zh.wikipedia.org/wiki/%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E6%9C%80%E4%BD%B3%E5%8C%96" target="_blank" rel="external">搜索引擎优化</a>（英语：search engine optimization，缩写为 SEO），是一种通过了解搜索引擎的运作规则来调整网站，以及提高目的网站在有关搜索引擎内排名的方式。</p>
+<p>而关于单页应用的 SEO，也是有各种各样的方式优化的，大家也可以去了解。</p>
+<h2 id="多页应用"><a href="#多页应用" class="headerlink" title="多页应用"></a>多页应用</h2><p>多页应用，更常见于相同的业务不同的页面的开发，这些页面或许没有很多的联系或者公用的数据，每个页面维护各自的状态。</p>
+<p>如今H5的业务多了，直出渲染也多了些。而多页应用和直出也是不错的搭配。</p>
+<p><strong>直出和同构</strong><br>直出，常常指代后端渲染，即我们请求的页面已经是把模版和数据组合好，直接吐出来给到浏览器。</p>
+<p>与此相对的，是前端渲染。例如单页应用，我们拿到的只是一个简单的空<code>&lt;html&gt;</code>，然后浏览器解析发现需要一些请求的数据和资源，发起二次请求。<br>当然，这样一来一去，消耗和等待的时间便会长了。</p>
+<p>同构又是什么呢？</p>
+<p>直出渲染的后端可以有很多，像PHP、JSP、Node.js等都是可以的。而同构的意思是，前后端使用一套代码。所以简单来说，就是Node.js的胜出了，同构最明显的优势，则是方便维护。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><hr>
+<p>本节简单介绍了关于前端页面的调试和组成，以及单页和多页应用的概念。对于<code>HTML</code>、<code>CSS</code>和<code>Javascript</code>，后面我们再详细说明一下吧。</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -145,13 +208,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/分享/">分享</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/vue八宝粥/">vue八宝粥</a>
+  <a class="article-category-link" href="/categories/js什锦/">js什锦</a>
 </div>
 
 
@@ -181,19 +244,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/01/28/vue2-notes-17-lazyload-chunk/" title="Vue2使用笔记17--路由懒加载">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Vue2使用笔记17--路由懒加载</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/01/21/vue2-notes-15-custom-v-model/"  title="Vue2使用笔记15--自定义的表单组件">
+<a href="/2018/04/07/front-end-1-what-is-front-end/"  title="前端入门1--什么是前端">
  <strong>NEXT:</strong><br/> 
- <span>Vue2使用笔记15--自定义的表单组件
+ <span>前端入门1--什么是前端
 </span>
 </a>
 </div>
@@ -215,7 +270,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-number">1.</span> <span class="toc-text">自定义指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚焦例子"><span class="toc-number">1.1.</span> <span class="toc-text">聚焦例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钩子函数"><span class="toc-number">1.2.</span> <span class="toc-text">钩子函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写v-click-outside指令"><span class="toc-number">1.3.</span> <span class="toc-text">编写v-click-outside指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前端页面"><span class="toc-number">1.</span> <span class="toc-text">前端页面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面查看"><span class="toc-number">1.1.</span> <span class="toc-text">页面查看</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#右键菜单"><span class="toc-number">1.1.1.</span> <span class="toc-text">右键菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制台"><span class="toc-number">1.1.2.</span> <span class="toc-text">控制台</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面组成"><span class="toc-number">1.2.</span> <span class="toc-text">页面组成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单页-amp-amp-多页"><span class="toc-number">2.</span> <span class="toc-text">单页&&多页</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#单页应用"><span class="toc-number">2.1.</span> <span class="toc-text">单页应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多页应用"><span class="toc-number">2.2.</span> <span class="toc-text">多页应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
