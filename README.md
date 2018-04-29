@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 > [《前端入门3--HTML和CSS》](https://godbasin.github.io/2018/04/21/front-end-3-html-css/)   
 > [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
 > [《前端入门1--什么是前端》](https://godbasin.github.io/2018/04/07/front-end-1-what-is-front-end/)   
@@ -21,6 +22,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### 前端入门    
+> [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 > [《前端入门3--HTML和CSS》](https://godbasin.github.io/2018/04/21/front-end-3-html-css/)   
 > [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
 > [《前端入门1--什么是前端》](https://godbasin.github.io/2018/04/07/front-end-1-what-is-front-end/)   
