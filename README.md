@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《前端入门5--Javascript》](https://godbasin.github.io/2018/05/05/front-end-5-javascript/)   
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 > [《前端入门3--HTML和CSS》](https://godbasin.github.io/2018/04/21/front-end-3-html-css/)   
 > [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
@@ -13,8 +14,6 @@
 > [《Vue2动画2--CSS过渡与动画》](https://godbasin.github.io/2018/03/17/vue2-transition-2-css-transition-animation/)   
 > [《Vue2动画1--transition组件》](https://godbasin.github.io/2018/03/11/vue2-transition-1-transition-component/)   
 > [《D3.js-Tree实战笔记8--曲线hover和点击》](https://godbasin.github.io/2018/03/10/d3-tree-notes-8-add-path-click/)   
-> [《D3.js-Tree实战笔记7--曲线上的文字textPath》](https://godbasin.github.io/2018/03/04/d3-tree-notes-7-text-path/)   
-> [《D3.js-Tree实战笔记6--添加右键菜单》](https://godbasin.github.io/2018/02/25/d3-tree-notes-6-add-smart-menu/)   
 
 ### 前端杂谈    
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
@@ -22,6 +21,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### 前端入门    
+> [《前端入门5--Javascript》](https://godbasin.github.io/2018/05/05/front-end-5-javascript/)   
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 > [《前端入门3--HTML和CSS》](https://godbasin.github.io/2018/04/21/front-end-3-html-css/)   
 > [《前端入门2--编写页面》](https://godbasin.github.io/2018/04/14/front-end-2-front-end-page/)   
