@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>纯前端的进军7--node.js | Here. There.</title>
+    <title>前端入门6--认识浏览器 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="《纯前端的进军》系列主要作为曾经的纯前端，对后台和底层的一些弥补，涉及进程、网络通信，以及对node.js和相关框架的学习。前面已经科普过网络进程通信、TCP/IP、HTTP和Socket等，本节我们来简单熟悉一下node.js吧。">
+    <meta name="description" content="《前端入门》系列主要为个人对前端一些经验和认识总结。本节我们从用户角度出发，认识浏览器的渲染机制吧。">
     
     
     
@@ -73,15 +73,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/12/16/advance-from-pure-front-ender-7-node-js/" title="纯前端的进军7--node.js" itemprop="url">纯前端的进军7--node.js</a>
+      <a href="/2018/05/08/front-end-6-browser-render/" title="前端入门6--认识浏览器" itemprop="url">前端入门6--认识浏览器</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-12-16T06:14:36.000Z" itemprop="datePublished">2017-12-16</time>
-    更新日期:<time datetime="2017-12-16T06:15:38.890Z" itemprop="dateModified">2017-12-16</time>
+    <time datetime="2018-05-08T13:46:14.000Z" itemprop="datePublished">2018-05-08</time>
+    更新日期:<time datetime="2018-05-08T13:56:44.832Z" itemprop="dateModified">2018-05-08</time>
     
   </p>
 </header>
@@ -90,103 +90,101 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js"><span class="toc-number">1.</span> <span class="toc-text">node.js</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Node-js"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关技术点"><span class="toc-number">1.2.</span> <span class="toc-text">相关技术点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJS"><span class="toc-number">1.3.</span> <span class="toc-text">CommonJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js模块"><span class="toc-number">1.4.</span> <span class="toc-text">Node.js模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器"><span class="toc-number">1.</span> <span class="toc-text">浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的结构"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面请求"><span class="toc-number">1.2.</span> <span class="toc-text">页面请求</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器渲染机制"><span class="toc-number">2.</span> <span class="toc-text">浏览器渲染机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析"><span class="toc-number">2.1.</span> <span class="toc-text">解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM-Tree"><span class="toc-number">2.1.1.</span> <span class="toc-text">DOM Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Render-Tree"><span class="toc-number">2.1.2.</span> <span class="toc-text">Render Tree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#渲染"><span class="toc-number">2.2.</span> <span class="toc-text">渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本流程"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器加载顺序"><span class="toc-number">2.3.</span> <span class="toc-text">浏览器加载顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阻塞的-script-标签"><span class="toc-number">2.3.1.</span> <span class="toc-text">阻塞的 script 标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">2.4.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.5.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>《纯前端的进军》系列主要作为曾经的纯前端，对后台和底层的一些弥补，涉及进程、网络通信，以及对node.js和相关框架的学习。前面已经科普过网络进程通信、TCP/IP、HTTP和Socket等，本节我们来简单熟悉一下node.js吧。<br><a id="more"></a></p>
-<h2 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h2><hr>
-<h3 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h3><ul>
-<li>Node.js是一个基于Chrome V8引擎的JavaScript运行环境。 </li>
-<li>Node.js使用了一个事件驱动、非阻塞式I/O的模型，使其轻量又高效。 </li>
-<li>Node.js的包管理器npm，是全球最大的开源库生态系统。</li>
-</ul>
-<p>以上是<a href="http://nodejs.cn/" target="_blank" rel="external">Node.js官网</a>的说明。</p>
-<p><strong>Node.js大部分基本模块都用JavaScript语言编写。</strong><br>在Node.js出现之前，JavaScript通常作为客户端程序设计语言使用，以JavaScript写出的程序常在用户的浏览器上运行。<br>Node.js的出现使JavaScript也能用于服务器端编程。Node.js含有一系列内置模块，使得程序可以脱离Apache HTTP Server或IIS，作为独立服务器运行。</p>
-<p><strong>Node.js允许通过JavaScript和一系列模块来编写服务器端应用和网络相关的应用。</strong><br>核心模块包括文件系统I/O、网络（HTTP、TCP、UDP、DNS、TLS/SSL等）、二进制数据流、加密算法、数据流等等。</p>
-<p>使用框架可以加速开发。常用的框架有Express.js、Socket.IO和Connect等。</p>
-<p>Node.js主要用于编写像Web服务器一样的网络应用，这和PHP和Python是类似的。但是Node.js与其他语言最大的不同之处在于，PHP等语言是阻塞的（只有前一条命令执行完毕才会执行后面的命令），而Node.js是非阻塞的（多条命令可以同时被运行，通过回调函数得知命令已结束运行）。</p>
-<p><strong>Node.js是事件驱动的。</strong><br>开发者可以在不使用线程的情况下开发出一个能够承载高并发的服务器。其他服务器端语言难以开发高并发应用，而且即使开发出来，性能也不尽人意。Node.js正是在这个前提下被创造出来。<br>Node.js把JavaScript的易学易用和Unix网络编程的强大结合到了一起。</p>
-<h3 id="相关技术点"><a href="#相关技术点" class="headerlink" title="相关技术点"></a>相关技术点</h3><ul>
-<li><strong>V8</strong></li>
-</ul>
-<p>V8是为Google Chrome设计的JavaScript运行引擎，Google于2008年将其开源。V8用C++写成，它将JavaScript源代码编译成本地机器码而不是随时解释。<br>Node.js用libuv来处理异步事件，而V8提供了JavaScript的实时运行环境。libuv是一个网络和文件系统功能的抽象层，既可以用于Windows又可以用于匹配POSIX标准的系统，例如Linux、OS X和Unix。<br>Node.js的核心功能被包含进一个JavaScript库，并通过C++将各部分与操作系统进行联系。</p>
-<ul>
-<li><strong>npm</strong></li>
-</ul>
-<p>npm是Node.js附带的包管理器。<br>npm是一个命令行工具，用于从NPM Registry中下载、安装Node.js程序，同时解决依赖问题。<br>npm提高了开发的速度，因为它能够负责第三方Node.js程序的安装与管理。</p>
-<ul>
-<li><strong>统一API</strong></li>
-</ul>
-<p>Node模块的API形式简单，降低了编程的复杂度。<br>Node.js将浏览器、数据（例如MongoDB或CouchDB）等组合到一起，通过JSON提供一个统一的接口。<br>由于前端框架和一些基本的后端开发技术（如MVC、MVP、MVVM等）变得流行，Node.js也支持客户端和服务器端重新利用相同的模型和接口。</p>
-<ul>
-<li><strong>单线程</strong></li>
-</ul>
-<p>Node.js以单线程运行，使用非阻塞I/O调用，这样既可以支持数以万计的并发连接，又不会因多线程本身的特点而带来麻烦。众多请求只使用单线程的设计意味着可以用于创建高并发应用程序。<br>Node.js应用程序的设计目标是任何需要操作I/O的函数都使用回调函数。<br>这种设计的缺点是，如果不使用cluster、StrongLoop Process Manager或pm2等模块，Node.js就难以处理多核或多线程等情况。</p>
-<ul>
-<li><strong>事件循环</strong></li>
-</ul>
-<p>Node.js将其注册到操作系统中，这样可以及时注意到新连接的产生。当新连接产生时，操作系统会产生一个回调。<br>在Node.js运行时内部，每个连接都被分配一个小型的堆。与其他服务器程序不同的是，Node.js不使用进程或线程处理连接，而是采用事件循环来处理并发连接。<br>而且Node.js的事件循环不需要手动调用。在回调函数定义之后，服务器进入事件循环。当回调函数均被执行完毕之后，Node.js结束事件循环。</p>
-<ul>
-<li><strong>异步执行的运行机制</strong></li>
-</ul>
+		<p>《前端入门》系列主要为个人对前端一些经验和认识总结。本节我们从用户角度出发，认识浏览器的渲染机制吧。<br><a id="more"></a></p>
+<h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><p>浏览器的主要功能是展示网页资源，也即请求服务器并将结果显示在浏览器窗口中。<br>资源的格式一般是HTML，但也有PDF、图片等其它各种格式。资源的定位由URL来实现。</p>
+<h2 id="浏览器的结构"><a href="#浏览器的结构" class="headerlink" title="浏览器的结构"></a>浏览器的结构</h2><p>废话少说，先上图：<br><img src="http://o905ne85q.bkt.clouddn.com/layers.png" alt="image"></p>
 <ol>
-<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
-<li>主线程之外，还存在一个“任务队列”（task queue）。只要异步任务有了运行结果，就在“任务队列”之中放置一个事件。</li>
-<li>一旦“执行栈”中的所有同步任务执行完毕，系统就会读取“任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
-<li>主线程不断重复上面的第三步。</li>
-</ol>
-<h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><p><strong>模块定义：</strong></p>
-<ol>
-<li>模块中，上下文提供<code>require()</code>方法来引入外部模块。</li>
-<li>对应引入功能，上下文提供了exports对象用于导出当前模块的方法或者变量，exports对象是唯一导出的出口。</li>
-<li>模块中，存在一个module对象，代表模块自身，而exports是module的属性。</li>
-</ol>
-<p>Node中，一个文件就是一个模块，将方法挂载在exports对象上作为属性即可定义导出方式。</p>
-<p><strong>模块标识：</strong><br>模块标识是传递给<code>require()</code>方法的参数，必须是符合小驼峰命名的字符串，或者以<code>.</code>、<code>..</code>开头的相对路径或者绝对路径，可以没有文件名后缀<code>.js</code>。</p>
-<h3 id="Node-js模块"><a href="#Node-js模块" class="headerlink" title="Node.js模块"></a>Node.js模块</h3><p><strong>一、模块分类</strong><br>Node.js的模块分为两类，一类为原生（核心）模块，一类为文件模块。原生模块在Node.js源代码编译的时候编译进了二进制执行文件，加载的速度最快。文件模块是动态加载的，加载速度比原生模块慢。</p>
-<p>Node.js中存在4类模块（原生模块和3种文件模块），其中3种文件模块为：</p>
-<ul>
-<li><code>.js</code>：通过fs模块同步读取js文件并编译执行。</li>
-<li><code>.node</code>：通过C/C++进行编写的Addon。通过dlopen方法进行加载。</li>
-<li><code>.json</code>：读取文件，调用JSON.parse解析加载。</li>
-</ul>
-<p>其中文件模块还包括路径形式文件模块（如<code>.</code>、<code>..</code>和<code>./</code>开头的标识符）和自定义文件模块（第三方npm包）。</p>
-<p>自定义文件模块的查找最耗时也是最慢的一种，查找顺序为：</p>
-<ol>
-<li>当前目录下<code>node_modules</code>目录</li>
-<li>父目录下<code>node_modules</code>目录</li>
-<li>向上逐级递归直到根目录下下<code>node_modules</code>目录</li>
-</ol>
-<p><strong>二、模块载入策略</strong><br>Node引入模块，经历的三个步骤：路径分析、文件定位、编译执行。</p>
-<ul>
-<li><code>require</code>方法接受以下几种参数的传递：<ul>
-<li>原生模块（http、fs、path等）</li>
-<li>相对路径的文件模块</li>
-<li>绝对路径的文件模块</li>
-<li>非原生模块的文件模块</li>
-</ul>
+<li><p>用户接口（User Interface）<br>包括地址栏，前进后退，书签菜单等窗口上除了网页显示区域以外的部分。</p>
 </li>
-</ul>
-<p>Node.js对原生模块和文件模块都进行了缓存，于是在第二次require时，是不会有重复开销的。<br>require方法中的文件查找策略：<br><img src="http://o905ne85q.bkt.clouddn.com/image1.jpg" alt="images"></p>
-<ol>
-<li><p>从文件模块缓存中加载<br>尽管原生模块与文件模块的优先级不同，但是都不会优先于从文件模块的缓存中加载已经存在的模块。</p>
+<li><p>浏览器引擎（Browser engine）：查询与操作渲染引擎的接口。</p>
 </li>
-<li><p>从原生模块加载<br>原生模块的优先级仅次于文件模块缓存的优先级。require方法在解析文件名之后，优先检查模块是否在原生模块列表中。<br>以http模块为例，尽管在目录下存在一个<code>http</code>/<code>http.js</code>/<code>http.node</code>/<code>http.json</code>文件，<code>require(&quot;http&quot;)</code>都不会从这些文件中加载，而是从原生模块中加载。</p>
+<li><p>渲染引擎（Rendering engine）。<br>负责显示请求的内容，比如请求到<code>HTML</code>, 它会负责解析<code>HTML</code>与<code>CSS</code>并将结果显示到窗口中。</p>
+</li>
+<li><p>网络（Networking）。<br>用于网络请求, 如HTTP请求。它包括平台无关的接口和各平台独立的实现。</p>
+</li>
+<li><p>UI后端（UI backend）。<br>绘制基础元件，如组合框与窗口。它提供平台无关的接口，内部使用操作系统的相应实现。</p>
+</li>
+<li><p><code>JavaScript</code>解释器（JavaScript Interpreter）：用于解析执行<code>JavaScript</code>代码。</p>
+</li>
+<li><p>数据存储（Data storage）。<br>这是一个持久层。浏览器需要把所有数据存到硬盘上，如cookies。<br>新的<code>HTML</code>规范 (<code>HTML5</code>) 规定了一个完整（虽然轻量级）的浏览器中的数据库：<code>web database</code>。</p>
 </li>
 </ol>
-<p>原生模块也有一个缓存区，同样也是优先从缓存区加载。如果缓存区没有被加载过，则调用原生模块的加载方式进行加载和执行。</p>
+<p>以上大概是浏览器的主要结构，作为前端，除了大致都了解一下之外，这节我们主要关注渲染引擎和JavaScript解释器。<br>当然，我们先从头理一下页面请求的过程。</p>
+<h2 id="页面请求"><a href="#页面请求" class="headerlink" title="页面请求"></a>页面请求</h2><p>当我们去面试的时候，常常会被问一个问题：在浏览器里面输入<code>url</code>，按下 enter 键，会发生什么？<br>这是个或许平时我们不会思考的问题，不过在了解之后会对整个网页渲染有更好的认识。</p>
+<p>当我们按下 enter 键之后，浏览器就会发起一个HTTP请求，我们也可以从控制台看到：<br><img src="http://o905ne85q.bkt.clouddn.com/1512702987%281%29.png" alt="image"></p>
+<p>在这里，我们能看到所有浏览器发起的网络请求，包括页面、图片、CSS 文件、xhr 请求等等，还能看到请求的状态（<code>200</code>成功、<code>404</code>找不到、缓存、重定向等等）、耗时、请求头和内容、返回头和内容，等等等等。<br>这里涉及太多 http 相关的东西啦，先略过。</p>
+<p>这里第一个就是我们的页面请求，我们来看看返回了什么：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1512703607%281%29.png" alt="image"></p>
+<p>很明显，这里返回<code>&lt;html&gt;</code>页面，然后浏览器会加载页面，同时页面中涉及的资源也会触发请求下载，包括我们看到的<code>png</code>图片、<code>js</code>文件，这里没有<code>css</code>样式，大概是样式被直出到<code>&lt;html&gt;</code>页面里啦。</p>
+<p>当然，这里面没有体现请求发送出去之后的流程，下面是<strong>一个完整的HTTP请求过程</strong>：</p>
+<ul>
+<li>域名解析（此处涉及<code>DNS</code>的寻址过程）</li>
+<li>发起<code>TCP</code>的3次握手</li>
+<li>建立<code>TCP</code>连接后发起<code>http</code>请求</li>
+<li>服务器响应<code>http</code>请求，浏览器得到<code>html</code>代码</li>
+<li>浏览器解析<code>html</code>代码，并请求 html 代码中的资源（如<code>js</code>、<code>css</code>、图片等，此处可能涉及<code>HTTP</code>缓存）</li>
+<li>浏览器对页面进行渲染呈现给用户（此处涉及浏览器的渲染原理）</li>
+</ul>
+<p>关于最后一步，我们先上个图：<br><img src="http://o905ne85q.bkt.clouddn.com/image013.png" alt="image"><br>这是我们的浏览器拿到源代码后，会进行的处理。</p>
+<p>上面这些环节，如果你还有哪些不是很清楚的，请抱着强烈的好奇心去把它们探索完成。</p>
+<h1 id="浏览器渲染机制"><a href="#浏览器渲染机制" class="headerlink" title="浏览器渲染机制"></a>浏览器渲染机制</h1><hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>我们亲爱的浏览器会解析三个东西：</p>
 <ol>
-<li>从文件加载<br>当文件模块缓存中不存在，而且不是原生模块的时候，Node.js会解析require方法传入的参数，并从文件系统中加载实际的文件，加载过程中的包装和编译细节在前一节中已经介绍过，这里我们将详细描述查找文件模块的过程，其中，也有一些细节值得知晓。</li>
+<li><code>HTML/SVG/XHTML</code>。解析这三种文件会产生一个<code>DOM Tree</code>。（渲染引擎）</li>
+<li><code>CSS</code>，解析<code>CSS</code>会产生<code>CSS规则树</code>。（渲染引擎）</li>
+<li><code>Javascript</code>脚本，主要是通过<code>DOM API</code>和<code>CSSOM API</code>来操作<code>DOM Tree</code>和<code>CSS Rule Tree</code>。（JavaScript解释器）</li>
 </ol>
-<p><strong>三、Node.js模块与前端模块的异同</strong><br>通常有一些模块可以同时适用于前后端，但是在浏览器端通过script标签的载入JavaScript文件的方式与Node.js不同。<br>Node.js在载入到最终的执行中，进行了包装，使得每个文件中的变量天然的形成在一个闭包之中，不会污染全局变量。而浏览器端则通常是裸露的JavaScript代码片段。<br>所以为了解决前后端一致性的问题，类库开发者需要将类库代码包装在一个闭包内。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://zh.wikipedia.org/wiki/Node.js" target="_blank" rel="external">Node.js - 维基百科，自由的百科全书</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">《JavaScript 运行机制详解：再谈Event Loop》</a></li>
-<li><a href="http://www.infoq.com/cn/articles/nodejs-module-mechanism" target="_blank" rel="external">《深入浅出Node.js（三）：深入Node.js的模块机制》</a></li>
-<li><a href="https://github.com/muwenzi/Program-Blog/issues/94" target="_blank" rel="external">《浅析NodeJS模块加载机制 》</a></li>
+<p>解析完成后，浏览器引擎会通过<code>DOM Tree</code>和<code>CSS Rule Tree</code>来构造<code>Render Tree</code>。</p>
+<p>大致流程如下图：<br><img src="http://o905ne85q.bkt.clouddn.com/flow.png" alt="image"></p>
+<p>我们来看看它们都是些啥。</p>
+<h3 id="DOM-Tree"><a href="#DOM-Tree" class="headerlink" title="DOM Tree"></a>DOM Tree</h3><p>前面也简单讲过 DOM 树了，这里再从<a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="external">《浏览器的渲染原理简介》</a>偷一下（噢，上面东西也是很多从这偷…参考的）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is an example Web page.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面的这段<code>html</code>会生成这样的一个<code>DOM Tree</code>：<br><img src="http://o905ne85q.bkt.clouddn.com/DOM-Tree-01.jpg" alt="image"></p>
+<p><code>DOM Tree</code>和<code>Render Tree</code>有个很简单的区别：像<code>header</code>或<code>display:none</code>的元素，会在<code>DOM Tree</code>中，但不会添加到<code>Render Tree</code>里。</p>
+<h3 id="Render-Tree"><a href="#Render-Tree" class="headerlink" title="Render Tree"></a>Render Tree</h3><p><code>CSS Rule Tree</code>主要是 Firefox 的产物。<br>Firefox 基本上来说是通过<code>CSS</code>解析生成<code>CSS Rule Tree</code>，然后通过比对<code>DOM</code>生成<code>Style Context Tree</code>。<br>然后 Firefox 通过把<code>Style Context Tree</code>和其<code>Render Tree（Frame Tree）</code>关联上，就完成了。</p>
+<p>Webkit 不像 Firefox 要用两个树来干这个，Webkit 也有<code>Style</code>对象，它直接把这个<code>Style</code>对象存在了相应的<code>DOM</code>结点上了。</p>
+<p>建立<code>CSS Rule Tree</code>是需要比照着<code>DOM Tree</code>来的。<code>CSS</code>匹配<code>DOM Tree</code>主要是从右到左解析<code>CSS</code>的<code>Selector</code>，这是一个相当复杂和有性能问题的事情。</p>
+<h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>解析的角度大概讲完了，下面来从渲染的角度讲讲。</p>
+<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>渲染的流程基本上如下（黄色的四个步骤）：</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/Render-Process-Skipping-1024x282.jpg" alt="image"></p>
+<ol>
+<li>计算<code>CSS</code>样式</li>
+<li>构建<code>Render Tree</code></li>
+<li><code>Layout</code>：定位坐标和大小，是否换行，各种 position, overflow, z-index 属性等等</li>
+<li>正式开画</li>
+</ol>
+<p><strong>重新<code>Layout</code></strong><br>图中有很多连接线，代表<code>Javascript</code>动态修改了<code>DOM</code>属性或是<code>CSS</code>属会导致重新<code>Layout</code>，有些改变不会，就是那些指到天上的箭头，比如，修改后的<code>CSS rule</code>没有被匹配到。</p>
+<p><strong>1. 重绘（Repaint）</strong><br><strong>屏幕的一部分要重画，比如某个CSS的背景色变了。但是元素的几何尺寸没有变。</strong></p>
+<p><strong>2. 重排（Reflow）</strong><br><strong>元件的几何尺寸变了（<code>Render Tree</code>的一部分或全部发生了变化，<code>Reflow</code>或<code>Layout</code>），需要重新验证并计算<code>Render Tree</code>。</strong><br><code>HTML</code>使用的是流式布局，如果某元件的几何尺寸发生了变化，需要重新布局，也就叫<code>Reflow</code>。</p>
+<p><code>Reflow</code>会从<code>&lt;html&gt;</code>这个<code>root frame</code>开始递归往下，依次计算所有的结点几何尺寸和位置，成本比<code>Repaint</code>的成本高得多的多。</p>
+<p>所以我们要注意以下一些操作，因为可能会导致性能降低：</p>
+<ul>
+<li>增加、删除、修改<code>DOM</code>结点</li>
+<li>移动<code>DOM</code>的位置，或是搞个动画</li>
+<li>修改<code>CSS</code>样式</li>
+<li><code>Resize</code>窗口（移动端没有这个问题），或是滚动</li>
+</ul>
+<p>了解这些以后，我们在写代码的时候就会下意识去比避免啦。当然，现在 MVVM 框架流行，以及 CSS3 普遍之后，手动操作<code>DOM</code>的场景也越来越少啦。</p>
+<h2 id="浏览器加载顺序"><a href="#浏览器加载顺序" class="headerlink" title="浏览器加载顺序"></a>浏览器加载顺序</h2><h3 id="阻塞的-script-标签"><a href="#阻塞的-script-标签" class="headerlink" title="阻塞的 script 标签"></a>阻塞的 script 标签</h3><p>正常的网页加载流程是这样的：</p>
+<ol>
+<li>浏览器一边下载HTML网页，一边开始解析</li>
+<li>解析过程中，发现<code>&lt;script&gt;</code>标签</li>
+<li>暂停解析，网页渲染的控制权转交给<code>JavaScript</code>引擎</li>
+<li>如果<code>&lt;script&gt;</code>标签引用了外部脚本，就下载该脚本，否则就直接执行</li>
+<li>执行完毕，控制权交还渲染引擎，恢复往下解析<code>HTML</code>网页</li>
+</ol>
+<p><strong>将<code>js</code>放在<code>body</code>的最后面，可以避免资源阻塞，同时使静态的<code>html</code>页面迅速显示。</strong><br>如果外部脚本加载时间很长（比如一直无法完成下载），就会造成网页长时间失去响应，浏览器就会呈现“假死”状态，这被称为“阻塞效应”。<br><code>html</code>需要等<code>head</code>中所有的<code>js</code>和<code>css</code>加载完成后才会开始绘制，但是<code>html</code>不需要等待放在<code>body</code>最后的<code>js</code>下载执行就会开始绘制。</p>
+<p><strong>将<code>css</code>放在<code>head</code>里，可避免浏览器渲染的重复计算。</strong><br>经过上面的渲染过程，我们知道<code>Layout</code>的计算是比较消耗性能的，所以我们在开始计算<code>Render Tree</code>之前，就把所有的<code>css</code>文件拿到，这样可减少<code>Repaint</code>和<code>Reflow</code>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">《How browsers work》</a></li>
+<li><a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="external">《浏览器的渲染原理简介》</a></li>
+<li><a href="http://www.cnblogs.com/yingsong/p/6170780.html" target="_blank" rel="external">《html,css,js加载顺序》</a></li>
 </ul>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>本节我们主要介绍了Node.js，了解模块加载机制及异步编程，至于具体的核心模块（例如http和fs模块），在后面缘分到了再详细讲。<br>作为一名纯前端，Node.js与浏览器中JS除了语法等较相似，却又很多不一样和缺少理解的地方，如果真正到使用到的时候，或许会有不一样的理解吧。</p>
+<p>这一节我们主要介绍了浏览器的主要结构、一些解析和渲染的机制。至于<code>js</code>文件的加载顺序、以及<code>js</code>代码的加载顺序等等，这里没有太多的讲解，小伙伴们可以自行去研究一下。</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -206,7 +204,7 @@ var _hmt = _hmt || [];
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/非前端钙片/">非前端钙片</a>
+  <a class="article-category-link" href="/categories/js什锦/">js什锦</a>
 </div>
 
 
@@ -236,19 +234,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/12/23/async-await/" title="async/await的使用">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  async/await的使用</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/12/09/advance-from-pure-front-ender-6-socket-and-socket-io/"  title="纯前端的进军6--套接字（Socket）与socket.io">
+<a href="/2018/05/05/front-end-5-javascript/"  title="前端入门5--Javascript">
  <strong>NEXT:</strong><br/> 
- <span>纯前端的进军6--套接字（Socket）与socket.io
+ <span>前端入门5--Javascript
 </span>
 </a>
 </div>
@@ -270,7 +260,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js"><span class="toc-number">1.</span> <span class="toc-text">node.js</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Node-js"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关技术点"><span class="toc-number">1.2.</span> <span class="toc-text">相关技术点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJS"><span class="toc-number">1.3.</span> <span class="toc-text">CommonJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js模块"><span class="toc-number">1.4.</span> <span class="toc-text">Node.js模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器"><span class="toc-number">1.</span> <span class="toc-text">浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的结构"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面请求"><span class="toc-number">1.2.</span> <span class="toc-text">页面请求</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器渲染机制"><span class="toc-number">2.</span> <span class="toc-text">浏览器渲染机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析"><span class="toc-number">2.1.</span> <span class="toc-text">解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM-Tree"><span class="toc-number">2.1.1.</span> <span class="toc-text">DOM Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Render-Tree"><span class="toc-number">2.1.2.</span> <span class="toc-text">Render Tree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#渲染"><span class="toc-number">2.2.</span> <span class="toc-text">渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本流程"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器加载顺序"><span class="toc-number">2.3.</span> <span class="toc-text">浏览器加载顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阻塞的-script-标签"><span class="toc-number">2.3.1.</span> <span class="toc-text">阻塞的 script 标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">2.4.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.5.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
