@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《前端入门7--代码调试》](https://godbasin.github.io/2018/05/13/front-end-7-debug/)   
 > [《前端入门6--认识浏览器》](https://godbasin.github.io/2018/05/08/front-end-6-browser-render/)   
 > [《前端入门5--Javascript》](https://godbasin.github.io/2018/05/05/front-end-5-javascript/)   
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
@@ -22,6 +23,7 @@
 > [《前端思维转变--从事件驱动到数据驱动》](https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/)      
 
 ### 前端入门    
+> [《前端入门7--代码调试》](https://godbasin.github.io/2018/05/13/front-end-7-debug/)   
 > [《前端入门6--认识浏览器》](https://godbasin.github.io/2018/05/08/front-end-6-browser-render/)   
 > [《前端入门5--Javascript》](https://godbasin.github.io/2018/05/05/front-end-5-javascript/)   
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   

@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>前端阶段性总结之「深入javascript」 | Here. There.</title>
+    <title>前端入门7--代码调试 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="该篇主要整理javascript的部分深入理解，以及一些分享。">
+    <meta name="description" content="《前端入门》系列主要为个人对前端一些经验和认识总结。前面讲了那么多基础性知识性的东西，本节我们来讲讲实战的一部分–代码调试。">
     
     
     
@@ -73,15 +73,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/06/front-end-notes-2-deep-into-javascript/" title="前端阶段性总结之「深入javascript」" itemprop="url">前端阶段性总结之「深入javascript」</a>
+      <a href="/2018/05/13/front-end-7-debug/" title="前端入门7--代码调试" itemprop="url">前端入门7--代码调试</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-05-06T09:35:50.000Z" itemprop="datePublished">2017-05-06</time>
-    更新日期:<time datetime="2017-07-14T13:03:25.105Z" itemprop="dateModified">2017-07-14</time>
+    <time datetime="2018-05-13T12:13:12.000Z" itemprop="datePublished">2018-05-13</time>
+    更新日期:<time datetime="2018-05-13T12:16:52.086Z" itemprop="dateModified">2018-05-13</time>
     
   </p>
 </header>
@@ -90,59 +90,106 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解javascript"><span class="toc-number">1.</span> <span class="toc-text">深入理解javascript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单线程与Event-Loop"><span class="toc-number">1.1.</span> <span class="toc-text">单线程与Event Loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器机制"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript设计模式"><span class="toc-number">1.3.</span> <span class="toc-text">javascript设计模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#debug–调试"><span class="toc-number">1.</span> <span class="toc-text">debug–调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码中调试"><span class="toc-number">1.1.</span> <span class="toc-text">代码中调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alert"><span class="toc-number">1.1.1.</span> <span class="toc-text">alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#console"><span class="toc-number">1.1.2.</span> <span class="toc-text">console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debugger"><span class="toc-number">1.1.3.</span> <span class="toc-text">debugger</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器-Chrome-调试"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器(Chrome)调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DevTools"><span class="toc-number">1.2.1.</span> <span class="toc-text">DevTools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打断点"><span class="toc-number">1.2.2.</span> <span class="toc-text">打断点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.2.3.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于debug的一点心得"><span class="toc-number">1.3.</span> <span class="toc-text">关于debug的一点心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug样式"><span class="toc-number">1.3.1.</span> <span class="toc-text">debug样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-JS"><span class="toc-number">1.3.2.</span> <span class="toc-text">debug JS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">1.4.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>该篇主要整理javascript的部分深入理解，以及一些分享。<br><a id="more"></a></p>
-<h2 id="深入理解javascript"><a href="#深入理解javascript" class="headerlink" title="深入理解javascript"></a>深入理解javascript</h2><hr>
-<h3 id="单线程与Event-Loop"><a href="#单线程与Event-Loop" class="headerlink" title="单线程与Event Loop"></a>单线程与Event Loop</h3><p>单线程这样的概念，其实本骚年在被问到之前一直是模糊的。</p>
-<p>当然这也是因为非科班，对线程、进程这些都不曾真正去了解和学习过，至于单线程，最大的感受就是异步事件、回调等等。</p>
-<p>你有想过为什么javascript是单线程的吗？其实更多是因为对页面交互的同步处理吧，具体大家可以参考一下<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">《JavaScript 运行机制详解：再谈Event Loop》</a>。</p>
-<ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="external">并发模型与Event Loop</a></li>
-</ul>
-<p>这里我们需要知道事件循环event loop、栈与队列、主线程等等，当我们继续查阅文章的时候，会涉及到其他的概念如宏任务和微任务。</p>
-<ul>
-<li>microtask与macrotask</li>
-</ul>
-<p>关于宏任务和微任务，其实大致有个了解就差不多了，在我们编码过程遇到相关的问题时，再针对性地去研究吧。或者大家也可以看看一些文章：<br><a href="https://juejin.im/entry/58332d560ce46300610e4bad" target="_blank" rel="external">《理解 js 事件循环二 (macrotask 和 microtask)》</a><br><a href="https://zhuanlan.zhihu.com/p/24460769" target="_blank" rel="external">《HTML系列：macrotask和microtask》</a></p>
-<p>思考问题：</p>
+		<p>《前端入门》系列主要为个人对前端一些经验和认识总结。前面讲了那么多基础性知识性的东西，本节我们来讲讲实战的一部分–代码调试。<br><a id="more"></a></p>
+<h1 id="debug–调试"><a href="#debug–调试" class="headerlink" title="debug–调试"></a>debug–调试</h1><p>通常来说，我们写代码的时候主要通过两种方式进行调试：代码中调试、浏览器中调试。</p>
+<h2 id="代码中调试"><a href="#代码中调试" class="headerlink" title="代码中调试"></a>代码中调试</h2><p>在代码中调试，其实说白了也就常用的<code>alert()</code>、<code>console</code>、<code>debugger</code>等输出和断点。</p>
+<h3 id="alert"><a href="#alert" class="headerlink" title="alert"></a>alert</h3><p><code>alert()</code>会在窗口中显示一个警告对话框，上面显示有指定的文本内容以及一个“确定”按钮。</p>
+<p>使用<code>alert()</code>需要注意的是：</p>
 <ol>
-<li>简单描述Event Loop过程。</li>
-<li>为什么javascript是单线程的？单线程与多线程的区别？</li>
+<li><code>alert()</code>会阻塞进程。</li>
+<li><code>alert(param)</code>中<code>param</code>只能是<code>number</code>、<code>string</code>类型或者它们组成的数组。</li>
 </ol>
-<h3 id="浏览器机制"><a href="#浏览器机制" class="headerlink" title="浏览器机制"></a>浏览器机制</h3><p>身为前端，对浏览器的机制和深入理解，能成为性能优化的一大利器呢。</p>
+<p>如果我们运行以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert([<span class="string">'123'</span>, <span class="string">'123'</span>, <span class="number">32</span>, &#123;<span class="number">1</span>: <span class="number">123</span>&#125;])</div></pre></td></tr></table></figure>
+<p>会得到这样的结果：<br><img src="http://o905ne85q.bkt.clouddn.com/1512982774%281%29.png" alt="image"></p>
+<h3 id="console"><a href="#console" class="headerlink" title="console"></a>console</h3><p><code>console</code>的使用，大概是本骚年最常用的一个吧。</p>
+<p>很多人喜欢打断点来debug，不过我用得最多的还是<code>console.log()</code>。当然这通常是自己调试自己的代码，如果说里面用到一些别人的库、调试其他人的问题的时候，或许打断点会更适合一些。</p>
+<p><code>console</code>常用的几个方法有：</p>
 <ul>
-<li>浏览器渲染机制</li>
+<li><code>console.log()</code>：打印字符串，以及对象、变量什么的都可以。</li>
+<li><code>console.info()</code>：打印以感叹号字符开始的信息，使用方法和<code>log</code>相同。</li>
+<li><code>console.error()</code>：打印一条错误信息。</li>
+<li><code>console.dir()</code>：打印一条以三角形符号开头的语句，可以点击三角展开查看对象的属性。<blockquote>
+<p><code>console.dir()</code>常用于打印<code>DOM</code>元素的属性</p>
+</blockquote>
+</li>
 </ul>
-<p>对于想做简单认识的，可以参考<a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="external">《浏览器的渲染原理简介》</a>。想要深入理解的，可以看<a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">《How browsers work》</a>以及译文系列<a href="http://ued.ctrip.com/blog/how-browsers-work-i-basic-knowledge.html" target="_blank" rel="external">《浏览器是怎样工作的（一）：基础知识》</a>。</p>
-<p>这里面有几个概念需要理解，包括：Rendering tree渲染树、CSS规则树、Repaint和Reflow等等。</p>
-<p>思考问题：</p>
+<p>其他的可以参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Console" target="_blank" rel="external">Console | MDN</a>。</p>
+<p><code>console</code>适用于大致已定位到哪里出了问题，然后在某些关键点输出。这是个人的感觉，其实更多只是习惯问题吧。</p>
+<p>自从浏览器支持ES6之后，本人就很喜欢这样输出了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这样可以顺便把变量名也打印出来</span></div><div class="line"><span class="built_in">console</span>.log(&#123;data, list, state&#125;)</div></pre></td></tr></table></figure>
+<h3 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h3><p><code>debugger</code>语句调用任何可用的调试功能，例如设置断点。 如果没有调试功能可用，则此语句不起作用。<br>当<code>debugger</code>被调用时, 执行暂停在<code>debugger</code>语句的位置。就像在脚本源代码中的断点一样。</p>
+<p>我基本很少用到<code>debugger</code>，不过据说在<code>node.js</code>中，因为木有浏览器自带的断点，使用<code>debugger</code>来调试也是很方便的（可惜自己做来做去，还是主打PC端应用就是了）。</p>
+<p>还有，使用完之后，发布前记得注释或者删除掉噢。</p>
+<h2 id="浏览器-Chrome-调试"><a href="#浏览器-Chrome-调试" class="headerlink" title="浏览器(Chrome)调试"></a>浏览器(Chrome)调试</h2><p>浏览器中调试功能又多又方便（主要是在 Chrome 下），大家可以参考下一些文章。前面章节有简单介绍过，这里讲一下用得比较多的，后面也会给到一些参考文章。</p>
+<h3 id="DevTools"><a href="#DevTools" class="headerlink" title="DevTools"></a>DevTools</h3><p>我们先看看Chrome提供的开发者工具：<br><img src="http://o905ne85q.bkt.clouddn.com/1512990373%281%29.png" alt="image"></p>
+<p>跟上次一样，我们从左往右讲起：</p>
 <ol>
-<li>浏览器解析哪些文件，分别会生成什么？</li>
-<li>渲染树的生成过程。</li>
-<li>哪些行为会导致Reflow和Repaint？怎么规避/优化？</li>
+<li>箭头按钮：用于在页面选择一个元素来审查和查看它的相关信息。</li>
+<li>设备图标：点击它可以切换到不同的终端（移动端和PC端）进行开发模式。可以选择不同的移动终端设备，同时可以选择不同的尺寸比例。常用的移动端页面调试，还能通过配置<code>User agent</code>来模拟终端环境。</li>
+<li><code>Elements</code>：用来查看、修改页面上的元素，包括<code>DOM</code>标签，以及<code>css</code>样式的查看，修改，还有相关盒模型的图形信息。</li>
+<li><code>Console</code>：用于打印和输出相关的命令信息，源代码定位等等。</li>
+<li><code>Sources</code>：<code>Sources</code>下的<code>Sources</code>查看浏览器页面中的源文件（<code>html/js/img/css</code>等），点击下面的<code>{}</code>大括号可以将代码转成可读格式，同时可给<code>js</code>文件添加上断点。<code>Sources</code>下的<code>Snippets</code>可以添加文件片段，可在浏览器中运行。</li>
+<li><code>Network</code>：可以看到所有的资源请求，包括网络请求、静态资源（<code>html</code>、<code>css</code>、<code>js</code>、图片等）文件请求，常用于调试网络请求。</li>
 </ol>
-<ul>
-<li>javascript在浏览器中的加载</li>
-</ul>
-<p>浏览的渲染线程和JS执行线程是互斥的，并且JavaScript默认是阻塞加载的。对于这个过程，相关文章阅读<a href="http://coolshell.cn/articles/9749.html#jtss-tsina" target="_blank" rel="external">《JAVASCRIPT 装载和执行》</a>、<a href="http://delai.me/code/js-and-performance/" target="_blank" rel="external">《S一定要放在Body的最底部么？聊聊浏览器的渲染机制》</a>，或者谷歌查询。</p>
-<p>对于这个我们会经常遇到一些问题，如：</p>
+<p>剩下的功能或许用得不是特别多，可以了解下（本人了解不多，或许不一定准确）：</p>
 <ol>
-<li>为什么js要放在最后面加载？为什么css放前面？</li>
-<li>js的加载顺序，相关事件（如onload）的理解。</li>
-<li>优化首屏加载时间？</li>
+<li><code>Performance</code>：查看页面在浏览器运行时的性能表现，如CPU\GPU执行时间与内存占用等。</li>
+<li><code>Memory</code>：似乎是内存泄漏分析相关的功能？</li>
+<li><code>Application</code>：会列出所有的资源，以及HTML5的Database和LocalStore等，你可以对存储的内容编辑和删除。</li>
+<li><code>Security</code>：查看网站的安全性，有效证书等。</li>
+<li><code>Audits</code>：会针对目前网页提出若干条优化的建议，这些建议分为两大类，一类是网络加载性能，另一类是界面性能。</li>
 </ol>
+<h3 id="打断点"><a href="#打断点" class="headerlink" title="打断点"></a>打断点</h3><p><strong>1. 代码断点</strong><br>常用的浏览器代码断点，在<code>Sources</code>面板<code>js</code>文件行号处设置断点，如图我们下了个断点：<br><img src="http://o905ne85q.bkt.clouddn.com/1512993498%281%29.jpg" alt="image"></p>
+<p>这里我们在请求发起的位置打了个断点，每次我们在搜索输入框输入的时候，都会发送请求，触发debug模式。</p>
+<p>这里除了常规断点外, 还有个条件断点(右键 -&gt; conditional breakpoint), 在设置的条件为<code>true</code>时才会断电, 在循环中需要断点时比较有用。断点后可以查看堆栈、变量。</p>
+<p><strong>2. 事件断点</strong><br>元素上事件断点：某一事件/某类事件，从<code>Elements &gt; Event Listeners</code>中进行。</p>
+<p><strong>3. DOM断点</strong><br>一般是<code>DOM</code>结构改变时触发。有时候我们需要监听某个<code>DOM</code>被修改情况，而不关心是哪行代码做的修改（也可能有多处都会对其做修改），可以直接在<code>DOM</code>上设置断点。</p>
+<p>在元素审查的<code>Elements</code>标签页中在某个元素上右键菜单里可以设置三种不同情况的断点：</p>
 <ul>
-<li>页面的加载过程（从输入Url到页面加载完成）</li>
-<li>浏览器的缓存机制</li>
-<li>浏览器的同源政策与跨域</li>
+<li>子节点修改</li>
+<li>自身属性修改</li>
+<li>自身节点被删除</li>
 </ul>
-<p>其实上面这些内容更加涉及http相关多一些，但是其实http也是前端的一部分啦。这些统一放到后面http部分一起进行整理吧。</p>
-<h3 id="javascript设计模式"><a href="#javascript设计模式" class="headerlink" title="javascript设计模式"></a>javascript设计模式</h3><p>关于javascript的设计，其实跟大多数的编程语言都是相通的。很多时候我们都会使用，但是或许我们并没有什么感觉。<br>只是当项目越来越大，重复的代码或是杂乱的代码总会让我们开始对其进行整理、抽象、封装等等工作，便于拓展也提升了开发效率，同时对项目整体的理解也更加深入了。</p>
-<p>这里面本骚年也不想细说，感兴趣的大家可以参考<a href="http://www.alloyteam.com/2012/10/common-javascript-design-patterns/" target="_blank" rel="external">《【Javascript设计模式1】-单例模式》</a>系列文章，当然还有其他文章，找谷歌或者度娘去吧。<br>其实很多时候我们使用的一些插件、框架和库，里面就使用了很多的设计模式，大家不妨也可以多去了解一下。</p>
+<p><strong>4. XHR断点</strong><br>右侧调试区有一个<code>XHR Breakpoints</code>，点击<code>+</code> 并输入<code>URL</code>包含的字符串，即可监听该<code>URL</code>的<code>Ajax</code>请求，输入内容就相当于<code>URL</code>的过滤器。<br>一旦<code>XHR</code>调用触发时就会在<code>request.send()</code>的地方中断。</p>
+<p><strong>5. 全局事件断点</strong><br>对事件发生时断点，不会限定在元素上，只要是事件发生，并且有<code>handler</code>就断点。<br>还可以对<code>resize</code>、<code>ajax</code>、<code>setTimeout/setInterval</code>断点.</p>
+<p>上面这些断点本骚年都用得不是很多，所以也不能提供很好的说明。<br>更多详细内容，可以参考<a href="http://www.cnblogs.com/jingwhale/p/4508774.html" target="_blank" rel="external">《页面制作之调试工具》</a>，里面通过动图讲述了一些断点是如何添加的。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.jianshu.com/p/b25c5b88baf5" target="_blank" rel="external">《前端chrome浏览器调试总结》</a><br><a href="https://developer.chrome.com/devtools" target="_blank" rel="external">Chrome DevTools Overview</a><br><a href="http://www.cnblogs.com/jingwhale/p/4508774.html" target="_blank" rel="external">《页面制作之调试工具》</a></p>
+<h2 id="关于debug的一点心得"><a href="#关于debug的一点心得" class="headerlink" title="关于debug的一点心得"></a>关于debug的一点心得</h2><h3 id="debug样式"><a href="#debug样式" class="headerlink" title="debug样式"></a>debug样式</h3><p>样式的调试需要有个前提，就是对一些样式属性有很好的认识和理解，尤其涉及盒子模型、<code>display</code>和定位等。<br>样式的规则除了一些基本的逻辑能遵循（可参考前面文章<a href="https://godbasin.github.io/2018/04/21/front-end-3-html-css/">《前端入门3–HTML和CSS》</a>），更多的则是丰富的经验，多写、多练。</p>
+<p>在此之外，一般样式的debug逻辑大概会是这样：</p>
+<ol>
+<li>样式是否生效。</li>
+<li>文件、相关样式代码是否加载。</li>
+<li>是否被其他样式覆盖（优先级问题）。</li>
+</ol>
+<p>常见的有上面的问题，除此之外，大部分都是没使用合理的<code>style</code>了吧。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1512998012%281%29.png" alt="image"><br>如上图，一般我们会在选中对应的元素后，从上往下来找到生效（或不生效）的样式，同时也可以定位到对应的源文件。</p>
+<p>这里面如果是本地环境调试的话，在<code>source map</code>的支持下，我们甚至可以直接在浏览器中修改源文件，保存生效。具体配置和操作可以参考<a href="https://developers.google.cn/web/tools/chrome-devtools/javascript/source-maps?hl=zh-cn" target="_blank" rel="external">将预处理代码映射到源代码</a>。</p>
+<h3 id="debug-JS"><a href="#debug-JS" class="headerlink" title="debug JS"></a>debug JS</h3><p>JS 的调试，像上面说过的，一般分为输出和打断点两种。</p>
+<p>一般 JS 的 debug 逻辑，未按预期执行会有这样的原因：代码未执行到理想的位置。</p>
+<p>这时候我们要思考这样的问题：</p>
+<ol>
+<li>为事件触发执行 -&gt; 检测事件是否被触发。</li>
+<li>在函数中执行 -&gt; 检测函数是否被调用。</li>
+<li>在判断语句中执行 -&gt; 检测判断是否正确。</li>
+</ol>
+<p>我们可以在这些地方进行输出，或者打下断点：</p>
+<ol>
+<li>事件触发的地方。</li>
+<li>函数调用过程。</li>
+<li>判断语句（<code>if</code>等）。</li>
+</ol>
+<p>以上是类似的推导逻辑，我们在写代码时，会有一个预期的执行顺序和期望，如果说不生效，则我们可以：</p>
+<ul>
+<li>从前往后执行步骤，看在哪一步分了岔路</li>
+<li>从后往前打下断点，看在哪一步走丢了</li>
+</ul>
+<p>其实最重要的是思路需要清晰，如果说你连自己要做的功能，逻辑还没理清楚的话，编写的代码质量不会高，同时调试性能也会随着下降。</p>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>其实仔细研究javascript，总会发现你所不了解的角落。即使是本骚年所认为的深入理解，到头来也只是某个浅尝的部分，越是相处时间长了，越能发现其中的美妙和乐趣吧。</p>
+<p>这一节我们主要基于 Chrome 浏览器，大致讲了一些开发者工具的功能。调试是很重要的一步，每一次 debug 我们都要吸取经验，总结教训。不管是 CSS 还是 JS 的调试，经验的积累都是很需要的，同时也能提高我们写代码的质量。</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -162,7 +209,7 @@ var _hmt = _hmt || [];
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/前端满汉全席/">前端满汉全席</a>
+  <a class="article-category-link" href="/categories/js什锦/">js什锦</a>
 </div>
 
 
@@ -192,19 +239,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/05/07/front-end-notes-3-javascript-keep-moving/" title="前端阶段性总结之「javascript新特性」">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  前端阶段性总结之「javascript新特性」</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/05/01/front-end-notes-1-init-javascript/"  title="前端阶段性总结之「掌握javascript」">
+<a href="/2018/05/08/front-end-6-browser-render/"  title="前端入门6--认识浏览器">
  <strong>NEXT:</strong><br/> 
- <span>前端阶段性总结之「掌握javascript」
+ <span>前端入门6--认识浏览器
 </span>
 </a>
 </div>
@@ -226,7 +265,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解javascript"><span class="toc-number">1.</span> <span class="toc-text">深入理解javascript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单线程与Event-Loop"><span class="toc-number">1.1.</span> <span class="toc-text">单线程与Event Loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器机制"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript设计模式"><span class="toc-number">1.3.</span> <span class="toc-text">javascript设计模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">2.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#debug–调试"><span class="toc-number">1.</span> <span class="toc-text">debug–调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码中调试"><span class="toc-number">1.1.</span> <span class="toc-text">代码中调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alert"><span class="toc-number">1.1.1.</span> <span class="toc-text">alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#console"><span class="toc-number">1.1.2.</span> <span class="toc-text">console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debugger"><span class="toc-number">1.1.3.</span> <span class="toc-text">debugger</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器-Chrome-调试"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器(Chrome)调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DevTools"><span class="toc-number">1.2.1.</span> <span class="toc-text">DevTools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打断点"><span class="toc-number">1.2.2.</span> <span class="toc-text">打断点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.2.3.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于debug的一点心得"><span class="toc-number">1.3.</span> <span class="toc-text">关于debug的一点心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug样式"><span class="toc-number">1.3.1.</span> <span class="toc-text">debug样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-JS"><span class="toc-number">1.3.2.</span> <span class="toc-text">debug JS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">1.4.</span> <span class="toc-text">结束语</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
