@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《一个组件的自我修养》](https://godbasin.github.io/2018/06/02/component-with-itself/)   
 > [《页面区块化与应用组件化》](https://godbasin.github.io/2018/05/26/app-component-isolation/)   
 > [《前端入门8--Ajax和http》](https://godbasin.github.io/2018/05/19/front-end-8-http-and-ajax/)   
 > [《前端入门7--代码调试》](https://godbasin.github.io/2018/05/13/front-end-7-debug/)   
@@ -11,6 +12,7 @@
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 
 ### 前端杂谈    
+> [《一个组件的自我修养》](https://godbasin.github.io/2018/06/02/component-with-itself/)   
 > [《页面区块化与应用组件化》](https://godbasin.github.io/2018/05/26/app-component-isolation/)   
 > [《前端模板引擎》](https://godbasin.github.io/2017/10/21/template-engine/)   
 > [《对话抽象》](https://godbasin.github.io/2017/10/14/dialogue-abstraction/)   
