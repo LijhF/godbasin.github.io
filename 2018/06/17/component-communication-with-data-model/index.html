@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Angular2使用笔记6--使用服务类 | Here. There.</title>
+    <title>数据抽离与数据管理 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="最近在学习Angular2作为前端的框架，《Angular2使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录将一些数据封装到服务类进行获取的过程。">
+    <meta name="description" content="托目前主流框架的福，我们能从事件驱动脱离，来到了数据驱动的世界，可以参考以前的《前端思维转变–从事件驱动到数据驱动》。在常常与数据打交道后，我们对组件的封装、配置化的思想一步步地深入和拓展之后，对于数据和状态的管理，也慢慢地出现了一些思考。">
     
     
     
@@ -73,15 +73,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/30/angular2-notes-6-use-service-class/" title="Angular2使用笔记6--使用服务类" itemprop="url">Angular2使用笔记6--使用服务类</a>
+      <a href="/2018/06/17/component-communication-with-data-model/" title="数据抽离与数据管理" itemprop="url">数据抽离与数据管理</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-10-29T17:40:42.000Z" itemprop="datePublished">2016-10-30</time>
-    更新日期:<time datetime="2017-02-17T13:49:48.742Z" itemprop="dateModified">2017-02-17</time>
+    <time datetime="2018-06-17T12:03:19.000Z" itemprop="datePublished">2018-06-17</time>
+    更新日期:<time datetime="2018-06-17T12:03:22.422Z" itemprop="dateModified">2018-06-17</time>
     
   </p>
 </header>
@@ -90,96 +90,65 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模块化和依赖注入"><span class="toc-number">1.</span> <span class="toc-text">模块化和依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Angular模块化"><span class="toc-number">1.1.</span> <span class="toc-text">Angular模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖注入"><span class="toc-number">1.2.</span> <span class="toc-text">依赖注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务提供商"><span class="toc-number">1.3.</span> <span class="toc-text">服务提供商</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建并使用服务"><span class="toc-number">2.</span> <span class="toc-text">创建并使用服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建服务"><span class="toc-number">2.1.</span> <span class="toc-text">创建服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入并使用服务"><span class="toc-number">2.2.</span> <span class="toc-text">注入并使用服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#应用数据抽离"><span class="toc-number">1.</span> <span class="toc-text">应用数据抽离</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#状态数据"><span class="toc-number">1.1.</span> <span class="toc-text">状态数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态数据"><span class="toc-number">1.2.</span> <span class="toc-text">动态数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据与应用抽离"><span class="toc-number">1.3.</span> <span class="toc-text">将数据与应用抽离</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用数据管理"><span class="toc-number">2.</span> <span class="toc-text">应用数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的流动"><span class="toc-number">2.1.</span> <span class="toc-text">数据的流动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件通知"><span class="toc-number">2.1.1.</span> <span class="toc-text">事件通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享对象"><span class="toc-number">2.1.2.</span> <span class="toc-text">共享对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单方向流动"><span class="toc-number">2.1.3.</span> <span class="toc-text">单方向流动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树状作用域"><span class="toc-number">2.1.4.</span> <span class="toc-text">树状作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适度的管理"><span class="toc-number">2.2.</span> <span class="toc-text">适度的管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>最近在学习Angular2作为前端的框架，《Angular2使用笔记》系列用于记录过程中的一些使用和解决方法。<br>本文记录将一些数据封装到服务类进行获取的过程。<br><a id="more"></a></p>
-<h2 id="模块化和依赖注入"><a href="#模块化和依赖注入" class="headerlink" title="模块化和依赖注入"></a>模块化和依赖注入</h2><hr>
-<p>模块是组织应用程序和使用外部程序库的最佳途径。</p>
-<h3 id="Angular模块化"><a href="#Angular模块化" class="headerlink" title="Angular模块化"></a>Angular模块化</h3><ul>
-<li>Angular模块把组件、指令和管道打包成内聚的功能块儿，每一个都聚焦于一个特性分区、业务领域、工作流，或一组通用的工具<ul>
-<li>模块还能用来把服务加到应用程序中</li>
-<li>模块可能在应用启动时立即加载，也可能由路由器进行异步延迟加载</li>
-</ul>
-</li>
-<li>Angular模块是一个由@NgModule装饰器提供元数据的类，元数据包括<ul>
-<li>声明哪些组件、指令、管道属于该模块</li>
-<li>公开某些类，以便其它的组件模板可以使用它们</li>
-<li>隐藏那些属于实现细节的非公开类</li>
-<li>导入其它模块，以获得所需的组件、指令和管道</li>
-<li>在应用程序级提供服务，以便应用中的任何组件都能使用它</li>
-</ul>
-</li>
-<li>每个Angular应用至少有一个模块类—— 根模块 ，我们将通过引导根模块来启动应用</li>
-</ul>
-<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>前面我们也有稍微介绍过angular2的依赖注入，可查看<a href="/2016/10/07/angular2-notes-3-create-header/">《Angular2使用笔记3–创建头部组件》</a>。本骚年稍微偷个懒，直接拿过来吧。</p>
+		<p>托目前主流框架的福，我们能从事件驱动脱离，来到了数据驱动的世界，可以参考以前的<a href="https://godbasin.github.io/2017/09/29/data-driven-or-event-driven/">《前端思维转变–从事件驱动到数据驱动》</a>。在常常与数据打交道后，我们对组件的封装、配置化的思想一步步地深入和拓展之后，对于数据和状态的管理，也慢慢地出现了一些思考。<br><a id="more"></a></p>
+<h1 id="应用数据抽离"><a href="#应用数据抽离" class="headerlink" title="应用数据抽离"></a>应用数据抽离</h1><hr>
+<p>在把数据与逻辑分离到极致的时候，你再看一个应用，会看到一具静态的逻辑躯壳，以及数据如灵魂般地注入到应用里，使其获得生命。</p>
+<p>数据的抽离，其实与配置化的思想有想通的地方，即把可变部分分离，然后通过注入的方式，来实现具体的功能和展示。</p>
+<h2 id="状态数据"><a href="#状态数据" class="headerlink" title="状态数据"></a>状态数据</h2><p>在一个应用的设计里，我们可能会拥有多个模块，每个模块又各自维护着自己的某些状态，同时部分状态相互影响着，最终呈现出应用的整体状态。</p>
+<p>这些状态，都可以通过数据的方式来表示，我们简单称之为状态数据。</p>
+<p>怎么定义状态数据？最浅显的办法就是这些数据，可以直接影响模块的状态，如对话框的出现、隐藏，标签的激活、失活，长流程的当前步骤等，都可以作为状态数据。用在 Vue 里面，可能常见如 <code>v-show</code>、<code>v-if</code>、以及其他状态判断逻辑。</p>
+<p>我们的应用，大多数都是呈现树状结构，一层层地往下分解，直到无法分割的某个简单功能。同时，我们的组件也会呈现出来这样树状的方式，状态是跟随着组件维护，某个功能状态属于组件自己，最外层的状态则属于整个应用，当然这个应用也是组件的一种表示方式。</p>
+<p>因此，我们的状态数据，也呈现一种树状的方式，与我们的组件相对应。就像 CSS 与 DOM 节点。</p>
+<h2 id="动态数据"><a href="#动态数据" class="headerlink" title="动态数据"></a>动态数据</h2><p>我们还有很多的数据，如内容、个人信息等，都是需要我们从数据库拉取回来的。这种需要动态获取然后展示或是影响配置的一些数据，我们称之为动态数据。</p>
+<p>动态数据不同于状态数据，并不会跟随着应用的生命周期而改变，也不会随着应用的关闭而消失。它们独立存在于外界，通过注入的方式进入应用，并影响具体的展示和功能逻辑。</p>
+<p>和状态数据不一样，动态数据并不一定呈现为树状的形式。它可以是并行的，可以是联动关系，但是随着注入的地方不一样，最终在应用中形成的结构也会不一致。我们可以简单理解为每个动态数据都是平等的。</p>
+<h2 id="将数据与应用抽离"><a href="#将数据与应用抽离" class="headerlink" title="将数据与应用抽离"></a>将数据与应用抽离</h2><p>要怎么理解将数据与应用抽离呢？形象点形容，就像是我们一个公司，所有的桌子椅子装修和电脑都是静态的，它们相当于一个个的组件，同时每个办公室也可以是一个大点的组件或是模块。</p>
+<p>那么在我们这个公司里：</p>
 <ul>
-<li>全局依赖<ul>
-<li>在应用程序根组件AppComponent中注册那些被应用程序全局使用的依赖提供商</li>
-<li>这些全局注册的依赖，能在应用程序的任何地方注入到任何组件和服务的构造函数里</li>
+<li>状态数据：椅子的位置、消耗的电量、办公室的照明和空调状态等</li>
+<li>动态数据：员工等各种人员流动</li>
 </ul>
-</li>
-<li>外部模块<ul>
-<li>@Injectable和嵌套服务依赖<ul>
-<li>@Injectable()标志着一个类可以被一个注入器实例化</li>
-<li>@Injectable()装饰器只在一个服务类有自己的依赖的时候，才是不可缺少</li>
-</ul>
-</li>
-<li>把服务作用域限制到一个组件支树<ul>
-<li>被注入的服务依赖都是单例的，在任意一个依赖注入器(“injector”)中，每个服务只有唯一的实例</li>
-<li>Angular应用程序有多个依赖注入器，组织成一个与组件树平行的树状结构</li>
-<li>在多个组件中注入，服务就会被新建出多个实例，分别提供给不同的组件</li>
-<li>通过在组件树的子级根组件中提供服务，可以把一个被注入服务的作用域局限在应用程序结构中的某个分支中</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>常用依赖注入<ul>
-<li>指令（组件）：通过Component中directives注入</li>
-<li>服务：通过Component中providers注入</li>
-</ul>
-</li>
-</ul>
-<h3 id="服务提供商"><a href="#服务提供商" class="headerlink" title="服务提供商"></a>服务提供商</h3><ul>
-<li>模块与服务<ul>
-<li>模块是为模块中的所有组件提供服务的最佳途径</li>
-<li>模块可以往应用的“根依赖注入器”中添加提供商，让那些服务在应用中到处可用</li>
-</ul>
-</li>
-<li>服务提供商<ul>
-<li>提供商提供所需依赖值的一个具体的运行期版本</li>
-<li>注入器依靠提供商们来创建服务的实例，它会被注入器注入到组件或其它服务中</li>
-<li>我们必须为注入器注册一个服务的提供商，否则它就不知道该如何创建此服务</li>
-</ul>
-</li>
-<li>提供商的使用<ul>
-<li>把提供商添加到根模块上，则任何地方使用的都是服务的同一个实例</li>
-<li>把它注册在组件级表示该组件的每一个新实例都会有一个(在该组件注册的)服务的新实例</li>
-</ul>
-</li>
-</ul>
-<h2 id="创建并使用服务"><a href="#创建并使用服务" class="headerlink" title="创建并使用服务"></a>创建并使用服务</h2><hr>
-<h3 id="创建服务"><a href="#创建服务" class="headerlink" title="创建服务"></a>创建服务</h3><p>这里我们用头部Header组件为例子，其中我们将菜单的数据获取单独封装成一个服务HeaderService在header.service.ts文件中。如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取@Injectable装饰器</span></div><div class="line"><span class="keyword">import</span> &#123;Injectable&#125; from <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="comment">// @Injectable()标志着一个类可以被一个注入器实例化</span></div><div class="line">Injectable()</div><div class="line"><span class="comment">// 输出HeaderService服务类</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeaderService &#123;</div><div class="line">  <span class="comment">// menus用于储存主菜单</span></div><div class="line">  <span class="keyword">private</span> menus: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt; = [&#123;</div><div class="line">    title: <span class="string">'index'</span>, <span class="comment">// title用于储存路由对应的路径</span></div><div class="line">    href: <span class="string">'/index'</span>, <span class="comment">// href用于设定该菜单跳转路由</span></div><div class="line">    text: <span class="string">'首页'</span>, <span class="comment">// text用于储存该菜单显示名称</span></div><div class="line">  &#125;, &#123;</div><div class="line">    title: <span class="string">'others'</span>,</div><div class="line">    href: <span class="string">'/other'</span>,</div><div class="line">    text: <span class="string">'其他'</span>,</div><div class="line">  &#125;];</div><div class="line"></div><div class="line">  <span class="comment">// usermenus用于储存侧边下拉菜单</span></div><div class="line">  <span class="keyword">private</span> usermenus: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt; = [&#123;</div><div class="line">    href: <span class="string">'/login'</span>, <span class="comment">// href用于设定该菜单跳转路由</span></div><div class="line">    text: <span class="string">'退出'</span>, <span class="comment">// text用于储存该菜单显示名称</span></div><div class="line">  &#125;];</div><div class="line"></div><div class="line">  <span class="comment">// 提供获取menus的接口</span></div><div class="line">  getMenus()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.menus;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 提供获取usermenus的接口</span></div><div class="line">  getUsermenus()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.usermenus;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="注入并使用服务"><a href="#注入并使用服务" class="headerlink" title="注入并使用服务"></a>注入并使用服务</h3><p>我们在header.component.ts文件中，进行HeaderService服务的注入和使用。</p>
+<p>当然，公司里没有人员流动的时候，似乎就是个空壳。每天上班的时候，一个个的程序员就涌入公司，给公司注入灵魂，公司得以运作。</p>
+<p>要说将数据和应用抽离，作用到这里大概是这个样子？</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">--------------------------------------------------------</div><div class="line">                         公司</div><div class="line">---------------------------  ---------------------------</div><div class="line">|                         |  |  人           人        |</div><div class="line">|                         |  |       人          人    |</div><div class="line">|         办公楼          |  |           人            |</div><div class="line">|                         |  |    人     人     人  人 |</div><div class="line">|                         |  |      人      人   人    |</div><div class="line">---------------------------  ---------------------------</div></pre></td></tr></table></figure>
+<p>在公司正常运作的时候，则是这样的：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">--------------------------------------------------------</div><div class="line">                         公司</div><div class="line">--------------------------------------------------------</div><div class="line">|   人     人             人   人       人     人 人    |</div><div class="line">|           人            人   人     人          人    |</div><div class="line">|        人    人    办公楼   人   人          人       |</div><div class="line">|     人    人                人  人     人     人  人  |</div><div class="line">|     人     人         人      人     人      人   人  |</div><div class="line">--------------------------------------------------------</div></pre></td></tr></table></figure>
+<p>当然，人不只是站在办公楼里面这么简单，更多的，人会与各种物件进行交互和交流，人与人之间也会相互影响。但是这样简单的管理，很容易造成公司的混乱，所以我们会把人员有规律有组织地分别注入到每个办公室、隔间里面。</p>
+<p>这就是我们要做的，不只是如何划分数据、将数据与应用抽离，我们还需要将其有规律地管理。所以，这大概是我们接下来的要讲的内容。</p>
+<h1 id="应用数据管理"><a href="#应用数据管理" class="headerlink" title="应用数据管理"></a>应用数据管理</h1><hr>
+<p>我们知道哪些数据需要抽离、如何将数据抽离出来，同时，我们还需要知道，这些数据在抽离出来之后，该怎么去进行管理。</p>
+<h2 id="数据的流动"><a href="#数据的流动" class="headerlink" title="数据的流动"></a>数据的流动</h2><p>数据在注入到我们的应用中后，并不只是简单地存在。它可能会影响应用的状态、同时也会影响其他同样注入的数据。</p>
+<p>数据与数据之间的交互，其实在某方面相等于我们组件之间的通信，包括但不限于以下的一些方式：</p>
 <ul>
-<li>获取服务类</li>
+<li>事件通知</li>
+<li>共享对象</li>
+<li>单方向流动</li>
 </ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取HeaderService服务类</span></div><div class="line"><span class="keyword">import</span> &#123; HeaderService &#125; from <span class="string">'./header.service'</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>在元数据中实例化服务类</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Component(&#123;</div><div class="line">  ... <span class="comment">// 其他元数据</span></div><div class="line">  providers:[HeaderService] <span class="comment">// 实例化服务</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<ul>
-<li>在组件中注入服务</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(private headerService: HeaderService) &#123;&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>组件初始化时初始化相应的数据</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 生命周期钩子：初始化</span></div><div class="line">ngOnInit() &#123;</div><div class="line">  <span class="comment">// 设定menus的初始值</span></div><div class="line">  <span class="keyword">this</span>.menus = <span class="keyword">this</span>.headerService.getMenus();</div><div class="line">  <span class="comment">// 设定usermenus的初始值</span></div><div class="line">  <span class="keyword">this</span>.usermenus = <span class="keyword">this</span>.headerService.getUsermenus();</div><div class="line">  ... <span class="comment">//其他初始化事件</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>经过上述的步骤，我们实现了服务的创建、实例化、注入和使用。<br>需要注意的是，Angular应用是一个组件树。每个组件实例都有自己的注入器！组件的树与注入器的树平行。<br>所以当我们需要共享或者隔断服务的时候就要想起来这个与组件树平行的注入器树。</p>
-<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>angular2中，不管是组件类，还是是服务类，这样的创建、输出、获取等等模块化的操作还是很棒的。<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/angular2-notes/6-use-service-class" target="_blank" rel="external">此处查看项目代码（仅包含src部分）</a><br><a href="http://oc8qsv1w6.bkt.clouddn.com/6-use-service-class/index.html#/index" target="_blank" rel="external">此处查看页面效果</a></p>
+<h3 id="事件通知"><a href="#事件通知" class="headerlink" title="事件通知"></a>事件通知</h3><p>事件的监听和触发机制，在许多的场景下都能适用，如浏览器点击、输入框的输入操作，则是典型的事件机制。而在很多时候，我们也可以通过事件通知的方式，来进行数据间的交互，如 Websocket 机制。</p>
+<p>事件通知机制很方便，可以随意地定义触发的时机，也可以任意地点使用监听或是触发。</p>
+<p>但事件机制的弊端也是很明显，就是每一个事件的触发对应一个监听，关系是一一对应。在整个应用中看，则是散落在各处，随意乱窜的数据流动。需要定位的时候，只能通过全局搜索的方式来跟踪数据的去向。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1524236289%281%29.jpg" alt="image"></p>
+<p>当然，也有些人会定义一个中转站，所有的事件数据流都会经过那，这样的维护方式会有所改善。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1524236465%281%29.jpg" alt="imgae"></p>
+<p>类似这种，额，可能会好一些？</p>
+<h3 id="共享对象"><a href="#共享对象" class="headerlink" title="共享对象"></a>共享对象</h3><p>共享对象是很简答的一种方式，当我们需要多个地方使用相同的数据，我们就把它们放置在一个地方，大家都去那理获取和更新。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1524236687%281%29.jpg" alt="image"><br>(额请叫我灵魂画家)</p>
+<p>通过注入对象的引用，来在不同组件中获取相同的数据源。当然这样的使用方式，需要考虑锁的问题（当然单线程的 JS 里面这样的情况比较少）。</p>
+<p>同时，很多时候我们在定义一个对象，有时候想要某些地方共享，有时候又想要获取一个全新独立的对象。这种情况下，我们需要考虑怎样去维护一套这种数据与实例。</p>
+<h3 id="单方向流动"><a href="#单方向流动" class="headerlink" title="单方向流动"></a>单方向流动</h3><p>给数据的流动一个方向，则可以方便地跟踪数据的来源和去处。通过流的方式管理状态，常见的状态管理工具 Vuex、Redux 等，都是这样的方式去管理。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1524237398.jpg" alt="image"></p>
+<p>当然，赋予数据流方向，但是数据的存放呢，可以通过共享对象的方式，也可以维护一个数据中心，所有的数据变更方式、触发逻辑、影响范围，都在数据中心里面管理和维护。</p>
+<h3 id="树状作用域"><a href="#树状作用域" class="headerlink" title="树状作用域"></a>树状作用域</h3><p>很多时候，我们的应用通过一层层地封装和隔离，最终会呈现为树状。</p>
+<p>我们可以根据组件的树状作用域，结合共享对象的管理，来注入树状的数据结构。典型如 Angular 里，则是通过提供通用的依赖注入方式，配合树状的模块管理，可通过局部注入实例来获取共享或是隔离的数据。</p>
+<p><img src="http://o905ne85q.bkt.clouddn.com/1524238569%281%29.jpg" alt="image"></p>
+<h2 id="适度的管理"><a href="#适度的管理" class="headerlink" title="适度的管理"></a>适度的管理</h2><p>与组件的封装和配置化相似，数据的抽象、抽离，也是需要适度的。</p>
+<p>当我们的应用很小，只有简单的功能的时候，我们甚至不需要对这些状态、数据什么的进行特殊的管理，甚至一个简单的变量就可以搞定了。随着应用组件数量变多，我们开始有了组件的作用域，当组件需要通信，我们可以通过简单的事件机制、或是共享对象的方式来进行交互。</p>
+<p>当我们的项目越做越大，要在上百的状态、上万的数据里要按照想要的方式去展示我们的应用，这时候一个状态管理工具则可以轻松解决乱糟糟的数据流问题。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><hr>
+<p>对数据的抽离和管理，也越来越成为我们在项目架构中需要考虑的部分。应用状态数据的管理，其实里面会有很多的设计模式。或许这块过于抽象，这篇文章也未能表达出最好的想法。但是对于设计模式，我们可以先了解下，在实战的时候，你会不自觉地想起来，啊原来这就是哪个设计模式的使用场景呀~</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -193,13 +162,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/分享/">分享</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/angular2火锅/">angular2火锅</a>
+  <a class="article-category-link" href="/categories/思想棉花糖/">思想棉花糖</a>
 </div>
 
 
@@ -229,19 +198,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/05/angular2-notes-7-basic-concept-in-angular2/" title="Angular2使用笔记7--Angular2中的基础概念">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Angular2使用笔记7--Angular2中的基础概念</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/10/29/angular2-notes-5-animation-and-create-index/"  title="Angular2使用笔记5--动画和制作index页面">
+<a href="/2018/06/09/component-with-configuration/"  title="组件配置化">
  <strong>NEXT:</strong><br/> 
- <span>Angular2使用笔记5--动画和制作index页面
+ <span>组件配置化
 </span>
 </a>
 </div>
@@ -263,7 +224,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模块化和依赖注入"><span class="toc-number">1.</span> <span class="toc-text">模块化和依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Angular模块化"><span class="toc-number">1.1.</span> <span class="toc-text">Angular模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖注入"><span class="toc-number">1.2.</span> <span class="toc-text">依赖注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务提供商"><span class="toc-number">1.3.</span> <span class="toc-text">服务提供商</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建并使用服务"><span class="toc-number">2.</span> <span class="toc-text">创建并使用服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建服务"><span class="toc-number">2.1.</span> <span class="toc-text">创建服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入并使用服务"><span class="toc-number">2.2.</span> <span class="toc-text">注入并使用服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#应用数据抽离"><span class="toc-number">1.</span> <span class="toc-text">应用数据抽离</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#状态数据"><span class="toc-number">1.1.</span> <span class="toc-text">状态数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态数据"><span class="toc-number">1.2.</span> <span class="toc-text">动态数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据与应用抽离"><span class="toc-number">1.3.</span> <span class="toc-text">将数据与应用抽离</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用数据管理"><span class="toc-number">2.</span> <span class="toc-text">应用数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的流动"><span class="toc-number">2.1.</span> <span class="toc-text">数据的流动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件通知"><span class="toc-number">2.1.1.</span> <span class="toc-text">事件通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享对象"><span class="toc-number">2.1.2.</span> <span class="toc-text">共享对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单方向流动"><span class="toc-number">2.1.3.</span> <span class="toc-text">单方向流动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树状作用域"><span class="toc-number">2.1.4.</span> <span class="toc-text">树状作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适度的管理"><span class="toc-number">2.2.</span> <span class="toc-text">适度的管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">

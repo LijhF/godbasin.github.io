@@ -3,6 +3,7 @@
 ---      
 
 ### 最新     
+> [《数据抽离与数据管理》](https://godbasin.github.io/2018/06/17/component-communication-with-data-model/)   
 > [《组件配置化》](https://godbasin.github.io/2018/06/09/component-with-configuration/)   
 > [《一个组件的自我修养》](https://godbasin.github.io/2018/06/02/component-with-itself/)   
 > [《页面区块化与应用组件化》](https://godbasin.github.io/2018/05/26/app-component-isolation/)   
@@ -13,6 +14,7 @@
 > [《前端入门4--DOM和BOM》](https://godbasin.github.io/2018/04/29/front-end-4-dom-bom/)   
 
 ### 前端杂谈    
+> [《数据抽离与数据管理》](https://godbasin.github.io/2018/06/17/component-communication-with-data-model/)   
 > [《组件配置化》](https://godbasin.github.io/2018/06/09/component-with-configuration/)   
 > [《一个组件的自我修养》](https://godbasin.github.io/2018/06/02/component-with-itself/)   
 > [《页面区块化与应用组件化》](https://godbasin.github.io/2018/05/26/app-component-isolation/)   
