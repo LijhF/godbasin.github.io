@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-05-08T13:46:14.000Z" itemprop="datePublished">2018-05-08</time>
-    更新日期:<time datetime="2018-05-08T13:56:44.832Z" itemprop="dateModified">2018-05-08</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.393Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -95,7 +95,7 @@ var _hmt = _hmt || [];
 		
 		<p>《前端入门》系列主要为个人对前端一些经验和认识总结。本节我们从用户角度出发，认识浏览器的渲染机制吧。<br><a id="more"></a></p>
 <h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><p>浏览器的主要功能是展示网页资源，也即请求服务器并将结果显示在浏览器窗口中。<br>资源的格式一般是HTML，但也有PDF、图片等其它各种格式。资源的定位由URL来实现。</p>
-<h2 id="浏览器的结构"><a href="#浏览器的结构" class="headerlink" title="浏览器的结构"></a>浏览器的结构</h2><p>废话少说，先上图：<br><img src="http://o905ne85q.bkt.clouddn.com/layers.png" alt="image"></p>
+<h2 id="浏览器的结构"><a href="#浏览器的结构" class="headerlink" title="浏览器的结构"></a>浏览器的结构</h2><p>废话少说，先上图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/layers.png" alt="image"></p>
 <ol>
 <li><p>用户接口（User Interface）<br>包括地址栏，前进后退，书签菜单等窗口上除了网页显示区域以外的部分。</p>
 </li>
@@ -114,10 +114,10 @@ var _hmt = _hmt || [];
 </ol>
 <p>以上大概是浏览器的主要结构，作为前端，除了大致都了解一下之外，这节我们主要关注渲染引擎和JavaScript解释器。<br>当然，我们先从头理一下页面请求的过程。</p>
 <h2 id="页面请求"><a href="#页面请求" class="headerlink" title="页面请求"></a>页面请求</h2><p>当我们去面试的时候，常常会被问一个问题：在浏览器里面输入<code>url</code>，按下 enter 键，会发生什么？<br>这是个或许平时我们不会思考的问题，不过在了解之后会对整个网页渲染有更好的认识。</p>
-<p>当我们按下 enter 键之后，浏览器就会发起一个HTTP请求，我们也可以从控制台看到：<br><img src="http://o905ne85q.bkt.clouddn.com/1512702987%281%29.png" alt="image"></p>
+<p>当我们按下 enter 键之后，浏览器就会发起一个HTTP请求，我们也可以从控制台看到：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512702987%281%29.png" alt="image"></p>
 <p>在这里，我们能看到所有浏览器发起的网络请求，包括页面、图片、CSS 文件、xhr 请求等等，还能看到请求的状态（<code>200</code>成功、<code>404</code>找不到、缓存、重定向等等）、耗时、请求头和内容、返回头和内容，等等等等。<br>这里涉及太多 http 相关的东西啦，先略过。</p>
 <p>这里第一个就是我们的页面请求，我们来看看返回了什么：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1512703607%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512703607%281%29.png" alt="image"></p>
 <p>很明显，这里返回<code>&lt;html&gt;</code>页面，然后浏览器会加载页面，同时页面中涉及的资源也会触发请求下载，包括我们看到的<code>png</code>图片、<code>js</code>文件，这里没有<code>css</code>样式，大概是样式被直出到<code>&lt;html&gt;</code>页面里啦。</p>
 <p>当然，这里面没有体现请求发送出去之后的流程，下面是<strong>一个完整的HTTP请求过程</strong>：</p>
 <ul>
@@ -128,7 +128,7 @@ var _hmt = _hmt || [];
 <li>浏览器解析<code>html</code>代码，并请求 html 代码中的资源（如<code>js</code>、<code>css</code>、图片等，此处可能涉及<code>HTTP</code>缓存）</li>
 <li>浏览器对页面进行渲染呈现给用户（此处涉及浏览器的渲染原理）</li>
 </ul>
-<p>关于最后一步，我们先上个图：<br><img src="http://o905ne85q.bkt.clouddn.com/image013.png" alt="image"><br>这是我们的浏览器拿到源代码后，会进行的处理。</p>
+<p>关于最后一步，我们先上个图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/image013.png" alt="image"><br>这是我们的浏览器拿到源代码后，会进行的处理。</p>
 <p>上面这些环节，如果你还有哪些不是很清楚的，请抱着强烈的好奇心去把它们探索完成。</p>
 <h1 id="浏览器渲染机制"><a href="#浏览器渲染机制" class="headerlink" title="浏览器渲染机制"></a>浏览器渲染机制</h1><hr>
 <h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>我们亲爱的浏览器会解析三个东西：</p>
@@ -138,18 +138,18 @@ var _hmt = _hmt || [];
 <li><code>Javascript</code>脚本，主要是通过<code>DOM API</code>和<code>CSSOM API</code>来操作<code>DOM Tree</code>和<code>CSS Rule Tree</code>。（JavaScript解释器）</li>
 </ol>
 <p>解析完成后，浏览器引擎会通过<code>DOM Tree</code>和<code>CSS Rule Tree</code>来构造<code>Render Tree</code>。</p>
-<p>大致流程如下图：<br><img src="http://o905ne85q.bkt.clouddn.com/flow.png" alt="image"></p>
+<p>大致流程如下图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/flow.png" alt="image"></p>
 <p>我们来看看它们都是些啥。</p>
 <h3 id="DOM-Tree"><a href="#DOM-Tree" class="headerlink" title="DOM Tree"></a>DOM Tree</h3><p>前面也简单讲过 DOM 树了，这里再从<a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="external">《浏览器的渲染原理简介》</a>偷一下（噢，上面东西也是很多从这偷…参考的）：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is an example Web page.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>上面的这段<code>html</code>会生成这样的一个<code>DOM Tree</code>：<br><img src="http://o905ne85q.bkt.clouddn.com/DOM-Tree-01.jpg" alt="image"></p>
+<p>上面的这段<code>html</code>会生成这样的一个<code>DOM Tree</code>：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/DOM-Tree-01.jpg" alt="image"></p>
 <p><code>DOM Tree</code>和<code>Render Tree</code>有个很简单的区别：像<code>header</code>或<code>display:none</code>的元素，会在<code>DOM Tree</code>中，但不会添加到<code>Render Tree</code>里。</p>
 <h3 id="Render-Tree"><a href="#Render-Tree" class="headerlink" title="Render Tree"></a>Render Tree</h3><p><code>CSS Rule Tree</code>主要是 Firefox 的产物。<br>Firefox 基本上来说是通过<code>CSS</code>解析生成<code>CSS Rule Tree</code>，然后通过比对<code>DOM</code>生成<code>Style Context Tree</code>。<br>然后 Firefox 通过把<code>Style Context Tree</code>和其<code>Render Tree（Frame Tree）</code>关联上，就完成了。</p>
 <p>Webkit 不像 Firefox 要用两个树来干这个，Webkit 也有<code>Style</code>对象，它直接把这个<code>Style</code>对象存在了相应的<code>DOM</code>结点上了。</p>
 <p>建立<code>CSS Rule Tree</code>是需要比照着<code>DOM Tree</code>来的。<code>CSS</code>匹配<code>DOM Tree</code>主要是从右到左解析<code>CSS</code>的<code>Selector</code>，这是一个相当复杂和有性能问题的事情。</p>
 <h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>解析的角度大概讲完了，下面来从渲染的角度讲讲。</p>
 <h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>渲染的流程基本上如下（黄色的四个步骤）：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/Render-Process-Skipping-1024x282.jpg" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/Render-Process-Skipping-1024x282.jpg" alt="image"></p>
 <ol>
 <li>计算<code>CSS</code>样式</li>
 <li>构建<code>Render Tree</code></li>

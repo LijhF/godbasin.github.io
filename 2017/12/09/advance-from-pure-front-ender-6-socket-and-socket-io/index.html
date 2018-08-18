@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-12-09T14:17:32.000Z" itemprop="datePublished">2017-12-09</time>
-    更新日期:<time datetime="2017-12-09T14:17:43.725Z" itemprop="dateModified">2017-12-09</time>
+    更新日期:<time datetime="2018-08-18T12:58:11.284Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -100,7 +100,7 @@ var _hmt = _hmt || [];
 <p>Socket是一序列的“指令” ，按汉语的理解，已经具备了“套接”（建立网络通讯或进程间通讯）和“字”（可交互的有序指令串）的概念，故称套接字。</p>
 <h3 id="Socket与网络进程通信"><a href="#Socket与网络进程通信" class="headerlink" title="Socket与网络进程通信"></a>Socket与网络进程通信</h3><p>Socket是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元。它是网络通信过程中端点的抽象表示，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
 <p>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/05225723-2ffa89aad91f46099afa530ef8660b20.jpg" alt="images"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/05225723-2ffa89aad91f46099afa530ef8660b20.jpg" alt="images"></p>
 <p>扯回第一节<a href="">《node.js聊天室1–网络进程通信和TCP/IP协议》</a>中的进程通信，两个进程如果需要进行通讯最基本的一个前提能能够唯一的标示一个进程，在本地进程通讯中我们可以使用PID来唯一标示一个进程，但PID只在本地唯一。</p>
 <p>我们知道IP层的ip地址可以唯一标示主机，而TCP层协议和端口号可以唯一标示主机的一个进程，这样我们可以利用ip地址＋协议＋端口号唯一标示网络中的一个进程。</p>
 <p>应用层通过传输层进行数据通信时，TCP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
@@ -111,7 +111,7 @@ var _hmt = _hmt || [];
 <p><strong>客户端请求</strong>：<br>指客户端的套接字提出连接请求，要连接的目标是服务器端的套接S字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
 <p><strong>连接确认</strong>：<br>当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发 给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
 <p>以使用TCP协议通讯的Socket为例，其交互流程大概是这样子的：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/05232335-fb19fc7527e944d4845ef40831da4ec2.png" alt="images"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/05232335-fb19fc7527e944d4845ef40831da4ec2.png" alt="images"></p>
 <p>先从服务器端说起。服务器端先初始化Socket，然后与端口绑定(bind)，对端口进行监听(listen)，调用accept阻塞，等待客户端连接。在这时如果有个客户端初始化一个Socket，然后连接服务器(connect)，如果连接成功，这时客户端与服务器端的连接就建立了。客户端发送数据请求，服务器端接收请求并处理请求，然后把回应数据发送给客户端，客户端读取数据，最后关闭连接，一次交互结束。</p>
 <p>通常服务器在启动的时候都会绑定一个众所周知的地址（如ip地址+端口号），用于提供服务，客户就可以通过它来接连服务器；而客户端就不用指定，有系统自动分配一个端口号和自身的ip地址组合。这就是为什么通常服务器端在listen之前会调用bind()，而客户端就不会调用，而是在connect()时由系统随机生成一个。</p>
 <h3 id="socket-io-1"><a href="#socket-io-1" class="headerlink" title="socket.io"></a>socket.io</h3><p>socket.io是基于Socket连接后对网络输入输出流的处理。</p>

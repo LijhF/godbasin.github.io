@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-11-05T04:56:22.000Z" itemprop="datePublished">2017-11-05</time>
-    更新日期:<time datetime="2017-11-05T04:56:36.689Z" itemprop="dateModified">2017-11-05</time>
+    更新日期:<time datetime="2018-08-18T12:58:11.383Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -148,7 +148,7 @@ var _hmt = _hmt || [];
 <p><strong>信号驱动式IO（signal driven IO）</strong><br>让内核在描述符就绪时发送SIGIO信号通知用户进程。<br>在等待数据ready期间进程不被阻塞，当收到信号通知时再阻塞并拷贝数据。</p>
 <p><strong>异步IO（asynchronous IO）</strong><br>用户进程在发起aio_read操作后，该系统调用立即返回。然后内核会自己等待数据ready，并自动将数据拷贝到用户内存。整个过程完成以后，内核会给用户进程发送一个信号，通知IO操作已完成。<br>异步IO的特点是IO执行的两个阶段都由内核去完成，用户进程无需干预，也不会被阻塞。</p>
 <p>五种IO模型的比较：<br>前4种模型的主要区别在于第一阶段，因为它们的第二阶段是一样的：都是阻塞于recvfrom调用，将数据从内核拷贝到用户进程缓冲区。</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/20160718170600861" alt="images"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/20160718170600861" alt="images"></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
 <li><a href="http://www.jianshu.com/p/7d9686cfcfbf" target="_blank" rel="external">《单线程和多线程的简单理解》</a></li>
 <li><a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E7%BA%BF%E7%A8%8B" target="_blank" rel="external">多线程- 维基百科</a></li>

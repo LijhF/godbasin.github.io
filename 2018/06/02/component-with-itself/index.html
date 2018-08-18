@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-06-02T03:07:40.000Z" itemprop="datePublished">2018-06-02</time>
-    更新日期:<time datetime="2018-06-02T03:07:43.847Z" itemprop="dateModified">2018-06-02</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.143Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -98,14 +98,14 @@ var _hmt = _hmt || [];
 <p>前面我们简单说明了下组件的封装和划分，参考<a href="https://godbasin.github.io/2018/05/26/app-component-isolation/">《页面区块化与应用组件化》</a>。</p>
 <h2 id="通过视觉和交互划分"><a href="#通过视觉和交互划分" class="headerlink" title="通过视觉和交互划分"></a>通过视觉和交互划分</h2><p>通常来说，组件的划分，与视觉、交互等密切相关，我们可通过功能、独立性来判断是否适合作为一个组件。</p>
 <p>这次我们拿知乎的内容卡片来说吧，上图：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1524128850.jpg" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1524128850.jpg" alt="image"></p>
 <p>可以看到，这里我们每个卡片，内容都稍微有些不一样。但毫无疑问，它们拥有相同的功能，可通过一个组件来控制内容的展示。</p>
 <p>那么我们大概可以这样来表示这个组件（为了方便，该文章大部分代码基于 Vue 来表示吧）：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-card</span> <span class="attr">:innerData</span>=<span class="string">"eachCardData"</span> <span class="attr">:cardType</span>=<span class="string">"'videoCard' | 'photoCard' | 'textCard'"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-card</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>其中，innerData 传入卡片内容，包括标题、文字、图片、附加信息（点赞数、评论数、日期等）。<br>同时，我们可以通过 cardType 来告诉组件，这是个视频类型、图片类型、还是纯文字类型的内容，来让组件控制内容和样式展示。</p>
 <h2 id="通过代码复用划分"><a href="#通过代码复用划分" class="headerlink" title="通过代码复用划分"></a>通过代码复用划分</h2><p>我们在写代码的时候，观察到一些代码，他们在结构和功能上其实是可复用的，这个时候我们也可以通过封装的办法，把它们封装一起，以减少重复的代码。</p>
 <p>同样的，我们拿右侧的一个快捷导航模块来看：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1524131302%281%29.jpg" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1524131302%281%29.jpg" alt="image"></p>
 <p>一般来说，从功能划分的话，我们会把外面那层封装成一整个组件：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">quick-link-panel</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in quickLinkItem"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">quick-link-panel</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这时候有人跑出来说，每一行我们都可以视为独立的一个组件，看：</p>
@@ -123,7 +123,7 @@ var _hmt = _hmt || [];
 <li>维护自身的事件</li>
 </ul>
 <p>同样拿之前的内容卡片来看：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1524133892%281%29.jpg" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1524133892%281%29.jpg" alt="image"></p>
 <p>这是个独立的卡片：</p>
 <ol>
 <li>它拥有自己的数据，包括标题、文字、图片、点赞数、评论数、日期等。</li>

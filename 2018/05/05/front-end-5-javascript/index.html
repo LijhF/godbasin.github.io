@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-05-05T06:59:18.000Z" itemprop="datePublished">2018-05-05</time>
-    更新日期:<time datetime="2018-05-05T07:01:31.289Z" itemprop="dateModified">2018-05-05</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.305Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -106,7 +106,7 @@ var _hmt = _hmt || [];
 <li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取“任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
 <li>主线程不断重复上面的第三步。</li>
 </ol>
-<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>参考偷来的图：<br><img src="http://o905ne85q.bkt.clouddn.com/bg2014100802.png" alt="image"><br>图中，主线程运行的时候，产生堆（<code>heap</code>）和栈（<code>stack</code>），栈中的代码调用各种外部<code>API</code>，它们在“任务队列”中加入各种事件（<code>click</code>，<code>load</code>，<code>done</code>）。只要栈中的代码执行完毕，主线程就会去读取“任务队列”，依次执行那些事件所对应的回调函数。<br>执行栈中的代码（同步任务），总是在读取“任务队列”（异步任务）之前执行。</p>
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>参考偷来的图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/bg2014100802.png" alt="image"><br>图中，主线程运行的时候，产生堆（<code>heap</code>）和栈（<code>stack</code>），栈中的代码调用各种外部<code>API</code>，它们在“任务队列”中加入各种事件（<code>click</code>，<code>load</code>，<code>done</code>）。只要栈中的代码执行完毕，主线程就会去读取“任务队列”，依次执行那些事件所对应的回调函数。<br>执行栈中的代码（同步任务），总是在读取“任务队列”（异步任务）之前执行。</p>
 <p>以上内容，大部分参考自<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">《JavaScript 运行机制详解：再谈Event Loop》</a>。</p>
 <h2 id="原型和继承"><a href="#原型和继承" class="headerlink" title="原型和继承"></a>原型和继承</h2><p><code>Javascript</code>的原型和继承处处围绕着一点展开：<strong><code>JavaScript</code>中几乎所有的对象都是位于原型链顶端的<code>Object</code>的实例。</strong></p>
 <p>当谈到继承时，<code>JavaScript</code>只有一种结构：对象。</p>
@@ -137,7 +137,7 @@ var _hmt = _hmt || [];
 <p>除了<code>class</code>，还包括<code>constructor</code>，<code>static</code>，<code>extends</code>和<code>super</code>关键字，这里也不详细说明。</p>
 <h3 id="proto-与-prototype"><a href="#proto-与-prototype" class="headerlink" title="proto 与 prototype"></a><strong>proto</strong> 与 prototype</h3><p><code>prototype</code>为显式原型：每一个函数在创建之后都会拥有一个名为<code>prototype</code>的属性，这个属性指向函数的原型对象。<br> 显式原型的作用：用来实现基于原型的继承与属性的共享。</p>
 <p><code>__proto__</code>为隐式原型，指向创建这个对象的构造函数（<code>constructor</code>）的原型（<code>prototype</code>）。<br> 隐式原型的作用：构成原型链，同样用于实现基于原型的继承。</p>
-<p> 附上一张从别人那扒来珍藏多年的图：<br><img src="http://o905ne85q.bkt.clouddn.com/e83bca5f1d1e6bf359d1f75727968c11_hd.jpg" alt="image"></p>
+<p> 附上一张从别人那扒来珍藏多年的图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/e83bca5f1d1e6bf359d1f75727968c11_hd.jpg" alt="image"></p>
 <h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p><strong>作用域链使得我们在函数内部可以直接读取外部以及全局变量。</strong><br><strong>闭包使得我们可以从外部读取局部变量。</strong></p>
 <h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p><strong>上下文</strong><br>上下文定义了一个函数正在执行时的作用域环境。</p>
 <p><strong>作用域链</strong><br>当代码在一个环境中执行时，会创建变量对象的一个作用域链，来保证对执行环境有权访问的变量和函数的有序访问。<br>作用域第一个对象始终是当前执行代码所在环境的变量对象，常被称之为“活跃对象”。</p>

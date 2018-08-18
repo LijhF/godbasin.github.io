@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-05-13T12:13:12.000Z" itemprop="datePublished">2018-05-13</time>
-    更新日期:<time datetime="2018-05-13T12:16:52.086Z" itemprop="dateModified">2018-05-13</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.377Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
 </ol>
 <p>如果我们运行以下代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert([<span class="string">'123'</span>, <span class="string">'123'</span>, <span class="number">32</span>, &#123;<span class="number">1</span>: <span class="number">123</span>&#125;])</div></pre></td></tr></table></figure>
-<p>会得到这样的结果：<br><img src="http://o905ne85q.bkt.clouddn.com/1512982774%281%29.png" alt="image"></p>
+<p>会得到这样的结果：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512982774%281%29.png" alt="image"></p>
 <h3 id="console"><a href="#console" class="headerlink" title="console"></a>console</h3><p><code>console</code>的使用，大概是本骚年最常用的一个吧。</p>
 <p>很多人喜欢打断点来debug，不过我用得最多的还是<code>console.log()</code>。当然这通常是自己调试自己的代码，如果说里面用到一些别人的库、调试其他人的问题的时候，或许打断点会更适合一些。</p>
 <p><code>console</code>常用的几个方法有：</p>
@@ -125,7 +125,7 @@ var _hmt = _hmt || [];
 <p>我基本很少用到<code>debugger</code>，不过据说在<code>node.js</code>中，因为木有浏览器自带的断点，使用<code>debugger</code>来调试也是很方便的（可惜自己做来做去，还是主打PC端应用就是了）。</p>
 <p>还有，使用完之后，发布前记得注释或者删除掉噢。</p>
 <h2 id="浏览器-Chrome-调试"><a href="#浏览器-Chrome-调试" class="headerlink" title="浏览器(Chrome)调试"></a>浏览器(Chrome)调试</h2><p>浏览器中调试功能又多又方便（主要是在 Chrome 下），大家可以参考下一些文章。前面章节有简单介绍过，这里讲一下用得比较多的，后面也会给到一些参考文章。</p>
-<h3 id="DevTools"><a href="#DevTools" class="headerlink" title="DevTools"></a>DevTools</h3><p>我们先看看Chrome提供的开发者工具：<br><img src="http://o905ne85q.bkt.clouddn.com/1512990373%281%29.png" alt="image"></p>
+<h3 id="DevTools"><a href="#DevTools" class="headerlink" title="DevTools"></a>DevTools</h3><p>我们先看看Chrome提供的开发者工具：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512990373%281%29.png" alt="image"></p>
 <p>跟上次一样，我们从左往右讲起：</p>
 <ol>
 <li>箭头按钮：用于在页面选择一个元素来审查和查看它的相关信息。</li>
@@ -143,7 +143,7 @@ var _hmt = _hmt || [];
 <li><code>Security</code>：查看网站的安全性，有效证书等。</li>
 <li><code>Audits</code>：会针对目前网页提出若干条优化的建议，这些建议分为两大类，一类是网络加载性能，另一类是界面性能。</li>
 </ol>
-<h3 id="打断点"><a href="#打断点" class="headerlink" title="打断点"></a>打断点</h3><p><strong>1. 代码断点</strong><br>常用的浏览器代码断点，在<code>Sources</code>面板<code>js</code>文件行号处设置断点，如图我们下了个断点：<br><img src="http://o905ne85q.bkt.clouddn.com/1512993498%281%29.jpg" alt="image"></p>
+<h3 id="打断点"><a href="#打断点" class="headerlink" title="打断点"></a>打断点</h3><p><strong>1. 代码断点</strong><br>常用的浏览器代码断点，在<code>Sources</code>面板<code>js</code>文件行号处设置断点，如图我们下了个断点：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512993498%281%29.jpg" alt="image"></p>
 <p>这里我们在请求发起的位置打了个断点，每次我们在搜索输入框输入的时候，都会发送请求，触发debug模式。</p>
 <p>这里除了常规断点外, 还有个条件断点(右键 -&gt; conditional breakpoint), 在设置的条件为<code>true</code>时才会断电, 在循环中需要断点时比较有用。断点后可以查看堆栈、变量。</p>
 <p><strong>2. 事件断点</strong><br>元素上事件断点：某一事件/某类事件，从<code>Elements &gt; Event Listeners</code>中进行。</p>
@@ -166,7 +166,7 @@ var _hmt = _hmt || [];
 <li>是否被其他样式覆盖（优先级问题）。</li>
 </ol>
 <p>常见的有上面的问题，除此之外，大部分都是没使用合理的<code>style</code>了吧。</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1512998012%281%29.png" alt="image"><br>如上图，一般我们会在选中对应的元素后，从上往下来找到生效（或不生效）的样式，同时也可以定位到对应的源文件。</p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512998012%281%29.png" alt="image"><br>如上图，一般我们会在选中对应的元素后，从上往下来找到生效（或不生效）的样式，同时也可以定位到对应的源文件。</p>
 <p>这里面如果是本地环境调试的话，在<code>source map</code>的支持下，我们甚至可以直接在浏览器中修改源文件，保存生效。具体配置和操作可以参考<a href="https://developers.google.cn/web/tools/chrome-devtools/javascript/source-maps?hl=zh-cn" target="_blank" rel="external">将预处理代码映射到源代码</a>。</p>
 <h3 id="debug-JS"><a href="#debug-JS" class="headerlink" title="debug JS"></a>debug JS</h3><p>JS 的调试，像上面说过的，一般分为输出和打断点两种。</p>
 <p>一般 JS 的 debug 逻辑，未按预期执行会有这样的原因：代码未执行到理想的位置。</p>

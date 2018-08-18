@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-04-29T06:06:40.000Z" itemprop="datePublished">2018-04-29</time>
-    更新日期:<time datetime="2018-04-29T06:09:53.734Z" itemprop="dateModified">2018-04-29</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.327Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -96,9 +96,9 @@ var _hmt = _hmt || [];
 		<p>《前端入门》系列主要为个人对前端一些经验和认识总结。Javascript 包括三块：ECMAScript、DOM和BOM，本文主要介绍 DOM 和 BOM。<br><a id="more"></a></p>
 <h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><h2 id="什么是-DOM"><a href="#什么是-DOM" class="headerlink" title="什么是 DOM"></a>什么是 DOM</h2><p>文档对象模型 (<code>DOM</code>) 是<code>HTML</code>和<code>XML</code>文档的编程接口。<br><code>DOM</code>将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。</p>
 <p>尽管通常会使用<code>JavaScript</code>来访问<code>DOM</code>， 但它并不是<code>JavaScript</code>的一部分，它也可以被其他语言使用。</p>
-<h2 id="DOM-解析"><a href="#DOM-解析" class="headerlink" title="DOM 解析"></a>DOM 解析</h2><p>我们常见的<code>HTML</code>元素，在浏览器中会被解析成节点：<br><img src="http://o905ne85q.bkt.clouddn.com/ct_htmltree.gif" alt="image"></p>
+<h2 id="DOM-解析"><a href="#DOM-解析" class="headerlink" title="DOM 解析"></a>DOM 解析</h2><p>我们常见的<code>HTML</code>元素，在浏览器中会被解析成节点：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/ct_htmltree.gif" alt="image"></p>
 <p>在控制台，我们也能比较清晰地看到这样的层级关系：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/%7BEA4AA8AF-DB12-4B48-8A6A-E71099D1A942%7D.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/%7BEA4AA8AF-DB12-4B48-8A6A-E71099D1A942%7D.png" alt="image"></p>
 <p><strong>节点树中的节点彼此拥有层级关系。</strong><br>父（<code>parent</code>）、子（<code>child</code>）和同胞（<code>sibling</code>）等术语用于描述这些关系。父节点拥有子节点。同级的子节点被称为同胞（兄弟或姐妹）。</p>
 <ul>
 <li>在节点树中，顶端节点被称为根（<code>root</code>）</li>
@@ -153,7 +153,7 @@ var _hmt = _hmt || [];
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#my-list"</span>).delegate(<span class="string">"button"</span>, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">// "$(this)"是被click的元素</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"you clicked a button"</span>,$(<span class="keyword">this</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>现在我们基本上都使用框架了，我们可以随意地在元素上绑定事件，如 Vue 中<code>&lt;div @click=&quot;myClickEvent&quot; /&gt;</code>，因为框架会帮我们用事件委托的方式处理掉，大部分都会绑定在最外层初始化的<code>id</code>元素，或者是<code>document</code>吧。</p>
 <h2 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h2><p>一个<code>DOM</code>节点元素，其实是很复杂的，包含了很多的属性和方法。</p>
-<p>我们来简单打印一下一个<code>DOM</code>元素：<br><img src="http://o905ne85q.bkt.clouddn.com/1512633321%281%29.png" alt="image"></p>
+<p>我们来简单打印一下一个<code>DOM</code>元素：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1512633321%281%29.png" alt="image"></p>
 <p>看到右边的滚动条了没，有如此之多的属性。</p>
 <p>所以随着应用程序越来越复杂，<code>DOM</code>操作越来越频繁，需要监听事件和在事件回调用更新页面的DOM操作也越来越多，性能消耗则会比较大。于是乎，虚拟<code>DOM</code>的想法便被人提出并实现了。</p>
 <p>虚拟<code>DOM</code>其实是用来模拟真实<code>DOM</code>的中间产物，主要包括以下功能：</p>

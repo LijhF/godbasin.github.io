@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2018-02-25T02:54:57.000Z" itemprop="datePublished">2018-02-25</time>
-    更新日期:<time datetime="2018-02-25T02:55:19.666Z" itemprop="dateModified">2018-02-25</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.193Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -106,7 +106,7 @@ var _hmt = _hmt || [];
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 给节点添加id，用于选择集索引</span></div><div class="line"><span class="keyword">var</span> node = view.selectAll(<span class="string">"g.node"</span>).data(nodes, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> d.id || (d.id = ++i);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>故我们可以通过添加属性的方式，来把节点的 id 添加到元素上，因为在 smartMenu 中，<code>func</code>属性的<code>function</code>中，this 是指向被右键选中的 dom 元素（故这里不能使用箭头函数）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nodeEnter = node</div><div class="line">  .enter()</div><div class="line">  .append(<span class="string">"g"</span>)</div><div class="line">  .attr(<span class="string">"class"</span>, <span class="string">"node"</span>)</div><div class="line">  .attr(<span class="string">"id"</span>, d =&gt; d.id);</div><div class="line"><span class="comment">// ...其他操作</span></div></pre></td></tr></table></figure>
-<p>最终效果如图：<br><img src="http://o905ne85q.bkt.clouddn.com/1513575655%281%29.jpg" alt="image"></p>
+<p>最终效果如图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1513575655%281%29.jpg" alt="image"></p>
 <h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><hr>
 <p>本节简单介绍了给节点添加右键菜单的过程，当然，大多数都是smartMenu的工作。这里只介绍了最简单的配置方式，还有分块配置、多层子菜单配置，甚至看文档说明似乎支持移动端，这个插件挺好用的，小伙伴们可以研究下。</p>
 <p><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/d3-tree-notes/6-add-smart-menu" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://p13oygsq6.bkt.clouddn.com/6-add-smart-menu/index.html" target="_blank" rel="external">此处查看页面效果</a></p>

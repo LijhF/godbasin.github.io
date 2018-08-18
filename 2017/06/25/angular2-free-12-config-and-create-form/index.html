@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-06-25T01:55:53.000Z" itemprop="datePublished">2017-06-25</time>
-    更新日期:<time datetime="2017-07-14T13:03:24.615Z" itemprop="dateModified">2017-07-14</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.034Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -154,11 +154,11 @@ var _hmt = _hmt || [];
 <p>使用<code>*ngIf</code>主要是方便控制<code>[config]</code>的输入更改的时候重新生成，因为自定义表单通常不会动态改变，故我们不将该功能拓展进去。<br>生成配置也很简单：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">customControl: ICustomControl[];</div><div class="line">json: any;</div><div class="line">isShown: boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line">buildForm()&#123;</div><div class="line">    <span class="keyword">this</span>.isShown = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">const</span> config = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.json);</div><div class="line">    <span class="keyword">this</span>.customControl = config.jsonResult;</div><div class="line">    <span class="keyword">this</span>.isShown = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样，我们就能实现表单的创建和生成啦。效果图如下：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1496674116%281%29.png" alt="image"></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1496674140%281%29.png" alt="image"></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1496674168%281%29.png" alt="image"></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1496674345%281%29.png" alt="image"></p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1496674356%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1496674116%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1496674140%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1496674168%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1496674345%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1496674356%281%29.png" alt="image"></p>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
 <p>项目中表单配置部分大致的实现也是差不多告一段落啦，后面可能更多的是补充和优化而已。<br>而其实项目还可以多种拓展呢，像这样的添加配置像（validations和hiddenWhen）也可以通过抽象做成更加通用的功能。<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/angular2-free/12-config-and-create-form" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://oqntc49tn.bkt.clouddn.com/12-config-and-create-form/index.html#/home/page-setting" target="_blank" rel="external">此处查看页面效果</a></p>
 <p>完整项目也可查看<a href="https://github.com/godbasin/angular-custom-app" target="_blank" rel="external">angular-custom-app项目</a>。</p>

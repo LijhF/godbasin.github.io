@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-08-04T14:51:57.000Z" itemprop="datePublished">2017-08-04</time>
-    更新日期:<time datetime="2017-08-04T14:52:47.888Z" itemprop="dateModified">2017-08-04</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.540Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -96,14 +96,14 @@ var _hmt = _hmt || [];
 		<p>n×n矩阵计算的javascript实现。<br><a id="more"></a></p>
 <h2 id="n×n矩阵计算"><a href="#n×n矩阵计算" class="headerlink" title="n×n矩阵计算"></a>n×n矩阵计算</h2><hr>
 <h3 id="n×n矩阵"><a href="#n×n矩阵" class="headerlink" title="n×n矩阵"></a>n×n矩阵</h3><p>若<code>A = (a[i][j])</code>和<code>B = (b[i][j])</code>为n × n的方阵，则对<code>i, j = 1, 2, ..., n</code>，定义乘积<code>C = A · B</code>中的元素<code>c[i][j]</code>为：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1487758346%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1487758346%281%29.png" alt="image"></p>
 <h3 id="基本js实现"><a href="#基本js实现" class="headerlink" title="基本js实现"></a>基本js实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">squareMatrixMultiply</span>(<span class="params">A, B</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> n = A.length;</div><div class="line">    <span class="keyword">var</span> C = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">        C[i] = [];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</div><div class="line">            C[i][j] = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;</div><div class="line">                C[i][j] += A[i][k] * B[k][j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> C;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> AMatrix = [[<span class="number">1</span>, <span class="number">3</span>], [<span class="number">7</span>, <span class="number">5</span>]];</div><div class="line"><span class="keyword">var</span> BMatrix = [[<span class="number">6</span>, <span class="number">8</span>], [<span class="number">4</span>, <span class="number">2</span>]];</div><div class="line">squareMatrixMultiply(AMatrix, BMatrix); </div><div class="line"><span class="comment">// 输出[[18, 14], [62, 66]]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> AMatrix = [[<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">7</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">7</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]];</div><div class="line"><span class="keyword">var</span> BMatrix = [[<span class="number">6</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">4</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">8</span>], [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>], [<span class="number">7</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">7</span>]];</div><div class="line">squareMatrixMultiply(AMatrix, BMatrix); </div><div class="line"><span class="comment">// 输出[[29, 25, 11, 37], [113, 104, 32, 105], [83, 66, 18, 87], [40, 35, 13, 44]]</span></div></pre></td></tr></table></figure>
 <h2 id="分治策略的矩阵算法"><a href="#分治策略的矩阵算法" class="headerlink" title="分治策略的矩阵算法"></a>分治策略的矩阵算法</h2><hr>
 <h3 id="直接的递归分治算法"><a href="#直接的递归分治算法" class="headerlink" title="直接的递归分治算法"></a>直接的递归分治算法</h3><ul>
 <li>思路</li>
 </ul>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1487758627%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1487758627%281%29.png" alt="image"></p>
 <ul>
 <li>js实现</li>
 </ul>
@@ -116,8 +116,8 @@ var _hmt = _hmt || [];
 <ul>
 <li>思路</li>
 </ul>
-<p>2×2矩阵计算：<br><img src="http://o905ne85q.bkt.clouddn.com/latex.png" alt="image"></p>
-<p>传统的矩阵乘法运算方式，<code>C[i][j] = A[i][1]·B[1][j] + A[i][2]·B[2][j]</code>，总共使用8个分块乘法和4个分块加法。<br>Strassen演算使用7个分块乘法和18个分块加法：<br><img src="http://o905ne85q.bkt.clouddn.com/latex%20%281%29.png" alt="image"></p>
+<p>2×2矩阵计算：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/latex.png" alt="image"></p>
+<p>传统的矩阵乘法运算方式，<code>C[i][j] = A[i][1]·B[1][j] + A[i][2]·B[2][j]</code>，总共使用8个分块乘法和4个分块加法。<br>Strassen演算使用7个分块乘法和18个分块加法：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/latex%20%281%29.png" alt="image"></p>
 <ul>
 <li>js实现</li>
 </ul>

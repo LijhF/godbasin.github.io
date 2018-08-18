@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-10-14T05:30:32.000Z" itemprop="datePublished">2017-10-14</time>
-    更新日期:<time datetime="2017-10-14T05:31:28.767Z" itemprop="dateModified">2017-10-14</time>
+    更新日期:<time datetime="2018-08-18T12:58:12.269Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -124,7 +124,7 @@ var _hmt = _hmt || [];
 <li>人 =&gt; 机：通过操作对机器进行输入，例如从键盘输入内容、用鼠标点击某些元素等</li>
 <li>机 =&gt; 人：机器拿到输入内容，根据程序进行计算，可通过显示器、声音设备进行输出</li>
 </ul>
-<p><img src="http://o905ne85q.bkt.clouddn.com/human-machine.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/human-machine.png" alt="image"></p>
 <p>以上的过程我们可以抽象为两两单体之间的交互：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> 人(<span class="params">输入</span>)</span>&#123;</div><div class="line">    输出 = 处理(输入);</div><div class="line">    <span class="keyword">return</span> 输出;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> 机(<span class="params">输入</span>)</span>&#123;</div><div class="line">    输出 = 处理(输入);</div><div class="line">    <span class="keyword">return</span> 输出;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 1. 输入从机开始</span></div><div class="line">人的输入 = 机(输入)</div><div class="line">机的输入 = 人(人的输入)</div><div class="line"></div><div class="line"><span class="comment">// 2. 输入从人开始</span></div><div class="line">机的输入 = 人(输入)</div><div class="line">人的输入 = 机(机的输入)</div></pre></td></tr></table></figure>
 <p>我们得到一个鸡生蛋蛋生鸡的模型。</p>
@@ -134,7 +134,7 @@ var _hmt = _hmt || [];
 <p>我们发现，<code>汇总</code>这个处理，与单体的模型非常相似，我们将其定义为一种<code>交互介质</code>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> 交互介质(<span class="params">单体输出</span>)</span>&#123;</div><div class="line">    单体输入 = 处理(单体输出);</div><div class="line">    <span class="keyword">return</span> 单体输入;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个模型与单体模型完全一致，也就是说，交互介质也是单体的一种，这时候我们人机交互过程图调整为：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/conmunitation.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/conmunitation.png" alt="image"></p>
 <p>也就是说，<code>群体 = 单体 + ... + 单体</code>这条公式是正确的，我们可以将群体直接视为多个单体的简单相加。</p>
 <h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><p>虽然我们知道，所有的事物（包括交互介质）都可抽象为一个个的单体，但一个个单体之间是怎么衔接起来呢？</p>
 <p>我们将所有的输入和输出抽象为“<code>流</code>”，对于流的传递（交互），我们使用熟悉的事件监听的方式：</p>

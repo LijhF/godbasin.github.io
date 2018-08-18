@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2017-05-30T03:41:33.000Z" itemprop="datePublished">2017-05-30</time>
-    更新日期:<time datetime="2017-07-14T13:03:24.646Z" itemprop="dateModified">2017-07-14</time>
+    更新日期:<time datetime="2018-08-18T12:58:11.851Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -174,7 +174,7 @@ var _hmt = _hmt || [];
 <p>然后就找了一个懒方法，利用的是<code>ViewEncapsulation</code>，在组件中将<code>styleUrls</code>定义为全局生效，如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, ViewEncapsulation &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line">@Component(&#123;</div><div class="line">  <span class="attr">selector</span>: <span class="string">'app-root'</span>,</div><div class="line">  <span class="attr">template</span>: <span class="string">' &lt;router-outlet&gt;&lt;/router-outlet&gt;'</span>,</div><div class="line">  <span class="attr">styleUrls</span>: [</div><div class="line">      <span class="string">'../../../node_modules/bootstrap/dist/css/bootstrap.min.css'</span>,</div><div class="line">    <span class="string">'../../assets/css/common.css'</span>,</div><div class="line">    <span class="string">'../../assets/css/custom.css'</span></div><div class="line">  ],</div><div class="line">  <span class="attr">encapsulation</span>: ViewEncapsulation.None</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><hr>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>如图：<br><img src="http://o905ne85q.bkt.clouddn.com/1495034687%281%29.png" alt="image"></p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>如图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1495034687%281%29.png" alt="image"></p>
 <h3 id="其他配置文件调整"><a href="#其他配置文件调整" class="headerlink" title="其他配置文件调整"></a>其他配置文件调整</h3><ul>
 <li>package.json</li>
 </ul>
@@ -192,7 +192,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 加了个插件，关闭之前的黄色warning</span></div><div class="line"><span class="keyword">new</span> webpack.ContextReplacementPlugin(</div><div class="line">  <span class="regexp">/angular(\\|\/)core(\\|\/)@angular/</span>,</div><div class="line">  path.resolve(__dirname, <span class="string">'src'</span>),</div><div class="line">  &#123;&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
 <p>登录页面也还是我们熟悉的：</p>
-<p><img src="http://o905ne85q.bkt.clouddn.com/1495970476%281%29.png" alt="image"></p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/1495970476%281%29.png" alt="image"></p>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
 <p>这节主要讲了路由相关的介绍和使用，以及添加静态资源，和调整一些配置使得项目得以启动的过程。项目里代码讲得不多，大家可以自行查看。<br><a href="https://github.com/godbasin/godbasin.github.io/tree/blog-codes/angular2-free/3-init-routes-and-assets" target="_blank" rel="external">此处查看项目代码</a><br><a href="http://oqntc49tn.bkt.clouddn.com/3-init-routes-and-assets/index.html" target="_blank" rel="external">此处查看页面效果</a></p>
   

@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
     </p>
   <p class="article-time">
     <time datetime="2016-09-03T03:04:35.000Z" itemprop="datePublished">2016-09-03</time>
-    更新日期:<time datetime="2017-02-17T13:49:48.825Z" itemprop="dateModified">2017-02-17</time>
+    更新日期:<time datetime="2018-08-18T12:58:13.151Z" itemprop="dateModified">2018-08-18</time>
     
   </p>
 </header>
@@ -105,16 +105,16 @@ var _hmt = _hmt || [];
 <li>安装项目</li>
 </ul>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g vue-cli</div><div class="line">$ vue init webpack vue-test</div><div class="line">$ <span class="built_in">cd</span> vue-test</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
-<p>安装过程会询问是否需要添加一些相关的依赖（编码规范、测试等），如图<br><img src="http://o905ne85q.bkt.clouddn.com/8EC6.tmp.png" alt="image"></p>
+<p>安装过程会询问是否需要添加一些相关的依赖（编码规范、测试等），如图<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/8EC6.tmp.png" alt="image"></p>
 <ul>
-<li>目录组织<br>如图，生成目录组织如下（这里木有显示.开头的文件）：<br><img src="http://o905ne85q.bkt.clouddn.com/9B08.tmp.png" alt="image"></li>
+<li>目录组织<br>如图，生成目录组织如下（这里木有显示.开头的文件）：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/9B08.tmp.png" alt="image"></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">├── build/                      <span class="comment"># webpack配置参数文件</span></div><div class="line">│   └── ...</div><div class="line">├── config/                     </div><div class="line">│   ├── index.js                <span class="comment"># 主项目的配置</span></div><div class="line">│   └── ...</div><div class="line">├── src/</div><div class="line">│   ├── main.js                 <span class="comment"># 应用入口</span></div><div class="line">│   ├── App.vue                 <span class="comment"># 主应用组件</span></div><div class="line">│   ├── components/             <span class="comment"># UI组件</span></div><div class="line">│   │   └── ...</div><div class="line">│   └── assets/                 <span class="comment"># 模块资源（webpack提供）</span></div><div class="line">│       └── ...</div><div class="line">├── static/                     <span class="comment"># 纯静态资源（打包时直接复制）</span></div><div class="line">├── <span class="built_in">test</span>/</div><div class="line">│   └── unit/                   <span class="comment"># 单元测试</span></div><div class="line">│   └── e2e/                    <span class="comment"># e2e tests测试</span></div><div class="line">├── .babelrc                    <span class="comment"># babel编译参数</span></div><div class="line">├── .editorconfig.js            <span class="comment"># 编辑器配置</span></div><div class="line">├── .eslintrc.js                <span class="comment"># eslint配置文件，用以规范团队开发编码规范</span></div><div class="line">├── index.html                  <span class="comment"># 主页模板</span></div><div class="line">└── package.json                <span class="comment"># 项目文件，记载着一些命令和依赖还有简要的项目描述信息</span></div></pre></td></tr></table></figure>
 <h3 id="主要的npm命令"><a href="#主要的npm命令" class="headerlink" title="主要的npm命令"></a>主要的npm命令</h3><ul>
 <li>启动服务</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run dec</div></pre></td></tr></table></figure>
-<p>效果如下：<br><img src="http://o905ne85q.bkt.clouddn.com/A221.tmp.png" alt="image"></p>
+<p>效果如下：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/A221.tmp.png" alt="image"></p>
 <ul>
 <li>打包生成</li>
 </ul>
@@ -122,14 +122,14 @@ var _hmt = _hmt || [];
 <ul>
 <li><p>注意，打包生成的文件为绝对定位，需在服务环境下才能打开。如果需要生成相对定位的文件，可以进行如下操作：</p>
 </li>
-<li><p>1.打开config文件夹下的index.js文件<br><img src="http://o905ne85q.bkt.clouddn.com/7BB8.tmp.png" alt="image"></p>
+<li><p>1.打开config文件夹下的index.js文件<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/7BB8.tmp.png" alt="image"></p>
 </li>
 <li><p>2.修改build中assetsPublicPath为’’（原本为’/‘）</p>
 </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">build</span>: &#123; <span class="comment">//打包生成项目相关配置</span></div><div class="line">    env: <span class="built_in">require</span>(<span class="string">'./prod.env'</span>), <span class="comment">//环境为生产环境</span></div><div class="line">    index: path.resolve(__dirname, <span class="string">'../dist/index.html'</span>), <span class="comment">//打包后的主页面位置</span></div><div class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../dist'</span>), <span class="comment">//打包后的其余文件的根位置</span></div><div class="line">    assetsSubDirectory: <span class="string">'static'</span>, <span class="comment">//其余文件的目录</span></div><div class="line">    assetsPublicPath: <span class="string">''</span>, <span class="comment">//相对或绝对位置</span></div><div class="line">    productionSourceMap: <span class="literal">true</span>, <span class="comment">//是否生产map文件</span></div><div class="line">    productionGzip: <span class="literal">false</span>, <span class="comment">//压缩</span></div><div class="line">    productionGzipExtensions: [<span class="string">'js'</span>, <span class="string">'css'</span>] <span class="comment">//需要压缩的文件类型</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">dev</span>: &#123; <span class="comment">//启动服务、热加载相关配置</span></div><div class="line">    env: <span class="built_in">require</span>(<span class="string">'./dev.env'</span>), <span class="comment">//环境为开发环境</span></div><div class="line">    port: <span class="number">8080</span>, <span class="comment">//服务端口</span></div><div class="line">    proxyTable: &#123;&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li><p>生成的文件将放置在dist文件夹，如图：<br><img src="http://o905ne85q.bkt.clouddn.com/3B27.tmp.png" alt="image"></p>
+<li><p>生成的文件将放置在dist文件夹，如图：<br><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/3B27.tmp.png" alt="image"></p>
 </li>
 <li><p>运行单元测试</p>
 </li>
