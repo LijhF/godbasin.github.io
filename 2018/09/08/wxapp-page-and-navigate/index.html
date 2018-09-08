@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>React使用笔记3--组件的State/Props与生命周期 | Here. There.</title>
+    <title>小程序页面管理与跳转 | Here. There.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="被删">
     
-    <meta name="description" content="最近在学习使用React作为前端的框架，《React使用笔记》系列用于记录过程中的一些使用和解决方法。本文记录组件的生命周期与状态State相关的学习笔记。">
+    <meta name="description" content="一个小程序有很多页面，每个页面又有各自的线程、生命周期和功能逻辑。关于小程序的生命周期、页面之间的跳转有哪些特殊的地方呢？">
     
     
     
@@ -73,15 +73,15 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/13/react-notes-3-props-state-lifecycle/" title="React使用笔记3--组件的State/Props与生命周期" itemprop="url">React使用笔记3--组件的State/Props与生命周期</a>
+      <a href="/2018/09/08/wxapp-page-and-navigate/" title="小程序页面管理与跳转" itemprop="url">小程序页面管理与跳转</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://godbasin.github.io" title="被删">被删</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-08-12T18:30:45.000Z" itemprop="datePublished">2016-08-13</time>
-    更新日期:<time datetime="2016-08-20T10:54:21.107Z" itemprop="dateModified">2016-08-20</time>
+    <time datetime="2018-09-08T10:19:08.000Z" itemprop="datePublished">2018-09-08</time>
+    更新日期:<time datetime="2018-09-08T10:19:13.660Z" itemprop="dateModified">2018-09-08</time>
     
   </p>
 </header>
@@ -90,148 +90,59 @@ var _hmt = _hmt || [];
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-State-状态"><span class="toc-number">1.</span> <span class="toc-text">React State(状态)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React与State"><span class="toc-number">1.1.</span> <span class="toc-text">React与State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#State的方法和属性"><span class="toc-number">1.2.</span> <span class="toc-text">State的方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用State"><span class="toc-number">1.3.</span> <span class="toc-text">使用State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Props-属性"><span class="toc-number">2.</span> <span class="toc-text">React Props(属性)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Props用法"><span class="toc-number">2.1.</span> <span class="toc-text">Props用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Props方法和属性"><span class="toc-number">2.2.</span> <span class="toc-text">Props方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Props与State"><span class="toc-number">2.3.</span> <span class="toc-text">Props与State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考-1"><span class="toc-number">2.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React生命周期"><span class="toc-number">3.</span> <span class="toc-text">React生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建类"><span class="toc-number">3.1.</span> <span class="toc-text">创建类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#首次实例化-挂载"><span class="toc-number">3.2.</span> <span class="toc-text">首次实例化/挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新"><span class="toc-number">3.3.</span> <span class="toc-text">更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除"><span class="toc-number">3.4.</span> <span class="toc-text">移除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考-2"><span class="toc-number">3.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序的启动"><span class="toc-number">1.</span> <span class="toc-text">小程序的启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#小程序启动过程"><span class="toc-number">1.1.</span> <span class="toc-text">小程序启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-App-实例"><span class="toc-number">1.2.</span> <span class="toc-text">注册 App 实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取-App-实例"><span class="toc-number">1.3.</span> <span class="toc-text">获取 App 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序页面"><span class="toc-number">2.</span> <span class="toc-text">小程序页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#页面生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">页面生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
-		<p>最近在学习使用React作为前端的框架，《React使用笔记》系列用于记录过程中的一些使用和解决方法。<br>本文记录组件的生命周期与状态State相关的学习笔记。<br><a id="more"></a></p>
-<h2 id="React-State-状态"><a href="#React-State-状态" class="headerlink" title="React State(状态)"></a>React State(状态)</h2><hr>
-<h3 id="React与State"><a href="#React与State" class="headerlink" title="React与State"></a>React与State</h3><ul>
-<li>React把组件看成是一个状态机（State Machines）</li>
-<li>通过与用户的交互，实现不同状态，然后渲染UI，让用户界面和数据保持一致</li>
-<li>React里，只需更新组件的state，然后根据新的state重新渲染用户界面（不要操作 DOM）</li>
-</ul>
-<h3 id="State的方法和属性"><a href="#State的方法和属性" class="headerlink" title="State的方法和属性"></a>State的方法和属性</h3><ul>
-<li>this.state属性可获取状态对象</li>
-<li>getInitialState方法用于定义初始状态，也就是一个对象，这个对象可以通过this.state属性读取</li>
-<li>this.setState方法就修改状态值，每次修改以后，自动调用this.render方法，再次渲染组件</li>
-<li>this.replaceState方法替换状态值，与setState相似，但删除之前所有已存在的state键，这些键都不在nextState中</li>
-</ul>
-<h3 id="使用State"><a href="#使用State" class="headerlink" title="使用State"></a>使用State</h3><ul>
-<li><p>使用state的组件</p>
-<blockquote>
-<p>大部分组件的工作应该是从props里取数据并渲染出来。需要对用户输入、服务器请求或者时间变化等作出响应时，才需要使用state。<br>常用的模式是创建多个只负责渲染数据的无状态（stateless）组件，在它们的上层创建一个有状态（stateful）组件并把它的状态通过 props 传给子级。这个有状态的组件封装了所有用户的交互逻辑，而这些无状态组件则负责声明式地渲染数据。</p>
-</blockquote>
-</li>
-<li><p>作为State</p>
-<blockquote>
-<p>State应该包括那些可能被组件的事件处理器改变并触发用户界面更新的数据。<br>当创建一个状态化的组件时，想象一下表示它的状态最少需要哪些数据，并只把这些数据存入this.state。</p>
-</blockquote>
-</li>
-<li><p>不作为State<br>this.state 应该仅包括能表示用户界面状态所需的最少数据。不应该包括：</p>
+		<p>一个小程序有很多页面，每个页面又有各自的线程、生命周期和功能逻辑。关于小程序的生命周期、页面之间的跳转有哪些特殊的地方呢？<br><a id="more"></a></p>
+<h2 id="小程序的启动"><a href="#小程序的启动" class="headerlink" title="小程序的启动"></a>小程序的启动</h2><hr>
+<h3 id="小程序启动过程"><a href="#小程序启动过程" class="headerlink" title="小程序启动过程"></a>小程序启动过程</h3><p>初次进入小程序的时候，微信客户端初始化好宿主环境，同时从网络下载或者从本地缓存中拿到小程序的代码包，把它注入到宿主环境。大概是这么个过程：</p>
+<ol>
+<li>创建线程（渲染层和逻辑层），启动小程序。</li>
+<li>载入基础库（WebView 基础库和 AppService 基础库）。</li>
+<li>载入小程序业务代码（下载或者从本地缓存中拿到）。</li>
+<li>使用<code>App()</code>注册程序实例。</li>
+</ol>
+<p>为了让小程序业务代码能够调用 API 以及组件，就需要在启动小程序后先载入基础库，接着再载入业务代码。<br>由于所有小程序都需要注入相同的基础库，所以<strong>小程序的基础库会被提前内置在微信客户端</strong>。而基础库是热更新的，故一般等微信客户端携带上一个稳定版的基础库正式发布后，再进行新版本基础库的灰度和推送。</p>
+<h3 id="注册-App-实例"><a href="#注册-App-实例" class="headerlink" title="注册 App 实例"></a>注册 App 实例</h3><p>宿主环境提供了<code>App()</code>构造器用来注册一个程序 App。App 实例是单例对象，在其他 JS 脚本中可以使用宿主环境提供的<code>getApp()</code>来获取程序实例。</p>
+<p><strong>App() 必须在 app.js 中调用，必须调用且只能调用一次。不然会出现无法预期的后果。</strong></p>
+<p><code>App()</code>函数用来注册一个小程序。接受一个<code>Object</code>参数，其指定小程序的生命周期回调等。</p>
+<p><strong>onLaunch</strong><br>小程序初始化完成时（全局只触发一次）触发<code>onLaunch</code>回调。<br>在微信客户端中打开小程序有很多途径，对不同途径的打开方式，小程序有时需要做不同的业务处理。所以微信客户端会把打开方式带给<code>onLaunch</code>和<code>onShow</code>的调用参数<code>options</code>，我们可以根据参数来判断一些进入方式，以及做对应的逻辑处理。</p>
+<p>例如，我需要拿到从另外一个小程序跳转过来携带的信息，此时场景值应该是1037（参考<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/scene.html" target="_blank" rel="external">场景值</a>）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">App(&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">  onShow: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(e.scene === <span class="number">1037</span>)&#123;</div><div class="line">      <span class="keyword">const</span> data = e.referrerInfo &amp;&amp; e.referrerInfo.extraData; <span class="comment">// 拿到对应的数据</span></div><div class="line">      <span class="keyword">const</span> refAppid = e.referrerInfo &amp;&amp; e.referrerInfo.appId; <span class="comment">// 拿到对应的小程序appid</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>onShow</strong><br>小程序启动，或从后台进入前台显示时触发<code>onShow</code>回调。通常我们用来处理数据和状态的更新。<br>小程序进入后台状态：当用户点击左上角关闭，或者按了设备 Home 键离开微信，小程序并没有直接销毁。</p>
+<p><strong>onHide</strong><br>小程序从前台进入后台时触发<code>onHide</code>回调。<br>小程序进入前台状态：当再次进入微信或再次打开小程序，又会从后台进入前台。</p>
+<h3 id="获取-App-实例"><a href="#获取-App-实例" class="headerlink" title="获取 App 实例"></a>获取 App 实例</h3><p>我们可以使用全局的<code>getApp()</code>函数来获取到小程序 App 实例（在<code>App()</code>内的函数中使用<code>this</code>就可以拿到<code>app</code>实例。）。</p>
+<p>前面我们可以看到，App 的生命周期是由微信客户端根据用户操作主动触发的。故我们通过<code>getApp()</code>获取实例之后，不应该私自调用生命周期函数。</p>
+<p>具体的原理是什么呢？小程序的 JS 脚本是运行在 JsCore 的线程里，小程序的每个页面各自有一个 WebView 线程进行渲染，所以<strong>小程序切换页面时，小程序逻辑层的 JS 脚本运行上下文依旧在同一个 JsCore 线程中。</strong></p>
+<p>因此，<strong>App 构造器可以传递其他参数作为全局属性以达到全局共享数据的目的。</strong></p>
+<p>由于所有页面的脚本逻辑都跑在同一个 JsCore 线程，页面使用<code>setTimeout</code>或者<code>setInterval</code>的定时器，即使切换了页面，也需要自行清理定时器。可以选择：</p>
 <ul>
-<li>计算所得数据</li>
-<li>React组件</li>
-<li>基于props的重复数据</li>
+<li>在页面离开<code>onUnload</code>、<code>onHide</code>等的时候自行清理</li>
+<li>做全局的定时器管理（当然也还是需要关闭时清理）</li>
 </ul>
-</li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.css88.com/react/docs/interactivity-and-dynamic-uis.html" target="_blank" rel="external">《富交互性的动态用户界面》</a><br><a href="http://www.runoob.com/react/react-state.html" target="_blank" rel="external">《React State(状态)》</a></p>
-<h2 id="React-Props-属性"><a href="#React-Props-属性" class="headerlink" title="React Props(属性)"></a>React Props(属性)</h2><hr>
-<h3 id="Props用法"><a href="#Props用法" class="headerlink" title="Props用法"></a>Props用法</h3><p>this.props表示一旦定义，就不再改变的特性。</p>
-<ul>
-<li>键值对（键： 值）</li>
-<li>展开语法{…props}<ul>
-<li>React会自动把对象中的属性和值当做属性的赋值。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Props方法和属性"><a href="#Props方法和属性" class="headerlink" title="Props方法和属性"></a>Props方法和属性</h3><ul>
-<li>propTypes属性<ul>
-<li>属性校验器，用来验证组件实例的属性是否符合要求。</li>
-</ul>
-</li>
-<li>getDefaultProps方法<ul>
-<li>可以用来设置组件属性的默认值。</li>
-</ul>
-</li>
-<li>this.props.children属性<ul>
-<li>this.props.children表示组件的所有子节点，除此之外this.props对象的属性与组件的属性一一对应。</li>
-<li>如果当前组件没有子节点，数据类型是undefined</li>
-<li>如果有一个子节点，数据类型是object</li>
-<li>如果有多个子节点，数据类型是array</li>
-</ul>
-</li>
-<li>React.Children方法<ul>
-<li>React提供一个工具方法React.Children来处理this.props.children，不用处理this.props.children的数据类型。</li>
-<li>React.Children.map/forEach/count/only</li>
-</ul>
-</li>
-</ul>
-<h3 id="Props与State"><a href="#Props与State" class="headerlink" title="Props与State"></a>Props与State</h3><p>state和props主要的区别在于props是不可变的，而state可以根据与用户交互来改变。</p>
-<ul>
-<li>状态只与组件本身相关，由自己本身维护。与父组件与子组件无关</li>
-<li>组件不能修改自己的属性，但可以从父组件获取属性，父组件也能修改其属性，组件也可以修改子组件的属性</li>
-</ul>
-<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a href="https://segmentfault.com/a/1190000004490882" target="_blank" rel="external">《React.js学习笔记之组件属性与状态》</a></p>
-<h2 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h2><hr>
-<p>React组件就是一个状态机，它接受两个输入参数: this.props和this.state，返回一个虚拟DOM。<br>React组件的生命周期分几个阶段，每个阶段会有若干个回调函数可以响应不同的时刻。<br>组件的生命周期包含三个主要部分：</p>
-<ul>
-<li>挂载： 组件被插入到DOM中。</li>
-<li>更新： 组件被重新渲染，查明DOM是否应该刷新。</li>
-<li>移除： 组件从DOM中移除。</li>
-</ul>
-<h3 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h3><ul>
-<li>getDefaultProps<ul>
-<li>在组件类创建的时候调用一次，然后返回值被缓存下来。</li>
-<li>该方法在任何实例创建之前调用，因此不能依赖于 this.props。</li>
-<li>返回的任何复杂对象将会在实例间共享，而不是每个实例拥有一份拷贝。</li>
-</ul>
-</li>
-</ul>
-<h3 id="首次实例化-挂载"><a href="#首次实例化-挂载" class="headerlink" title="首次实例化/挂载"></a>首次实例化/挂载</h3><p>类创建完成之后，就可以进行实例化。</p>
-<ul>
-<li>getInitialState<ul>
-<li>在组件挂载之前调用一次。返回值将会作为this.state的初始值。</li>
-</ul>
-</li>
-<li>componentWillMount: <ul>
-<li>在初始化渲染执行render之前立刻调用。</li>
-<li>如果在这个方法内调用setState，render()将会感知到更新后的state，将会执行仅一次，尽管state改变了。</li>
-<li>render就是一个模板的作用，他只处理和展示相关的逻辑，如果有业务逻辑，应放在componentWillMount中执行。</li>
-</ul>
-</li>
-<li>render: 渲染并返回一个虚拟DOM</li>
-<li>componentDidMount<ul>
-<li>在初始化渲染render后，react会使用render返回的虚拟DOM来创建真实DOM，之后立刻调用此方法一次。</li>
-<li>在生命周期中的这个时间点，组件拥有一个DOM展现，可以通过this.getDOMNode()来获取相应DOM节点。</li>
-<li>如果想和其它JavaScript框架集成，使用setTimeout或者setInterval来设置定时器，或者发送AJAX请求，可以在该方法中执行这些操作。</li>
-</ul>
-</li>
-</ul>
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>当组件实例化完成，就进入了存在期，这时候一般会响应用户操作和父组件的更新来更新视图。</p>
-<ul>
-<li>componentWillRecieveProps<ul>
-<li>在组件接收到新的props的时候调用。在初始化渲染的时候，该方法不会调用。</li>
-<li>用此函数可以作为react在prop传入之后， render()渲染之前更新state的机会。</li>
-</ul>
-</li>
-<li>shouldComponentUpdate<ul>
-<li>在接收到新的props或者state，将要渲染之前调用。</li>
-<li>如果确定新的props和state不会导致组件更新，则此处应该 返回 false。</li>
-</ul>
-</li>
-<li>componentWillUpdate<ul>
-<li>在接收到新的props或者state之前立刻调用。在初始化渲染的时候该方法不会被调用。</li>
-<li>使用该方法做一些更新render之前的准备工作。</li>
-</ul>
-</li>
-<li>render: 更新并返回一个虚拟DOM</li>
-<li>componentDidUpdate<ul>
-<li>在组件的更新已经同步到DOM中之后立刻被调用。该方法不会在初始化渲染的时候调用。</li>
-<li>使用该方法可以在组件更新之后操作DOM元素。</li>
-</ul>
-</li>
-</ul>
-<h3 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h3><ul>
-<li>componentWillUnmount<ul>
-<li>在组件从 DOM 中移除的时候立刻被调用。</li>
-<li>在该方法中执行任何必要的清理，比如无效的定时器，或者清除在componentDidMount中创建的DOM元素。</li>
-</ul>
-</li>
-</ul>
-<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a href="http://reactjs.cn/react/docs/component-specs.html" target="_blank" rel="external">《组件的详细说明和生命周期》</a><br><a href="http://blog.csdn.net/lihongxun945/article/details/46334379" target="_blank" rel="external">《ReactJS读书笔记二：组件生命周期》</a></p>
+<p>说到页面之间的数据共享，我们也该来讲讲小程序里页面的启动。</p>
+<h2 id="小程序页面"><a href="#小程序页面" class="headerlink" title="小程序页面"></a>小程序页面</h2><hr>
+<h3 id="页面生命周期"><a href="#页面生命周期" class="headerlink" title="页面生命周期"></a>页面生命周期</h3><p>宿主环境提供了<code>Page(Object)</code>构造器用来注册一个小程序页面，接受一个<code>Object</code>类型参数，其指定页面的初始数据、生命周期回调、事件处理函数等。</p>
+<p>注意：<strong>Object 内容在页面加载时会进行一次深拷贝，需考虑数据大小对页面加载的开销。</strong></p>
+<p>这里我们先来看看官方的生命周期图：</p>
+<p><img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/mina-lifecycle.png" alt="image"></p>
+<p>左侧是渲染层，右侧是逻辑层。几件事：</p>
+<ol>
+<li>渲染层和逻辑层之间通信，是通过 Native 转发实现的。</li>
+<li>逻辑层通过 Page 实例的<code>setData</code>方法传递数据到渲染层。由于需要两个线程的一些通信消耗，为了提高性能，每次只设置需要改变的最小单位数据。</li>
+<li>启动的生命周期顺序：<code>onLoad</code> -&gt; <code>onShow</code> -&gt; <code>onReady</code>。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 文件 mock/index.js</span></div><div class="line"><span class="keyword">import</span> express <span class="keyword">from</span> <span class="string">"express"</span>;</div><div class="line"><span class="keyword">import</span> bodyParser <span class="keyword">from</span> <span class="string">"body-parser"</span>;</div><div class="line"><span class="keyword">import</span> fs <span class="keyword">from</span> <span class="string">"fs"</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> app = express();</div><div class="line"></div><div class="line"><span class="keyword">const</span> port = <span class="number">80</span>;</div><div class="line">app.listen(port, () =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`server running 127.0.0.1:<span class="subst">$&#123;port&#125;</span>`</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.all(<span class="string">"*"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req = &#123;&#125;, res = &#123;&#125;</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> type = (req.query &amp;&amp; req.query.type) || <span class="number">0</span>;</div><div class="line">  <span class="keyword">const</span> url =</div><div class="line">    req.url &amp;&amp; req.url.indexOf(<span class="string">"?"</span>) &gt; <span class="number">-1</span> ? req.url.split(<span class="string">"?"</span>)[<span class="number">0</span>] : req.url;</div><div class="line">  <span class="keyword">let</span> path = <span class="string">`./mock/data<span class="subst">$&#123;url&#125;</span>_<span class="subst">$&#123;type&#125;</span>.json`</span>;</div><div class="line">  <span class="comment">// 若 type 对应文件不存在，返回不带 type 的文件</span></div><div class="line">  <span class="keyword">if</span> (!fs.existsSync(path)) &#123;</div><div class="line">    path = <span class="string">`./mock/data<span class="subst">$&#123;url&#125;</span>.json`</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 若对应文件不存在，返回默认文件</span></div><div class="line">  <span class="keyword">if</span> (!fs.existsSync(path)) &#123;</div><div class="line">    path = <span class="string">`./mock/data/default.json`</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`type:<span class="subst">$&#123;type&#125;</span>,请求URL：<span class="subst">$&#123;url&#125;</span>，返回文件位置：<span class="subst">$&#123;path&#125;</span>`</span>);</div><div class="line">  <span class="comment">// 返回数据</span></div><div class="line">  responseData(res, path);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">responseData</span>(<span class="params">res, file</span>) </span>&#123;</div><div class="line">  <span class="comment">// 设置跨域头</span></div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</div><div class="line">  res.header(</div><div class="line">    <span class="string">"Access-Control-Allow-Headers"</span>,</div><div class="line">    <span class="string">"Content-Type,Content-Length, Authorization, Accept,X-Requested-With"</span></div><div class="line">  );</div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</div><div class="line">  res.send(fs.readFileSync(file).toString());</div><div class="line">  res.end();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码是写好了，但我们要怎么跑起来呢？首先我们需要配置一个 HOST 映射：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">127.0.0.1 test.com</div></pre></td></tr></table></figure></p>
+<p>然后我们只需要运行<code>node ./mock/index.js</code>就可以..额报错了？</p>
+<p>是的，看代码我们使用了包括<code>import</code>、<code>let</code>、<code>const</code>这些 node 可能并不认识的语法，所以我们简单安装个<code>babel</code>：</p>
+<ol>
+<li>执行<code>npm install -D babel-cli</code></li>
+<li>配置<code>.babelrc</code>文件，并安装对应的<code>presets</code>依赖。</li>
+</ol>
+<p>然后再次运行<code>babel-node ./mock/index.js</code>，就能正常使用 mock 啦。</p>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><hr>
-<p>该节主要记录本骚年在使用过程中遇到的一些不理解的地方，其实大都是借鉴，而且也是不是很深入的呢。<br>下节我们就使用这些东西来建个头部的组件吧。</p>
+<p>观察一些项目，发现大家使用 mock 的频率比较低。虽然说很多时候代码变动快，接口也经常调整，使用 mock 其实是个比较好的习惯。尤其涉及长期维护的项目交接、后台服务线上使用特殊性、接口开发时间较长等，mock 在很多时候都还是很好用的。</p>
   
 		
 		<p style="margin-top:50px;">查看Github有更多内容噢：<a href="https://github.com/godbasin">https://github.com/godbasin</a></p>
@@ -245,13 +156,13 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/教程/">教程</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/react沙拉/">react沙拉</a>
+  <a class="article-category-link" href="/categories/小程序双皮奶/">小程序双皮奶</a>
 </div>
 
 
@@ -281,19 +192,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/08/14/react-notes-4-create-header/" title="React使用笔记4--创建头部组件">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  React使用笔记4--创建头部组件</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/12/react-notes-2-create-login/"  title="React使用笔记2--创建登录组件">
+<a href="/2018/09/02/wxapp-technology-architecture/"  title="小程序的底层框架">
  <strong>NEXT:</strong><br/> 
- <span>React使用笔记2--创建登录组件
+ <span>小程序的底层框架
 </span>
 </a>
 </div>
@@ -315,7 +218,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-State-状态"><span class="toc-number">1.</span> <span class="toc-text">React State(状态)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React与State"><span class="toc-number">1.1.</span> <span class="toc-text">React与State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#State的方法和属性"><span class="toc-number">1.2.</span> <span class="toc-text">State的方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用State"><span class="toc-number">1.3.</span> <span class="toc-text">使用State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Props-属性"><span class="toc-number">2.</span> <span class="toc-text">React Props(属性)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Props用法"><span class="toc-number">2.1.</span> <span class="toc-text">Props用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Props方法和属性"><span class="toc-number">2.2.</span> <span class="toc-text">Props方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Props与State"><span class="toc-number">2.3.</span> <span class="toc-text">Props与State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考-1"><span class="toc-number">2.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React生命周期"><span class="toc-number">3.</span> <span class="toc-text">React生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建类"><span class="toc-number">3.1.</span> <span class="toc-text">创建类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#首次实例化-挂载"><span class="toc-number">3.2.</span> <span class="toc-text">首次实例化/挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新"><span class="toc-number">3.3.</span> <span class="toc-text">更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除"><span class="toc-number">3.4.</span> <span class="toc-text">移除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考-2"><span class="toc-number">3.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序的启动"><span class="toc-number">1.</span> <span class="toc-text">小程序的启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#小程序启动过程"><span class="toc-number">1.1.</span> <span class="toc-text">小程序启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-App-实例"><span class="toc-number">1.2.</span> <span class="toc-text">注册 App 实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取-App-实例"><span class="toc-number">1.3.</span> <span class="toc-text">获取 App 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序页面"><span class="toc-number">2.</span> <span class="toc-text">小程序页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#页面生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">页面生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
