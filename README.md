@@ -315,5 +315,5 @@
 
 ### 
 ### 乞讨码
-<img src="https://github-imglib-1255459943.cos.ap-chengdu.myqcloud.com/2code2.jpg" width="200" height="200" />
+![image](./img/2code.jpg)
 **码生艰难，写文不易，给我家猪囤点猫粮了喵~**
